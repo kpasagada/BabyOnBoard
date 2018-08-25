@@ -11,7 +11,7 @@
 </head>
 <body>
 	<%out.print("Hello!"); %>
-	<%= new java.util.Date() %>
+	<%= new java.util.Date()  %>
 	
 	
 	<%! int number1, number2; %>

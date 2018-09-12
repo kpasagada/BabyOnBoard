@@ -10,8 +10,8 @@ package db;
 public interface MyDB {
 
 	String USER="root";
-	String PASS="welcome123";
-	String CONN_URL="jdbc:mysql://localhost:3306/coursedatabase?useSSL=false";
+	String PASS="1234";
+	String CONN_URL="jdbc:mysql://localhost:3306/ooad?useSSL=false";
 	
 	
 }

@@ -9,9 +9,9 @@ package db;
  */
 public interface MyDB {
 
-	String USER="root";
-	String PASS="1234";
-	String CONN_URL="jdbc:mysql://localhost:3306/ooad?useSSL=false";
+	String USER="<username>";
+	String PASS="<password>";
+	String CONN_URL="jdbc:mysql://localhost:3306/<database>?useSSL=false";
 	
 	
 }

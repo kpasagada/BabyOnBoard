@@ -15,20 +15,21 @@
     </head>
     
     <body>
-    <!-- Login Validation -->
-    <script type="text/javascript">
-    	var loginStatus;
-	    var loginStatus = <%=session.getAttribute("loginStatus")%>;
-	    var contextPath = "<%=request.getContextPath()%>";
-    </script>
     
-	<!-- Database Connection -->
-	<%
-		DbManager db = new DbManager();
-		Connection conn = (Connection) db.getConnection();
-	%>
+	    <!-- Login Validation -->
+	    <script type="text/javascript">
+	    	var loginStatus;
+		    var loginStatus = <%=session.getAttribute("loginStatus")%>;
+		    var contextPath = "<%=request.getContextPath()%>";
+	    </script>
+	    
+		<!-- Database Connection -->
+		<%
+			DbManager db = new DbManager();
+			Connection conn = (Connection) db.getConnection();
+		%>
 	
-	<!--HEADER SECTION -->
+		<!--HEADER SECTION -->
         <div class="header">
             <a href="bob.html"> <img src="images/baby.png" alt="logo" class="logo"> </a>
             <ul class="main-nav">
@@ -38,6 +39,7 @@
                     <li id="logout-button" class="hide"><a href="/logout">Logout</a></li>
             </ul>
         </div>
+        
         <!--LANDING PAGE-->
         <div class="home">
            <form id="login" name="loginform" action="LoginController" method="post" onsubmit="return loginValidate()" >
@@ -46,19 +48,19 @@
                  <input type="password" name="password" class="login" placeholder="Password">
                  <button type="submit" class="login" name="submit" value="login">Login</button>
                  <h3 style="text-align:center;"> Forgot Your Password? <br><br></h3>
-                 <button type="button" onclick="register()" class="button" style="padding: 0px 56px;" > not a registered user yet? Sign Up!</button>
+                 <button type="button" onclick="register()" class="button" style="padding: 0px 56px;" > Not a registered user yet? Sign Up!</button>
            </form>
            <form id="register" name="regform" action="LoginController" method="post" onsubmit="return regValidate()">
            	 <p id="incorrect-register" class="te-al-ce hide">Login details invalid, register to continue!</p>
              <h1 class="te-al-ce"><img class="human" src="images/human.png"/> <br><br>REGISTER</h1>
              <input type="text" name="name" class="register" placeholder="Full Name">
-             <input type="text" class="register" placeholder="Email Address">
-             <input type="number" class="register" placeholder="Phone Number">
+             <input type="text" name="email" class="register" placeholder="Email Address">
+             <input type="number" name="phone" class="register" placeholder="Phone Number">
              <input type="text" name="username" class="register" placeholder="Username">
              <input type="password" name="password" class="register" placeholder="Password">
              <input type="password" name="retry-password" class="register" placeholder="Confirm Password">
              <button type="submit" name="submit" class="register" value="register">Register</button>
-             <button type="button" onclick="login()" class="button" style="padding: 15px 85px;" > already registered? LOGIN</button>
+             <button type="button" onclick="login()" class="button" style="padding: 15px 85px;" > Already registered? LOGIN</button>
            </form>
         </div>
         
@@ -66,17 +68,17 @@
         <div class="section-age">
             <ul class="age">
                 <h2>Choose a category</h2>
-                    <li class="box">
-                        <p href="#newborn">Newborns</p>
-                        <a href="#"><img class="box_age" src="images/newborn.jpg"></a>
+                <li class="box">
+                    <p href="#newborn">Newborns</p>
+                    <a href="#"><img class="box_age" src="images/newborn.jpg"></a>
                 </li>
-                    <li class="box">
-                        <p href="#infant">Infants</p>
-                        <a href="#"><img class="box_age" src="images/infant.jpeg"></a>
+                <li class="box">
+                    <p href="#infant">Infants</p>
+                    <a href="#"><img class="box_age" src="images/infant.jpeg"></a>
                 </li>
-                    <li class="box">
-                        <p href="#toddler">Toddlers</p>
-                        <a href="#"><img class="box_age" src="images/toddler.jpg"></a>
+                <li class="box">
+                    <p href="#toddler">Toddlers</p>
+                    <a href="#"><img class="box_age" src="images/toddler.jpg"></a>
                 </li>
             </ul>
         </div>

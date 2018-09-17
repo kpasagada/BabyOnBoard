@@ -31,15 +31,21 @@ public class LoginController extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
-		if(submitType.equals("login") && c!=null && c.getName()!=null){
-		    session.setAttribute("loginStatus", "true");
+		if(submitType.equals("login") && c != null && c.getFullName() != null && c.getUsername() != null){
+			session.setAttribute("loginStatus", "true");
 			response.sendRedirect(request.getContextPath()+"/index");
 		}else if(submitType.equals("register")){
-			c.setName(request.getParameter("name"));
+			c.setFullName(request.getParameter("name"));
 			c.setUsername(request.getParameter("username"));
 			c.setPassword(request.getParameter("password"));
-			customerDao.register(c);
-			session.setAttribute("loginStatus", "true");
+			c.setEmail(request.getParameter("email"));
+			c.setPhone(request.getParameter("phone"));
+			if(customerDao.register(c) == 0) {
+				session.setAttribute("loginStatus", "false");
+			}
+			else {
+				session.setAttribute("loginStatus", "true");
+			}
 			response.sendRedirect(request.getContextPath()+"/index");
 		}else{
 			session.setAttribute("loginStatus", "false");

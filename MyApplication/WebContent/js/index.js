@@ -41,7 +41,8 @@ function register(failed) {
 	document.getElementById("login").style.display="none";
 	document.getElementById("register").style.display="inline";
 	if(failed == true){
-		document.getElementById("incorrect-register").style.display="block";
+		var incorrect_register_element = document.getElementById("incorrect-register");
+		incorrect_register_element.classList.remove("hide");
 	}
 }
 

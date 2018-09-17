@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>logout page</title>
+<title>Baby On Board | Logout</title>
 </head>
 <body>
 <%
 	session.invalidate();
-	response.sendRedirect("login.jsp");
+	response.sendRedirect(request.getContextPath()+"/index");
 %>
 
 </body>

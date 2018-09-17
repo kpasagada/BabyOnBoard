@@ -1,0 +1,190 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background-color: #fff;
+    color: #555;
+    font-family: 'Lato','Arial', 'sans-serif';
+    font-weight: 300;
+    font-size: 20px;
+    text-rendering: optimizeLegibility;
+}
+
+body {
+    font-family:Whitney; 
+    font-size:12px;
+    height:100%;
+    margin:0px;
+}
+
+h1 {
+    
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/*------------------------------------------------------------------------------
+COMMON CLASSES
+--------------------------------------------------------------------------------*/
+.te-al-ce{
+	text-align: center;
+}
+
+.hide{
+	display: none !important;
+}
+
+/*------------------------------------------------------------------------------
+SECTION-HOME
+--------------------------------------------------------------------------------*/
+
+.header {
+	background-color:#F1AF7F;
+	height:100px;
+}
+
+.logo {
+    height: 100px;
+    width: auto;
+    float: left;
+    margin-top: 2px;
+    margin-left: 12px;
+}
+
+.main-nav {
+    float: right;
+    list-style: none;
+    font-size: 20px;
+    margin-top: 38px;
+    margin-right: 90px;
+}
+
+.main-nav li {
+    display: inline-block;
+    margin-left: 40px;
+}
+
+.main-nav li a:link,
+.main-nav li a:visited {
+    padding: 5px 0px;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 90%;
+    border-bottom: 2px solid transparent;
+
+}
+
+.main-nav li a:hover,
+.main-nav li a:active {
+    border-bottom: 2px solid #dd7a32;
+}
+
+.home {
+    background:url(../images/hero.png) no-repeat;
+    width:100%;
+    height:600px;
+    background-size:inherit;
+}
+
+.human {   
+    width: 23%;
+    margin-top:5%;
+}
+
+.login {    
+    width: 70%;
+    height: 43px;
+    font-size: 20px;
+    text-align: center;
+    margin: 4% 15%;
+}
+
+#login {
+    display:block;
+    width:25%;
+    float: left;
+    margin: 2% 15%;
+    background:white;
+    height: 500px;
+    -webkit-box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2px 15px rgba(123, 125, 128, 0.78);
+}
+
+.register {
+    width: 70%;
+    height: 18px;
+    font-size: 13px;
+    text-align: center;
+    margin: 2% 15%;
+}
+
+#register {
+	display:none;width:25%; 
+    float: left;
+    margin: 2% 15%; 
+    background:white;
+    height: 500px;
+    box-shadow: 0px 2px 15px rgba(123, 125, 128, 0.78);
+}
+
+.button {    
+    background: none;
+    border: none;
+    text-align: center;
+    text-align:center;
+}
+
+/*------------------------------------------------------------------------------
+SECTION-AGE
+--------------------------------------------------------------------------------*/
+
+.age {
+    float:none;
+    list-style: none;
+    font-size: 20px;
+    margin-top: 38px;
+    margin-right: 0px;
+    margin-bottom: 40px;
+}
+
+.age li {
+    text-decoration: none;
+    display: inline-block;
+    margin-left: 10%;
+    margin-right: 11%
+}
+
+.box_age{
+    width: 150px;
+    height: 150px;
+}
+
+/*------------------------------------------------------------------------------
+SECTION-
+--------------------------------------------------------------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

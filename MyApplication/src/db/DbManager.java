@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 /**
  * 
- * @author mehra
+ * @author karthik
  * getConnection method help us to connect to the appropriate database. In this project we only have one
  * database. Data comes from MyDB interface.
  */

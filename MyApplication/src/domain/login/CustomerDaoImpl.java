@@ -19,10 +19,12 @@ public class CustomerDaoImpl implements CustomerDao {
 		int status = 0;
 		try{
 			conn = db.getConnection();
-			ps =conn.prepareStatement("insert into customer values(?,?,?)");
+			ps =conn.prepareStatement("INSERT INTO customer(user_name,password,full_name,email,phone) VALUES(?,?,?,?,?)");
 			ps.setString(1, c.getUsername());
 			ps.setString(2, c.getPassword());
-			ps.setString(3, c.getName());
+			ps.setString(3, c.getFullName());
+			ps.setString(4, c.getEmail());
+			ps.setString(5, c.getPhone());
 			status = ps.executeUpdate();
 			conn.close();
 		}catch(Exception e){
@@ -36,15 +38,18 @@ public class CustomerDaoImpl implements CustomerDao {
 		Customer c = new Customer();
 		try{
 			conn = db.getConnection();
-			ps =conn.prepareStatement("select * from customer where userId=? and password=?");
+			ps =conn.prepareStatement("SELECT * FROM customer WHERE user_name=? AND password=?");
 			ps.setString(1, login.getUsername());
 			ps.setString(2, login.getPassword());
 
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()){
-				c.setUsername(rs.getString(1));
-				c.setPassword(rs.getString(2));
-				c.setName(rs.getString(3));
+				c.setId(rs.getInt(1));
+				c.setUsername(rs.getString(2));
+				c.setPassword(rs.getString(3));
+				c.setFullName(rs.getString(4));
+				c.setEmail(rs.getString(5));
+				c.setPhone(rs.getString(6));
 			}
 			conn.close();
 		}catch(Exception e){

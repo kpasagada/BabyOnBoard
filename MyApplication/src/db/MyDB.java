@@ -7,6 +7,7 @@ package db;
  * pass :Test1234
  * 
  */
+
 public interface MyDB {
 
 	String USER="<username>";

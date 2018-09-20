@@ -65,25 +65,75 @@
         </div>
         
         <!--AGE CATEGORY-->
-        <div class="section-age">
+        <div>
             <ul class="age">
                 <h2>Choose a category</h2>
-                <li class="box">
+                <li>
+                    <a href="#"><img class="box-age" alt="Newborns" src="images/newborn.jpg"></a>
                     <p href="#newborn">Newborns</p>
-                    <a href="#"><img class="box_age" src="images/newborn.jpg"></a>
                 </li>
-                <li class="box">
+                <li>
+                    <a href="#"><img class="box-age" alt="Infant" src="images/infant.jpeg"></a>
                     <p href="#infant">Infants</p>
-                    <a href="#"><img class="box_age" src="images/infant.jpeg"></a>
                 </li>
-                <li class="box">
+                <li>
+                    <a href="#"><img class="box-age" alt="Toddler" src="images/toddler.jpg"></a>
                     <p href="#toddler">Toddlers</p>
-                    <a href="#"><img class="box_age" src="images/toddler.jpg"></a>
                 </li>
             </ul>
         </div>
         
-        <!--JAVA SCRIPTS -->
+        
+        <!--SUBSCRIPTION MODEL--> 
+        <div>
+        	<ul class="subscription">
+        		<h2>Choose a subscription Model</h2>
+        		<div class="subscription-box">
+        			<h3>Premium</h3>
+        				<ul class="card">
+        					<li>$550 / month</li>
+        					<li>Free Home Delivery</li>
+        				</ul>
+        		</div>
+        		<div class="subscription-box">
+        			<h3>Standard</h3>
+        				<ul class="card">
+        					<li>$350 / month</li>
+        					<li>Home Delivery within a week</li>
+        				</ul>
+        		</div>
+        		<div class="subscription-box">
+        			<h3>Premium</h3>
+        				<ul class="card">
+        					<li>$250 / month</li>
+        					<li>Home Delivery at $15</li>
+        				</ul>
+        		</div>
+        	</ul>
+        </div>
+        
+        
+        <!-- SUBSCRIPTION DURATION-->
+         <div>
+            <ul class="subscription-duration">
+                <h2>Choose the subscription Duration</h2>
+                <li>
+                    <a href="#"><img class="duration-circle" alt="3" src="images/3.jpg"></a>
+                </li>
+                <li>
+                    <a href="#"><img class="duration-circle" alt="6" src="images/6.jpg"></a>
+                </li>
+                <li>
+                    <a href="#"><img class="duration-circle" alt="9" src="images/9.jpg"></a>
+                </li>
+                <li>
+                    <a href="#"><img class="duration-circle" alt="12" src="images/12.jpg"></a>
+                </li>
+            </ul>
+        </div>
+        
+       
+       <!--JAVA SCRIPTS -->
         <script type="text/javascript" src="js/index.js"></script>
     </body>
 </html>

@@ -26,7 +26,7 @@ h1 {
 
 h2 {
     text-align: center;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
 
 /*------------------------------------------------------------------------------
@@ -90,7 +90,7 @@ SECTION-HOME
     background:url(../images/hero.png) no-repeat;
     width:100%;
     height:600px;
-    background-size:inherit;
+    background-size:cover;
 }
 
 .human {   
@@ -152,29 +152,97 @@ SECTION-AGE
     font-size: 20px;
     margin-top: 38px;
     margin-right: 0px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
+    margin-left: 35px;
+    text-align: center;
 }
 
 .age li {
     text-decoration: none;
     display: inline-block;
-    margin-left: 10%;
-    margin-right: 11%
+    margin-left: 3%;
+    margin-right: 3%;
+    text-align: center;
 }
 
-.box_age{
-    width: 150px;
-    height: 150px;
+.box-age{
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    img{border:solid 1px red; margin:10px;} //for the purpose of highligthing the image when it gets selected
+}
+
+//for the purpose of highligthing the image when it gets selected
+.selected{
+   box-shadow:0px 12px 22px 1px #333; 
 }
 
 /*------------------------------------------------------------------------------
-SECTION-
+SECTION-SUBSCRIPTION 
 --------------------------------------------------------------------------------*/
 
+.subscription {
+	float:none;
+    list-style: none;
+    font-size: 20px;
+    margin-top: 200px;
+    margin-right: 0px;
+    margin-bottom: 40px;
+    margin-left: 35px;
+}
+
+.subscription-box {
+	box-sizing: border-box;
+  	float: left;
+  	width: 33.33%;
+  	padding: 50px;
+  	text-align: center;
+}
+
+.card {
+	-webkit-column-gap: 100px;
+  	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  	padding: 16px;
+	background-color: #f1f1f1;
+	text-align: left;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
 
 
+/*------------------------------------------------------------------------------
+SECTION-SUBSCRIPTION DURATION
+--------------------------------------------------------------------------------*/
 
+.subscription-duration {
+    float:none;
+    list-style: none;
+    font-size: 20px;
+    margin-top: 50px;
+    margin-right: 0px;
+    margin-bottom: 40px;
+    margin-left: 35px;
+    text-align: center;
+}
 
+.subscription-duration li {
+    text-decoration: none;
+    display: inline-block;
+    margin-left: 3%;
+    margin-right: 3%;
+    text-align: center;
+}
+
+.duration-circle{
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    padding:1px;
+   	border:1px solid #021a40;
+   	background-color:#ff0;
+}
 
 
 

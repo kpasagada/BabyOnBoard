@@ -115,8 +115,8 @@
         
         <!-- SUBSCRIPTION DURATION-->
          <div>
+            <h2> Choose the subscription Duration</h2>
             <ul class="subscription-duration">
-                <h2>Choose the subscription Duration</h2>
                 <li>
                     <a href="#"><img class="duration-circle" alt="3" src="images/3.jpg"></a>
                 </li>

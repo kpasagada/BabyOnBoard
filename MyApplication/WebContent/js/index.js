@@ -51,8 +51,14 @@ function login() {
 	document.getElementById("register").style.display="none";
 }
 
-// Initialising the Index page
-function initIndex(){
+function infants_F() {
+	document.getElementById("sub_newborn").style.display="none";
+	//document.getElementById("sub_infants").style.display="block";
+	//document.getElementById("sub_toddlers").style.display="none";
+}
+
+// Initializing the Index page
+function initIndex() {
 	if(loginStatus == true){
 		document.getElementsByClassName("home")[0].style.display="none";
 		document.getElementById("logout-button").classList.remove("hide");
@@ -66,5 +72,5 @@ function initIndex(){
     document.getElementById("logout-button").getElementsByTagName("A")[0].setAttribute("href", logoutPath);
 }
 
-// Function call to initialise the index page
+// Function call to initialize the index page
 initIndex();

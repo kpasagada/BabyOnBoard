@@ -66,9 +66,9 @@
         
         <!--AGE CATEGORY-->
         <div>
-            <ul class="age">
+            <ul id="age-group-list" class="age">
                 <h2>Choose a category</h2>
-                <li>
+                <!-- <li>
                     <a href="#"><img class="box-age" alt="Newborns" src="images/newborn.jpg"></a>
                     <p href="#newborn">Newborns</p>
                 </li>
@@ -79,7 +79,7 @@
                 <li>
                     <a href="#"><img class="box-age" alt="Toddler" src="images/toddler.jpg"></a>
                     <p href="#toddler">Toddlers</p>
-                </li>
+                </li> -->
             </ul>
         </div>
         

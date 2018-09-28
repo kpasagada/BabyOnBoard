@@ -189,6 +189,11 @@ SECTION-AGE
      margin: -2% 0px 3% 45%;
 }
 
+.age_border{
+	 border-radius: 50%;
+	 border:none;
+}
+
 /*for the purpose of highligthing the image when it gets selected*/
 .selected {
    box-shadow:0px 12px 22px 1px #333; 
@@ -198,7 +203,7 @@ SECTION-AGE
 SECTION-SUBSCRIPTION 
 --------------------------------------------------------------------------------*/
 #sub_newborn {
-	display:inline;
+	display:block;
 }
 
 #sub_infants {
@@ -298,7 +303,7 @@ SECTION-SUBSCRIPTION DURATION
 }
 
 .duration_list {
-	    margin: 0 -60%;
+	    margin: 0 -60% 0 -69%;
 }
 .duration_button {
 	background-color: #F1AF7F;
@@ -311,7 +316,22 @@ SECTION-SUBSCRIPTION DURATION
    
 }
 
+/*----------checkout_btn-----------*/
 
+.checkout{
+	margin: 9% 0;
+}
+.checkout_btn{
+	text-decoration: none;
+    background-color: #a2d6bf;
+    color: #fff;
+    font-size: 33px;
+    font-weight: 500;
+    padding: 2%;
+    /* border-radius: 100px; */
+    border-width: inherit;
+    margin: 0 43%;
+}
 
 
 

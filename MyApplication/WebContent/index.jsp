@@ -69,15 +69,15 @@
             <ul class="age">
                 <h2>Choose a category</h2>
                 <li>
-                    <a href="#" id="newborn"><img class="box-age" alt="Newborns" src="images/newborn.jpg"></a>
+                    <button type="button" class="age_border" onclick="display_Newborns()"><img class="box-age" alt="Newborns" src="images/newborn.jpg"></button>
                     <p class="size" href="#newborn"><br> Newborns</p>
                 </li>
                 <li>
-                    <button type="button" onclick="infants_F()"> <img class="box-age" alt="Infant" src="images/infant.jpeg"> </button>
+                    <button type="button" class="age_border" onclick="display_Infants()"> <img class="box-age" alt="Infant" src="images/infant.jpeg"> </button>
                     <p class="size" href="#infant"><br>Infants</p>
                 </li>
                 <li>
-                    <a href="#" id="toddlers" ><img class="box-age" alt="Toddler" src="images/toddler.jpg"></a>
+                    <button type="button" class="age_border" onclick="display_Toddlers()" ><img class="box-age" alt="Toddler" src="images/toddler.jpg"></button>
                     <p class="size" href="#toddler"><br> Toddlers</p>
                 </li>
             </ul>
@@ -221,7 +221,7 @@
             <ul class="subscription-duration">
                 <h2> Choose the subscription Duration</h2>
                 <div class="border"></div>
-  <div class="duration_list">
+                <div class="duration_list">
                 <li>
                   <button type="button" class="duration_button"> 03</button>  
                 </li>
@@ -238,6 +238,13 @@
             </ul>
         </div>
         
+       <!--  Proceed to checkout -->
+       <div class="checkout">
+       
+        <a href="checkout.jsp" class="checkout_btn">Checkout</a>
+       
+       </div>
+       
        
        <!--JAVA SCRIPTS -->
         <script type="text/javascript" src="js/index.js"></script>

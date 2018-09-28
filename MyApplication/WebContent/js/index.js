@@ -51,9 +51,22 @@ function login() {
 	document.getElementById("register").style.display="none";
 }
 
-function infants_F() {
+function display_Newborns() {
+	document.getElementById("sub_newborn").style.display="block";
+	document.getElementById("sub_infants").style.display="none";
+	document.getElementById("sub_toddlers").style.display="none";
+}
+function display_Infants() {
+	
+	document.getElementById("sub_infants").style.display="block";
 	document.getElementById("sub_newborn").style.display="none";
-	//document.getElementById("sub_infants").style.display="block";
+	document.getElementById("sub_toddlers").style.display="none";
+}
+
+function display_Toddlers() {
+	document.getElementById("sub_toddlers").style.display="block";
+	document.getElementById("sub_infants").style.display="none";
+	document.getElementById("sub_newborn").style.display="none";
 	//document.getElementById("sub_toddlers").style.display="none";
 }
 

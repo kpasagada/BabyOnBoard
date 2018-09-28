@@ -90,7 +90,7 @@ th, td {
 tr:nth-child(even){background-color: #f2f2f2}
 
 th {
-    background-color: #4CAF50;
+    background-color: #a2d6bf;
     color: white;
 }
 
@@ -183,7 +183,7 @@ p.footer a:hover{
     width: 17%;
 }
 .resp-tab-active{
-    color: #B3E03F;
+    color: #6dbf9b;
 }
 .resp-tabs-container {
 	padding: 0px;
@@ -228,7 +228,7 @@ li.resp-tab-item span .pic1,li.resp-tab-item span .pic2,li.resp-tab-item span .p
 	cursor:pointer;	
 }
 li.resp-tab-item.resp-tab-active span label {
-    border: 1px solid #B3E03F;
+    border: 1px solid #6dbf9b;
 }
 .payment-info h3{
     font-size: 26px;
@@ -338,7 +338,7 @@ input.text_box {
 	-ms-transition:0.5s all;
 }
 .payment-info form input[type="submit"] {
-    background: #B3E03F;
+    background:#6dbf9b;
     color: #FFFFFF;
     text-align: center;
     padding: 10px 0;
@@ -356,7 +356,7 @@ input.text_box {
     -ms-transition: 0.5s all;
 }
 .payment-info form input[type="submit"]:hover{
-    background: #3AD5A0;
+    background: #6dbf9b;
     transition: 0.5s all;
     -webkit-transition: 0.5s all;
     -moz-transition: 0.5s all;
@@ -385,7 +385,7 @@ input.text_box {
 	width: 14px;
     height: 14px;
     display: inline-block;
-    border: 2px solid #B3E03F;
+    border: 2px solid #6dbf9b;
     position: absolute;
     left: 0;
     top: 1px;
@@ -503,7 +503,7 @@ label.checkbox {
 	color:#fff;
 	font-weight:600;
 	text-transform:uppercase;
-	background:#B5E045;
+	background: #6dbf9b;
 }
 .payment-info a:hover{
     background: #3AD5A0;	

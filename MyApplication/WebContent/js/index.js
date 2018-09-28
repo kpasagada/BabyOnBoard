@@ -1,6 +1,7 @@
 /**
  *  Functions for index page
  */
+
 (function() {
 	
 	/*
@@ -55,8 +56,6 @@
 	function register(failed) {
 		document.getElementById("login").style.display="none";
 		document.getElementById("register").style.display="inline";
-		
-		// If failed is true, displays the error occurred during registration 
 		if(failed == true){
 			var incorrect_register_element = document.getElementById("incorrect-register");
 			incorrect_register_element.classList.remove("hide");
@@ -65,10 +64,16 @@
 	
 	/*
 	 *  Hides register form and shows login form
-	 */ 
+	 */
 	function login() {
 		document.getElementById("login").style.display="inline";
 		document.getElementById("register").style.display="none";
+	}
+	
+	function infants_F() {
+		document.getElementById("sub_newborn").style.display="none";
+		//document.getElementById("sub_infants").style.display="block";
+		//document.getElementById("sub_toddlers").style.display="none";
 	}
 	
 	/*
@@ -88,7 +93,7 @@
 		    var age_group_object = response[i];
 		    age_group_string += '<li>'
 	        					+ '<a href="#"><img class="box-age" alt="' + age_group_object['name'] + '" src="images/' + age_group_object['name'].replace(" ","").toLowerCase() + '.jpg"></a>'
-	        					+ '<p href="#newborn">' + age_group_object['name'] + '</p>'
+	        					+ '<p>' + age_group_object['name'] + '</p>'
 	        					+ '</li>';
 		}
 		
@@ -110,7 +115,6 @@
 	    xhttp.open("GET", "AgeGroups", true);
 	    xhttp.send(); 
 	}
-	
 	
 	/*
 	 *  Initializing the Index page

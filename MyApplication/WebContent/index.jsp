@@ -26,7 +26,7 @@
 		<!-- Database Connection -->
 		<%
 			DbManager db = new DbManager();
-			Connection conn = (Connection) db.getConnection();
+			Connection conn = (Connection)db.getConnection();
 		%>
 	
 		<!--HEADER SECTION -->
@@ -67,68 +67,161 @@
         <!--AGE CATEGORY-->
         <div>
             <ul id="age-group-list" class="age">
-                <h2>Choose a category</h2>
-                <!-- <li>
-                    <a href="#"><img class="box-age" alt="Newborns" src="images/newborn.jpg"></a>
-                    <p href="#newborn">Newborns</p>
-                </li>
-                <li>
-                    <a href="#"><img class="box-age" alt="Infant" src="images/infant.jpeg"></a>
-                    <p href="#infant">Infants</p>
-                </li>
-                <li>
-                    <a href="#"><img class="box-age" alt="Toddler" src="images/toddler.jpg"></a>
-                    <p href="#toddler">Toddlers</p>
-                </li> -->
+            <h2>Choose a category</h2>
             </ul>
         </div>
         
         
         <!--SUBSCRIPTION MODEL--> 
-        <div>
+        <div id="sub_newborn">
         	<ul class="subscription">
-        		<h2>Choose a subscription Model</h2>
-        		<div class="subscription-box">
-        			<h3>Premium</h3>
-        				<ul class="card">
-        					<li>$550 / month</li>
-        					<li>Free Home Delivery</li>
-        				</ul>
+        		<h2>Choose a subscription for Newborns</h2>
+        		 <div class="border"></div>
+        		<div class="subscription-box">        			
+      				<ul class="card">
+      				    <li><h3 >PREMIUM</h3></li><br>
+      				    <li class="border1"></li>
+      					<li><h3 class="price">$550 </h3><span>/ month</span></li><br>
+      					<li>Premium products</li><br>
+      					<li>Free Home Delivery</li><br>
+      					<li>24/7 Customer service</li><br>
+      					<li>10 Product package</li><br>
+      					<li><button type="button" class="subscription_button">BUY</button></li>
+      				</ul>
+        		</div>
+        		<div class="subscription-box">       	
+       				<ul class="card">
+       				    <li><h3>STANDARD</h3></li><br>
+       				    <li class="border1"></li>
+       					<li><h3 class="price">$350  </h3><span>/ month</span></li><br>
+       					<li>Standard products</li><br>
+       					<li>Home Delivery within a week</li><br>
+       					<li>24/7 Customer service</li><br>
+       					<li>8 Standard Products package</li><br>
+       					<li><button type="button" class="subscription_button">BUY</button></li>
+       				</ul>
         		</div>
         		<div class="subscription-box">
-        			<h3>Standard</h3>
-        				<ul class="card">
-        					<li>$350 / month</li>
-        					<li>Home Delivery within a week</li>
-        				</ul>
+       	        	<ul class="card">
+       				    <li><h3>ECONOMICAL</h3></li><br>
+       				    <li class="border1"></li>
+       					<li><h3 class="price">$250 </h3><span>/ month</span></li><br>
+       					<li>Quality Budget friendly products</li><br>
+       					<li>Home Delivery at $7</li><br>
+       					<li>24/7 Customer service</li><br>
+       					<li>6 Product package</li><br>
+       					<li><button type="button" class="subscription_button">BUY</button></li>
+       				</ul>
+        		</div>
+        	</ul>
+        </div>
+        
+         <div id="sub_infants" >
+        	<ul class="subscription">
+        		<h2>Choose a subscription for infants</h2>
+        		 <div class="border"></div>
+        		<div class="subscription-box">        			
+       				<ul class="card">
+       				    <li><h3 >PREMIUM</h3></li><br>
+       				    <li class="border1"></li>
+       					<li><h3 class="price">$550 </h3><span>/ month</span></li><br>
+       					<li>Premium products</li><br>
+       					<li>Free Home Delivery</li><br>
+       					<li>24/7 Customer service</li><br>
+       					<li>10 Product package</li><br>
+       					<li><button type="button" class="subscription_button">BUY</button></li>
+       				</ul>
+        		</div>
+        		<div class="subscription-box">       	
+       				<ul class="card">
+       				    <li><h3>STANDARD</h3></li><br>
+       				    <li class="border1"></li>
+       					<li><h3 class="price">$350  </h3><span>/ month</span></li><br>
+       					<li>Standard products</li><br>
+       					<li>Home Delivery within a week</li><br>
+       					<li>24/7 Customer service</li><br>
+       					<li>8 Standard Products package</li><br>
+       					<li><button type="button" class="subscription_button">BUY</button></li>
+       				</ul>
         		</div>
         		<div class="subscription-box">
-        			<h3>Premium</h3>
-        				<ul class="card">
-        					<li>$250 / month</li>
-        					<li>Home Delivery at $15</li>
-        				</ul>
+       	        	<ul class="card">
+       				    <li><h3>ECONOMICAL</h3></li><br>
+       				    <li class="border1"></li>
+       					<li><h3 class="price">$250 </h3><span>/ month</span></li><br>
+       					<li>Quality Budget friendly products</li><br>
+       					<li>Home Delivery at $7</li><br>
+       					<li>24/7 Customer service</li><br>
+       					<li>6 Product package</li><br>
+       					<li><button type="button" class="subscription_button">BUY</button></li>
+       				</ul>
+        		</div>
+        	</ul>
+        </div>
+        
+         <div id="sub_toddlers">
+        	<ul class="subscription">
+        		<h2>Choose a subscription for toddlers</h2>
+        		<div class="border"></div>
+        		<div class="subscription-box">        			
+       				<ul class="card">
+       				    <li><h3 >PREMIUM</h3></li><br>
+       				    <li class="border1"></li>
+       					<li><h3 class="price">$550 </h3><span>/ month</span></li><br>
+       					<li>Premium products</li><br>
+       					<li>Free Home Delivery</li><br>
+       					<li>24/7 Customer service</li><br>
+       					<li>10 Product package</li><br>
+       					<li><button type="button" class="subscription_button">BUY</button></li>
+       				</ul>
+        		</div>
+        		<div class="subscription-box">       	
+       				<ul class="card">
+       				    <li><h3>STANDARD</h3></li><br>
+       				    <li class="border1"></li>
+       					<li><h3 class="price">$350  </h3><span>/ month</span></li><br>
+       					<li>Standard products</li><br>
+       					<li>Home Delivery within a week</li><br>
+       					<li>24/7 Customer service</li><br>
+       					<li>8 Standard Products package</li><br>
+       					<li><button type="button" class="subscription_button">BUY</button></li>
+       				</ul>
+        		</div>
+        		<div class="subscription-box">
+       	        	<ul class="card">
+       				    <li><h3>ECONOMICAL</h3></li><br>
+       				    <li class="border1"></li>
+       					<li><h3 class="price">$250 </h3><span>/ month</span></li><br>
+       					<li>Quality Budget friendly products</li><br>
+       					<li>Home Delivery at $7</li><br>
+       					<li>24/7 Customer service</li><br>
+       					<li>6 Product package</li><br>
+       					<li><button type="button" class="subscription_button">BUY</button></li>
+       				</ul>
         		</div>
         	</ul>
         </div>
         
         
         <!-- SUBSCRIPTION DURATION-->
-         <div>
+         <div>            
             <ul class="subscription-duration">
-                <h2>Choose the subscription Duration</h2>
+                <h2> Choose the subscription Duration</h2>
+                <div class="border"></div>
+  <div class="duration_list">
                 <li>
-                    <a href="#"><img class="duration-circle" alt="3" src="images/3.jpg"></a>
+                  <button type="button" class="duration_button"> 03</button>  
                 </li>
                 <li>
-                    <a href="#"><img class="duration-circle" alt="6" src="images/6.jpg"></a>
+                   <button type="button" class="duration_button"> 06</button>
                 </li>
                 <li>
-                    <a href="#"><img class="duration-circle" alt="9" src="images/9.jpg"></a>
+                   <button type="button" class="duration_button"> 09</button>
                 </li>
                 <li>
-                    <a href="#"><img class="duration-circle" alt="12" src="images/12.jpg"></a>
+                    <button type="button" class="duration_button">12</button>
                 </li>
+                </div>
             </ul>
         </div>
         

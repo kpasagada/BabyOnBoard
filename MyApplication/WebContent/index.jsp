@@ -65,9 +65,9 @@
         </div>
         
         <!--AGE CATEGORY-->
-        <div>
+        <div >
             <ul id="age-group-list" class="age">
-            <h2>Choose a category</h2>
+                <h2>Choose a category</h2>
             </ul>
         </div>
         
@@ -208,7 +208,7 @@
             <ul class="subscription-duration">
                 <h2> Choose the subscription Duration</h2>
                 <div class="border"></div>
-  <div class="duration_list">
+                <div class="duration_list">
                 <li>
                   <button type="button" class="duration_button"> 03</button>  
                 </li>
@@ -225,6 +225,13 @@
             </ul>
         </div>
         
+       <!--  Proceed to checkout -->
+       <div class="checkout">
+       
+        <a href="checkout.jsp" class="checkout_btn">Checkout</a>
+       
+       </div>
+       
        
        <!--JAVA SCRIPTS -->
         <script type="text/javascript" src="js/index.js"></script>

@@ -70,12 +70,6 @@
 		document.getElementById("register").style.display="none";
 	}
 	
-	function infants_F() {
-		document.getElementById("sub_newborn").style.display="none";
-		//document.getElementById("sub_infants").style.display="block";
-		//document.getElementById("sub_toddlers").style.display="none";
-	}
-	
 	/*
 	 * Success handler for load age groups 
 	 */
@@ -92,8 +86,8 @@
 		for (var i = 0; i < response.length; i++){
 		    var age_group_object = response[i];
 		    age_group_string += '<li>'
-	        					+ '<a href="#"><img class="box-age" alt="' + age_group_object['name'] + '" src="images/' + age_group_object['name'].replace(" ","").toLowerCase() + '.jpg"></a>'
-	        					+ '<p>' + age_group_object['name'] + '</p>'
+	        					+ '<button type="button" class="age_border"><img class="box-age" alt="' + age_group_object['name'] + '" src="images/' + age_group_object['name'].replace(" ","").trim().toLowerCase() + '.jpg"></button>'
+	        					+ '<p class="size"><br> ' + age_group_object['name'] + '</p>'
 	        					+ '</li>';
 		}
 		

@@ -304,6 +304,7 @@ SECTION-SUBSCRIPTION DURATION
 .duration_list {
 	    margin: 0 -60% 0 -69%;
 }
+
 .duration_button {
 	background-color: #F1AF7F;
     color: #fff;
@@ -312,7 +313,12 @@ SECTION-SUBSCRIPTION DURATION
     border-radius: 200px;
     border-width: inherit;
     margin: 3% 25%;
-   
+   	outline: none;
+}
+
+.duration_button:hover,
+.duration_button.selected-dur {
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
 /*----------checkout_btn-----------*/

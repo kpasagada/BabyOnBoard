@@ -191,7 +191,8 @@
 			}
 			
 			if(i%3 == 0){
-				subscription_list_string += '<div class="inner-subscription-container" data-age="' + sub_object['ageGroup'] + '" class="' + (sub_object['ageGroup'] == selected_age_group? '':'hide') + '">' +
+				var hide_val = sub_object['ageGroup'] == selected_age_group ? 'inner-subscription-container':'inner-subscription-container hide';
+				subscription_list_string += '<div class="' + hide_val + '" data-age="' + sub_object['ageGroup'] + '">' +
 											'<ul class="subscription">' +
 											'<h2>Choose a subscription for ' + sub_age_group_name.replace(" ","") + '</h2>' +
 											'<div class="border"></div>';
@@ -251,11 +252,31 @@
 	}
 	
 	/*
+	 *  Subscription duration event listeners
+	 */
+	function addSubscriptionDurationEventListeners(){
+		var duration_elements = document.getElementsByClassName("duration_button");
+		
+		for(var m = 0; m < duration_elements.length; m++){
+			duration_elements[m].addEventListener("click", function(e){
+				if(e.target && e.target.tagName == "BUTTON"){
+					if(document.getElementsByClassName("selected-dur").length){
+						document.getElementsByClassName("selected-dur")[0].classList.remove("selected-dur");
+					}	
+					e.target.classList.add("selected-dur");
+					selected_duration = e.target.getAttribute("data-val");
+				}
+			});
+		}
+	}
+	
+	/*
 	 *  Function to initialize all event listeners 
 	 */
 	function initEventListeners(){
 		document.getElementById("login-button").addEventListener("click", login);
 		document.getElementById("sign-up-button").addEventListener("click", register);
+		addSubscriptionDurationEventListeners();
 	}
 	
 	/*

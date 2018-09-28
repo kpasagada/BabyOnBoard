@@ -84,16 +84,16 @@
                 <div class="border"></div>
                 <div class="duration_list">
 	                <li>
-	                  <button type="button" data-val="3" class="duration_button"> 03</button>  
+	                  <button type="button" data-val="3" class="duration_button pointer"> 03</button>  
 	                </li>
 	                <li>
-	                   <button type="button" data-val="6" class="duration_button"> 06</button>
+	                   <button type="button" data-val="6" class="duration_button pointer"> 06</button>
 	                </li>
 	                <li>
-	                   <button type="button" data-val="9" class="duration_button"> 09</button>
+	                   <button type="button" data-val="9" class="duration_button pointer"> 09</button>
 	                </li>
 	                <li>
-	                    <button type="button" data-val="12" class="duration_button">12</button>
+	                    <button type="button" data-val="12" class="duration_button pointer">12</button>
 	                </li>
                 </div>
             </ul>

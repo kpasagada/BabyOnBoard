@@ -48,7 +48,7 @@
                  <input type="password" name="password" class="login" placeholder="Password">
                  <button type="submit" class="login" name="submit" value="login">Login</button>
                  <h3 style="text-align:center;"> Forgot Your Password? <br><br></h3>
-                 <button type="button" onclick="register()" class="button" style="padding: 0px 56px;" > Not a registered user yet? Sign Up!</button>
+                 <button id="sign-up-button" type="button" class="button" style="padding: 0px 56px;" > Not a registered user yet? Sign Up!</button>
            </form>
            <form id="register" name="regform" action="LoginController" method="post" onsubmit="return regValidate()">
            	 <p id="incorrect-register" class="te-al-ce hide">Login details invalid, register to continue!</p>
@@ -60,7 +60,7 @@
              <input type="password" name="password" class="register" placeholder="Password">
              <input type="password" name="retry-password" class="register" placeholder="Confirm Password">
              <button type="submit" name="submit" class="register" value="register">Register</button>
-             <button type="button" onclick="login()" class="button" style="padding: 15px 85px;" > Already registered? LOGIN</button>
+             <button id="login-button" type="button" class="button" style="padding: 15px 85px;" > Already registered? LOGIN</button>
            </form>
         </div>
         
@@ -72,134 +72,8 @@
         </div>
         
         
-        <!--SUBSCRIPTION MODEL--> 
-        <div id="sub_newborn">
-        	<ul class="subscription">
-        		<h2>Choose a subscription for Newborns</h2>
-        		 <div class="border"></div>
-        		<div class="subscription-box">        			
-      				<ul class="card">
-      				    <li><h3 >PREMIUM</h3></li><br>
-      				    <li class="border1"></li>
-      					<li><h3 class="price">$550 </h3><span>/ month</span></li><br>
-      					<li>Premium products</li><br>
-      					<li>Free Home Delivery</li><br>
-      					<li>24/7 Customer service</li><br>
-      					<li>10 Product package</li><br>
-      					<li><button type="button" class="subscription_button">BUY</button></li>
-      				</ul>
-        		</div>
-        		<div class="subscription-box">       	
-       				<ul class="card">
-       				    <li><h3>STANDARD</h3></li><br>
-       				    <li class="border1"></li>
-       					<li><h3 class="price">$350  </h3><span>/ month</span></li><br>
-       					<li>Standard products</li><br>
-       					<li>Home Delivery within a week</li><br>
-       					<li>24/7 Customer service</li><br>
-       					<li>8 Standard Products package</li><br>
-       					<li><button type="button" class="subscription_button">BUY</button></li>
-       				</ul>
-        		</div>
-        		<div class="subscription-box">
-       	        	<ul class="card">
-       				    <li><h3>ECONOMICAL</h3></li><br>
-       				    <li class="border1"></li>
-       					<li><h3 class="price">$250 </h3><span>/ month</span></li><br>
-       					<li>Quality Budget friendly products</li><br>
-       					<li>Home Delivery at $7</li><br>
-       					<li>24/7 Customer service</li><br>
-       					<li>6 Product package</li><br>
-       					<li><button type="button" class="subscription_button">BUY</button></li>
-       				</ul>
-        		</div>
-        	</ul>
-        </div>
-        
-         <div id="sub_infants" >
-        	<ul class="subscription">
-        		<h2>Choose a subscription for infants</h2>
-        		 <div class="border"></div>
-        		<div class="subscription-box">        			
-       				<ul class="card">
-       				    <li><h3 >PREMIUM</h3></li><br>
-       				    <li class="border1"></li>
-       					<li><h3 class="price">$550 </h3><span>/ month</span></li><br>
-       					<li>Premium products</li><br>
-       					<li>Free Home Delivery</li><br>
-       					<li>24/7 Customer service</li><br>
-       					<li>10 Product package</li><br>
-       					<li><button type="button" class="subscription_button">BUY</button></li>
-       				</ul>
-        		</div>
-        		<div class="subscription-box">       	
-       				<ul class="card">
-       				    <li><h3>STANDARD</h3></li><br>
-       				    <li class="border1"></li>
-       					<li><h3 class="price">$350  </h3><span>/ month</span></li><br>
-       					<li>Standard products</li><br>
-       					<li>Home Delivery within a week</li><br>
-       					<li>24/7 Customer service</li><br>
-       					<li>8 Standard Products package</li><br>
-       					<li><button type="button" class="subscription_button">BUY</button></li>
-       				</ul>
-        		</div>
-        		<div class="subscription-box">
-       	        	<ul class="card">
-       				    <li><h3>ECONOMICAL</h3></li><br>
-       				    <li class="border1"></li>
-       					<li><h3 class="price">$250 </h3><span>/ month</span></li><br>
-       					<li>Quality Budget friendly products</li><br>
-       					<li>Home Delivery at $7</li><br>
-       					<li>24/7 Customer service</li><br>
-       					<li>6 Product package</li><br>
-       					<li><button type="button" class="subscription_button">BUY</button></li>
-       				</ul>
-        		</div>
-        	</ul>
-        </div>
-        
-         <div id="sub_toddlers">
-        	<ul class="subscription">
-        		<h2>Choose a subscription for toddlers</h2>
-        		<div class="border"></div>
-        		<div class="subscription-box">        			
-       				<ul class="card">
-       				    <li><h3 >PREMIUM</h3></li><br>
-       				    <li class="border1"></li>
-       					<li><h3 class="price">$550 </h3><span>/ month</span></li><br>
-       					<li>Premium products</li><br>
-       					<li>Free Home Delivery</li><br>
-       					<li>24/7 Customer service</li><br>
-       					<li>10 Product package</li><br>
-       					<li><button type="button" class="subscription_button">BUY</button></li>
-       				</ul>
-        		</div>
-        		<div class="subscription-box">       	
-       				<ul class="card">
-       				    <li><h3>STANDARD</h3></li><br>
-       				    <li class="border1"></li>
-       					<li><h3 class="price">$350  </h3><span>/ month</span></li><br>
-       					<li>Standard products</li><br>
-       					<li>Home Delivery within a week</li><br>
-       					<li>24/7 Customer service</li><br>
-       					<li>8 Standard Products package</li><br>
-       					<li><button type="button" class="subscription_button">BUY</button></li>
-       				</ul>
-        		</div>
-        		<div class="subscription-box">
-       	        	<ul class="card">
-       				    <li><h3>ECONOMICAL</h3></li><br>
-       				    <li class="border1"></li>
-       					<li><h3 class="price">$250 </h3><span>/ month</span></li><br>
-       					<li>Quality Budget friendly products</li><br>
-       					<li>Home Delivery at $7</li><br>
-       					<li>24/7 Customer service</li><br>
-       					<li>6 Product package</li><br>
-       					<li><button type="button" class="subscription_button">BUY</button></li>
-       				</ul>
-        		</div>
-        	</ul>
+        <!--SUBSCRIPTION MODEL-->
+        <div id="subscription-container"> 
         </div>
         
         
@@ -209,28 +83,26 @@
                 <h2> Choose the subscription Duration</h2>
                 <div class="border"></div>
                 <div class="duration_list">
-                <li>
-                  <button type="button" class="duration_button"> 03</button>  
-                </li>
-                <li>
-                   <button type="button" class="duration_button"> 06</button>
-                </li>
-                <li>
-                   <button type="button" class="duration_button"> 09</button>
-                </li>
-                <li>
-                    <button type="button" class="duration_button">12</button>
-                </li>
+	                <li>
+	                  <button type="button" data-val="3" class="duration_button"> 03</button>  
+	                </li>
+	                <li>
+	                   <button type="button" data-val="6" class="duration_button"> 06</button>
+	                </li>
+	                <li>
+	                   <button type="button" data-val="9" class="duration_button"> 09</button>
+	                </li>
+	                <li>
+	                    <button type="button" data-val="12" class="duration_button">12</button>
+	                </li>
                 </div>
             </ul>
         </div>
         
-       <!--  Proceed to checkout -->
-       <div class="checkout">
-       
-        <a href="checkout.jsp" class="checkout_btn">Checkout</a>
-       
-       </div>
+       	<!--  Proceed to checkout -->
+       	<div class="checkout">
+			<a href="checkout" class="checkout_btn">Checkout</a>
+       	</div>
        
        
        <!--JAVA SCRIPTS -->

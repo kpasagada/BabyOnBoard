@@ -73,7 +73,8 @@
                     <p class="size" href="#newborn"><br> Newborns</p>
                 </li>
                 <li>
-                    <button type="button" onclick="infants_F()"> <img class="box-age" alt="Infant" src="images/infant.jpeg"> </button>
+                	<a href="#" id="newborn"><img class="box-age" alt="Infant" src="images/infant.jpeg"></a>
+                   <!--   <button type="button" onclick="infants_F()"> <img class="box-age" alt="Infant" src="images/infant.jpeg"> </button> -->
                     <p class="size" href="#infant"><br>Infants</p>
                 </li>
                 <li>

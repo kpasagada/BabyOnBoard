@@ -42,24 +42,26 @@
         
         <!--LANDING PAGE-->
         <div class="home">
+        <!-- Login -->
            <form id="login" name="loginform" action="LoginController" method="post" onsubmit="return loginValidate()" >
-                 <h1 style="text-align:center;"><img class="human" src="images/human.png"/> <br><br>LOGIN</h1>
+                 <h1 style="text-align:center;"><img class="human" src="images/human.png"/> <br><span style="font-size:35px;">LOGIN </span><br></h1>
                  <input type="text" name="username" class="login" placeholder="Username">
                  <input type="password" name="password" class="login" placeholder="Password">
-                 <button type="submit" class="login" name="submit" value="login">Login</button>
-                 <h3 style="text-align:center;"> Forgot Your Password? <br><br></h3>
+                 <button type="submit" class="login pointer btn-1" name="submit" value="login">Login</button>
+                 <a href="#"><h3 style="text-align:center;color:#555555;text-decoration:none;"> <br>Forgot Your Password? <br><br></h3></a>
                  <button id="sign-up-button" type="button" class="button" style="padding: 0px 56px;" > Not a registered user yet? Sign Up!</button>
            </form>
+           <!-- Register -->
            <form id="register" name="regform" action="LoginController" method="post" onsubmit="return regValidate()">
            	 <p id="incorrect-register" class="te-al-ce hide">Login details invalid, register to continue!</p>
-             <h1 class="te-al-ce"><img class="human" src="images/human.png"/> <br><br>REGISTER</h1>
+             <h1 class="te-al-ce"><img class="human reg" src="images/human.png"/> <br>REGISTER</h1>
              <input type="text" name="name" class="register" placeholder="Full Name">
              <input type="text" name="email" class="register" placeholder="Email Address">
              <input type="number" name="phone" class="register" placeholder="Phone Number">
              <input type="text" name="username" class="register" placeholder="Username">
              <input type="password" name="password" class="register" placeholder="Password">
              <input type="password" name="retry-password" class="register" placeholder="Confirm Password">
-             <button type="submit" name="submit" class="register" value="register">Register</button>
+             <button type="submit" name="submit" class="register pointer btn-1 size1" value="register">Register</button>
              <button id="login-button" type="button" class="button" style="padding: 15px 85px;" > Already registered? LOGIN</button>
            </form>
         </div>
@@ -80,7 +82,7 @@
         <!-- SUBSCRIPTION DURATION-->
          <div>            
             <ul class="subscription-duration">
-                <h2> Choose the subscription Duration</h2>
+                <h2> Choose the subscription Duration in Months</h2>
                 <div class="border"></div>
                 <div class="duration_list">
 	                <li>

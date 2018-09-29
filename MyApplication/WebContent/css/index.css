@@ -39,6 +39,7 @@ COMMON CLASSES
 
 .te-al-ce {
 	text-align: center;
+	font-weight:700;
 }
 
 .hide {
@@ -104,7 +105,11 @@ SECTION-LANDING PAGE
 
 .human {   
     width: 23%;
-    margin-top:5%;
+    margin-top:8%;
+}
+
+.reg{
+	margin-top:4%;
 }
 
 .login {    
@@ -113,8 +118,12 @@ SECTION-LANDING PAGE
     font-size: 20px;
     text-align: center;
     margin: 4% 15%;
+   
 }
 
+.btn-1{
+	 border:none;
+}
 #login {
     display:block;
     width:25%;
@@ -127,14 +136,21 @@ SECTION-LANDING PAGE
     box-shadow: 0px 2px 15px rgba(123, 125, 128, 0.78);
 }
 
+.login:hover{
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+	
+}
 .register {
     width: 70%;
-    height: 18px;
+    height: 6%;
     font-size: 13px;
     text-align: center;
-    margin: 2% 15%;
+    margin: 4% 0 0 15%;
 }
 
+.size1{
+	font-size:19px;
+}
 #register {
 	display:none;width:25%; 
     float: left;
@@ -145,10 +161,13 @@ SECTION-LANDING PAGE
 }
 
 .button {    
+    color: #555555;
+    font-weight: 600;
     background: none;
     border: none;
     text-align: center;
-    text-align:center;
+    cursor:pointer;
+    text-decoration:underline;
 }
 
 /*------------------------------------------------------------------------------
@@ -269,6 +288,11 @@ SECTION-SUBSCRIPTION
     width: 42%;
     outline: none;
 }
+
+.subscription_button:hover
+{
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
 /*------------------------------------------------------------------------------
 SECTION-SUBSCRIPTION DURATION
 --------------------------------------------------------------------------------*/
@@ -336,6 +360,10 @@ SECTION-SUBSCRIPTION DURATION
     /* border-radius: 100px; */
     border-width: inherit;
     margin: 0 43%;
+}
+
+.checkout_btn:hover{
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
 

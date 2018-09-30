@@ -62,7 +62,7 @@ COMMON CLASSES
 /*------------------------------------------------------------------------------
 SECTION-LANDING PAGE
 --------------------------------------------------------------------------------*/
-
+/*-------Header--------*/
 .header {
 	background-color:#F1AF7F;
 	height:100px;
@@ -100,11 +100,16 @@ SECTION-LANDING PAGE
 
 }
 
+.color{
+	
+}
 .main-nav li a:hover,
 .main-nav li a:active {
     border-bottom: 2px solid #dd7a32;
 }
 
+
+/*----------------*/
 .home {
     background:url(../images/hero.png) no-repeat;
     width:100%;
@@ -148,14 +153,15 @@ SECTION-LANDING PAGE
 
 .register {
     width: 70%;
-    height: 6%;
+    height: 5%;
     font-size: 13px;
     text-align: center;
     margin: 4% 0 0 15%;
 }
 
 .size1{
-	font-size:19px;
+	font-size:20px;
+	height:43px;
 }
 
 #register {
@@ -165,6 +171,12 @@ SECTION-LANDING PAGE
     background:white;
     height: 500px;
     box-shadow: 0px 2px 15px rgba(123, 125, 128, 0.78);
+}
+
+#incorrect-register{
+	color:red;
+	margin-top:2%;
+	font-size: 14px;
 }
 
 .button {    
@@ -298,7 +310,9 @@ SECTION-SUBSCRIPTION
 
 .subscription_button:hover {
 	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+	border:2px solid #F1AF7F;
 }
+
 
 /*------------------------------------------------------------------------------
 SECTION-SUBSCRIPTION DURATION
@@ -347,8 +361,11 @@ SECTION-SUBSCRIPTION DURATION
    	outline: none;
 }
 
-.duration_button:hover,
+.duration_button:hover{
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
 .duration_button.selected-dur {
+	    border: 3px solid #dea0502b;
 	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 

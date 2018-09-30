@@ -9,8 +9,10 @@
         <meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!--LINKS-->
+        
         <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet">        
 		<link rel="stylesheet" type="text/css" href="css/index.css">
+		
 		<!-- Scroll to top on reload -->
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 				function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -39,7 +41,7 @@
                     <li><a href="#features">Features</a></li>
                     <li><a href="#work">How it works</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <li id="logout-button" class="hide"><a href="/logout">Logout</a></li>
+                    <li id="logout-button" class="hide"><a href="/logout">Logout </a></li>
             </ul>
         </div>
         
@@ -106,7 +108,7 @@
         
        	<!--  Proceed to checkout -->
        	<div class="checkout">
-			<button class="checkout_btn disabled">Proceed to check out</button>
+			<button class="checkout_btn disabled">Proceed to Checkout</button>
        	</div>
        
        

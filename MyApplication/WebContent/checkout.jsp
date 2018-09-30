@@ -12,9 +12,8 @@
 				function hideURLbar(){ window.scrollTo(0,1); } </script>
 		
 		<link href="css/checkout.css" rel="stylesheet" type="text/css" media="all" />
-		<link href='//fonts.googleapis.com/css?family=Fugaz+One' rel='stylesheet' type='text/css'>
-		<link href='//fonts.googleapis.com/css?family=Alegreya+Sans:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,800,800italic,900,900italic' rel='stylesheet' type='text/css'>
-		<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+		
+		<link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet">  
 		<title>Baby On Board | Check Out</title>
     </head>
     
@@ -51,11 +50,11 @@
         </div>
         
 		<div class="cart-payment-container">
-			<div class="heading">Cart Details</div>
+			<div class="heading"><h2>Cart Details</h2></div>
 			<div class="subscription-details">
 				<div class="wi-25-di-in-bk fo-we-bo">1. Premium</div>
-				<div class="age-group wi-25-di-in-bk">Age Group: Infants (1-2 months)</div>
-				<div id="duration-dropdown" class="dropdown wi-15-di-in-bk">
+				<div class="age-group wi-25-di-in-bk ">Age Group: Infants (1-2 months)</div>
+				<div id="duration-dropdown" class="dropdown wi-15-di-in-bk fo-we-bo">
 					<button class="dropbtn">Duration</button>
 					<div id="duration-dropdown-content" class="dropdown-content" data-name="Duration">
 						<a class="dropdown-item" href="#" data-val="3">3 Months</a> 
@@ -72,7 +71,7 @@
 						<a class="dropdown-item" href="#" data-val="3">Monthly</a>
 					</div>
 				</div>
-				<div class="sub-quantity wi-15-di-in-bk">
+				<div class="sub-quantity wi-15-di-in-bk quantity">
 					<span class="di-in-bl fo-si-13">Quantity: </span>
 					<input class="di-in-bl ou-no" type="number" value="2" name="quantity" min="1" max="30">
 				</div>
@@ -290,7 +289,7 @@
 											</div>
 											<div class="clear"></div>
 										</div>
-										<input type="submit" value="SUBMIT">
+										<input type="submit" value="SUBMIT" id=submit>
 									</form>
 									<div class="single-bottom">
 										<ul>

@@ -1,5 +1,5 @@
 /* reset */
-html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,dl,dt,dd,ol,nav ul,nav li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
+html,body,div,span,applet,object,iframe,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,dl,dt,dd,ol,nav ul,nav li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
 article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section {display: block;}
 ol,ul{list-style:none;margin:0px;padding:0px;}
 blockquote,q{quotes:none;}
@@ -26,14 +26,20 @@ html {
     background-color: #fff;
     color: #555;
     font-size: 20px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Lato','Arial', 'sans-serif';
 }
 
 body{
+	 font-family: 'Lato','Arial', 'sans-serif';
     height: 100%;
 	overflow-x: hidden;   
 	padding: 0px;
 	margin: 0px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 4%;
 }
 
 /*------------------------ Cart Container ----------------------------*/
@@ -41,10 +47,7 @@ body{
 	color: #555;
 	display: block;
     font-size: 1.5em;
-    margin-block-start: 5px;
-    margin-block-end: 10px;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
+        margin: 4% 0;
     font-weight: bold;
     text-align: center;
 }
@@ -53,8 +56,8 @@ body{
 .dropbtn {
     background-color: #f1af7f;
     color: white;
-    padding: 10px;
-    font-size: 13px;
+    padding: 12px;
+    font-size: 17px;
     border: none;
     cursor: pointer;
     outline: none;
@@ -105,30 +108,39 @@ body{
 }
 
 .subscription-details{
-	padding: 0px 2.5%;
+	
+	padding: 0px 12.5%;
 }
 
 .age-group{
-    font-size: 13px;
+    font-size:17px;
+    text-align:left;
+        margin: 0px -6%;
 }
 
 .wi-25-di-in-bk{
 	width: 25%;
+	text-align:left;
     max-width: 25%;
     min-width: 25%;
     display: inline-block;
 }
 
+.quantity{
+	    margin: 0 10%;
+}
 .wi-15-di-in-bk{
-	width: 15%;
-    max-width: 15%;
-    min-width: 15%;
+	
+	text-align:left;
+    
     display: inline-block;
 }
 
 /*-------------------------Common---------------------------*/
 .fo-we-bo{
 	font-weight: bold;
+	    margin: -11px 0px;
+	    margin-left: 26px;
 }
 
 .di-in-bl{
@@ -136,7 +148,7 @@ body{
 }
 
 .fo-si-13{
-	font-size: 13px;
+	font-size: 17px;
 }
 
 .ou-no{
@@ -208,10 +220,7 @@ th {
 }
 
 /*-------------------------END------------------------------*/
-
-h1,h2,h3,h4,h5,h6{
-	margin:0;			   
-}	
+	
 p{
 	margin:0;
 }
@@ -225,7 +234,7 @@ label{
 
 /*-- main --*/
 .main {
-    padding: 25px 0;
+    padding: 45px 0;
 }
 .main h1{
 	font-size:35px;
@@ -233,7 +242,7 @@ label{
 	text-transform:uppercase;
 	color:#B3E03F;
     margin-bottom: 25px;
-	font-family: 'Fugaz One', cursive;
+	font-family: 'Lato','Arial', 'sans-serif';
 }
 .content{
 	width:40%;
@@ -270,7 +279,7 @@ p.footer a:hover{
     margin-bottom: 25px;
     color: #3AD5A0;
     font-weight: 500;
-    font-family: 'Alegreya Sans', sans-serif;
+   font-family: 'Lato','Arial', 'sans-serif';
 }
 .resp-tabs-list {
     list-style: none;
@@ -351,7 +360,7 @@ li.resp-tab-item.resp-tab-active span label {
     margin-bottom: 15px;
     color: #3AD5A0;
     font-weight: 500;
-    font-family: 'Alegreya Sans', sans-serif;
+   font-family: 'Lato','Arial', 'sans-serif';
 }
 .tab-for input[type="text"] {
     width:96%;

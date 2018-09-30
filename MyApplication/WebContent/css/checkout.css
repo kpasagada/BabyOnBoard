@@ -23,10 +23,9 @@ img{max-width:100%;}
 /*end reset*/
 
 body{
-padding:0;
-margin:0;
-font-family: 'Open Sans', sans-serif;
-
+	padding:0;
+	margin:0;
+	font-family: 'Open Sans', sans-serif;
 }
 
 /*-------------------------Header---------------------------*/
@@ -34,7 +33,6 @@ font-family: 'Open Sans', sans-serif;
 	background-color:#F1AF7F;
 	height:100px;
 }
-
 
 .logo {
     height: 100px;
@@ -138,6 +136,7 @@ p.footer a{
 p.footer a:hover{
 	color: #B3E03F;	
 }
+
 /******** SAP ************/
 .sap_tabs{
 	clear:both;
@@ -468,6 +467,7 @@ label.checkbox {
 	width: 28%;
 	floaT: left;
 }
+
 /*** normal state ***/
 .radio i {
 	transition: border-color 0.3s;
@@ -567,14 +567,17 @@ width:46%;
   font-weight: bold;
   margin-left: 5px;
 }
+
 .user-left {
   width: 61%;
   float: left;
 }
+
 .user-right  {
   width: 21%;
   float: right;
 }
+
 .user-right input[type="submit"] {
    background: #ed5564;
    font-weight: bold;
@@ -589,6 +592,7 @@ width:46%;
 	-o-transition:0.5s all;
 	-ms-transition:0.5s all;
 }
+
 .user-right input[type="submit"]:hover {
 background:#28b08a;
 transition:0.5s all;
@@ -597,11 +601,13 @@ transition:0.5s all;
 	-o-transition:0.5s all;
 	-ms-transition:0.5s all;
 }
+
 .payment-info h4 {
     font-size: 14px;
     text-align: center;
     color: #000;
 }
+
 /*-- responsive media queries --*/
 @media (max-width: 1440px){
 	li.resp-tab-item span .pic3 {

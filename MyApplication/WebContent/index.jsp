@@ -103,7 +103,7 @@
         
        	<!--  Proceed to checkout -->
        	<div class="checkout">
-			<a href="checkout" class="checkout_btn">Checkout</a>
+			<button class="checkout_btn disabled">Proceed to check out</button>
        	</div>
        
        

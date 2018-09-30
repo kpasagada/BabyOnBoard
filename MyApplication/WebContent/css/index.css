@@ -14,10 +14,11 @@ html {
 }
 
 body {
-    font-family:'Lato','Arial', 'sans-serif'; 
-    font-size:12px;
-    height:100%;
-    margin:0px;
+    font-family: 'Lato','Arial', 'sans-serif'; 
+    font-size: 12px;
+    height: 100%;
+    margin: 0px;
+	overflow-x: hidden;    
 }
 
 h1 {
@@ -30,7 +31,7 @@ h2 {
 }
 
 li {
-	list-style:none;
+	list-style: none;
 }
 
 /*------------------------------------------------------------------------------
@@ -39,7 +40,7 @@ COMMON CLASSES
 
 .te-al-ce {
 	text-align: center;
-	font-weight:700;
+	font-weight: 700;
 }
 
 .hide {
@@ -355,17 +356,25 @@ SECTION-SUBSCRIPTION DURATION
 
 .checkout{
 	margin: 9% 0;
+	text-align: center;
 }
 .checkout_btn{
 	text-decoration: none;
-    background-color: #a2d6bf;
+    background-color: #2aaf74;
     color: #fff;
-    font-size: 33px;
+    font-size: 30px;
     font-weight: 500;
-    padding: 2%;
-    /* border-radius: 100px; */
+    padding: 15px;
+    border-radius: 5px;
     border-width: inherit;
-    margin: 0 43%;
+    outline: none;
+    cursor: pointer;
+}
+
+.checkout_btn.disabled{
+	pointer-events: none;
+	background-color: #a2d6bf;
+	cursor: not-allowed;
 }
 
 .checkout_btn:hover{

@@ -277,6 +277,25 @@
 	}
 	
 	/*
+	 *  Proceed to checkout
+	 */
+	function proceedToCheckout(){
+		var checkout_url =  window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + contextPath + "/checkout?age=" + selected_age_group + "&sub=" + selected_subscription + "&dur=" + selected_duration;
+		window.location.href = checkout_url;
+	}
+	
+	/*
+	 *  Watches selected subscription and duration variables to enable or disable checkout button
+	 */
+	function addSubscriptionSelectionListener(){
+		var interval = setInterval(function(){ 
+			if(selected_subscription == -1 || selected_duration == -1){ return; }
+			document.getElementsByClassName("checkout_btn")[0].classList.remove("disabled");
+			clearInterval(interval);
+		}, 100);
+	}
+	
+	/*
 	 *  Function to initialize all event listeners 
 	 */
 	function initEventListeners(){
@@ -284,7 +303,10 @@
 		document.getElementById("register").addEventListener("submit", function(e){ regValidate(e);});
 		document.getElementById("login-button").addEventListener("click", login);
 		document.getElementById("sign-up-button").addEventListener("click", register);
+		document.getElementsByClassName("checkout_btn")[0].addEventListener("click", proceedToCheckout);
+		addSubscriptionSelectionListener();
 		addSubscriptionDurationEventListeners();
+		
 	}
 	
 	/*
@@ -301,9 +323,7 @@
 		
 		//Setting logout path and checkout page path
 		var logoutPath = contextPath + "/logout";
-		var checkoutPath = contextPath + "/checkout"
 	    document.getElementById("logout-button").getElementsByTagName("A")[0].setAttribute("href", logoutPath);
-	    document.getElementsByClassName("checkout_btn")[0].setAttribute("href", checkoutPath);
 	    
 	    loadAgeGroups();
 	    initEventListeners();

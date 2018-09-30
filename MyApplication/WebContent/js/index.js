@@ -9,7 +9,7 @@
 	/*
 	 * Validates registration form
 	 */
-	function regValidate() {
+	function regValidate(e) {
 	
 		var username = document.forms["regform"]["username"].value;
 		var password = document.forms["regform"]["password"].value;
@@ -18,37 +18,43 @@
 		if (username == "") {
 	        alert("username must be filled out");
 	        document.forms["regform"]["username"].focus();
-	        return false;
+	        e.preventDefault();
+	        e.stopPropagation();
 	    }else if (password== "") {
 	        alert("password must be filled out");
 	        document.forms["regform"]["password"].focus();
-	        return false;
+	        e.preventDefault();
+	        e.stopPropagation();
 	    }else if (rpassword == "") {
 	        alert("retry-password must be filled out");
 	        document.forms["regform"]["retry-password"].focus();
-	        return false;
+	        e.preventDefault();
+	        e.stopPropagation();
 	    }else if(password != rpassword){
 	    	alert("password doesnt match");
 	        document.forms["regform"]["password"].focus();
-	        return false;
+	        e.preventDefault();
+	        e.stopPropagation();
 	    }
 	}
 	
 	/*
 	 * Validates login form
 	 */
-	function loginValidate(){
+	function loginValidate(e){
 		var username = document.forms["loginform"]["username"].value;
 		var password = document.forms["loginform"]["password"].value;
 		
 		if (username == "") {
 	        alert("username must be filled out");
 	        document.forms["loginform"]["username"].focus();
-	        return false;
+	        e.preventDefault();
+	        e.stopPropagation();
 	    }else if (password== "") {
 	        alert("password must be filled out");
 	        document.forms["loginform"]["password"].focus();
-	        return false;
+	        e.preventDefault();
+	        e.stopPropagation();
 	    }
 	}
 	
@@ -274,6 +280,8 @@
 	 *  Function to initialize all event listeners 
 	 */
 	function initEventListeners(){
+		document.getElementById("login").addEventListener("submit", function(e){ loginValidate(e);});
+		document.getElementById("register").addEventListener("submit", function(e){ regValidate(e);});
 		document.getElementById("login-button").addEventListener("click", login);
 		document.getElementById("sign-up-button").addEventListener("click", register);
 		addSubscriptionDurationEventListeners();

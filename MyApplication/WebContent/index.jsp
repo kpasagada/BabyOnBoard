@@ -43,7 +43,7 @@
         <!--LANDING PAGE-->
         <div class="home">
         <!-- Login -->
-           <form id="login" name="loginform" action="LoginController" method="post" onsubmit="return loginValidate()" >
+           <form id="login" name="loginform" action="LoginController" method="post">
                  <h1 style="text-align:center;"><img class="human" src="images/human.png"/> <br><span style="font-size:35px;">LOGIN </span><br></h1>
                  <input type="text" name="username" class="login outline-none" placeholder="Username">
                  <input type="password" name="password" class="login outline-none" placeholder="Password">
@@ -52,12 +52,12 @@
                  <button id="sign-up-button" type="button" class="button outline-none" style="padding: 0px 56px;" > Not a registered user yet? Sign Up!</button>
            </form>
            <!-- Register -->
-           <form id="register" name="regform" action="LoginController" method="post" onsubmit="return regValidate()">
+           <form id="register" name="regform" action="LoginController" method="post">
            	 <p id="incorrect-register" class="te-al-ce hide">Login details invalid, register to continue!</p>
              <h1 class="te-al-ce"><img class="human reg" src="images/human.png"/> <br>REGISTER</h1>
              <input type="text" name="name" class="register outline-none" placeholder="Full Name">
              <input type="text" name="email" class="register outline-none" placeholder="Email Address">
-             <input type="number" name="phone" class="register outline-none" placeholder="Phone Number">
+             <input type="text" name="phone" class="register outline-none" placeholder="Phone Number">
              <input type="text" name="username" class="register outline-none" placeholder="Username">
              <input type="password" name="password" class="register outline-none" placeholder="Password">
              <input type="password" name="retry-password" class="register outline-none" placeholder="Confirm Password">

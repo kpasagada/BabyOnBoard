@@ -50,6 +50,14 @@ COMMON CLASSES
 	cursor: pointer;
 }
 
+.outline-none{
+	outline: none;
+}
+
+.bo-sh-rgba:hover{
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
 /*------------------------------------------------------------------------------
 SECTION-LANDING PAGE
 --------------------------------------------------------------------------------*/
@@ -124,6 +132,7 @@ SECTION-LANDING PAGE
 .btn-1{
 	 border:none;
 }
+
 #login {
     display:block;
     width:25%;
@@ -136,10 +145,6 @@ SECTION-LANDING PAGE
     box-shadow: 0px 2px 15px rgba(123, 125, 128, 0.78);
 }
 
-.login:hover{
-	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-	
-}
 .register {
     width: 70%;
     height: 6%;
@@ -151,6 +156,7 @@ SECTION-LANDING PAGE
 .size1{
 	font-size:19px;
 }
+
 #register {
 	display:none;width:25%; 
     float: left;
@@ -289,10 +295,10 @@ SECTION-SUBSCRIPTION
     outline: none;
 }
 
-.subscription_button:hover
-{
+.subscription_button:hover {
 	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
+
 /*------------------------------------------------------------------------------
 SECTION-SUBSCRIPTION DURATION
 --------------------------------------------------------------------------------*/
@@ -365,11 +371,3 @@ SECTION-SUBSCRIPTION DURATION
 .checkout_btn:hover{
 	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
-
-
-
-
-
-
-
-

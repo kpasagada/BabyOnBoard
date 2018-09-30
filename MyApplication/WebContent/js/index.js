@@ -289,7 +289,7 @@
 	 */
 	function addSubscriptionSelectionListener(){
 		var interval = setInterval(function(){ 
-			if(selected_subscription == -1 || selected_duration == -1){ return; }
+			if(selected_subscription == -1 || selected_duration == -1 || loginStatus != true){ return; }
 			document.getElementsByClassName("checkout_btn")[0].classList.remove("disabled");
 			clearInterval(interval);
 		}, 100);
@@ -321,9 +321,11 @@
 			register(true);
 		}
 		
-		//Setting logout path and checkout page path
+		//Setting logout path
 		var logoutPath = contextPath + "/logout";
+		var indexPath = contextPath + "/index";
 	    document.getElementById("logout-button").getElementsByTagName("A")[0].setAttribute("href", logoutPath);
+	    document.getElementById("logo-link").setAttribute("href", indexPath);
 	    
 	    loadAgeGroups();
 	    initEventListeners();

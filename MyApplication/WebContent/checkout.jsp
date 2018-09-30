@@ -7,7 +7,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		
+		<!-- Scroll to top on reload -->
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 				function hideURLbar(){ window.scrollTo(0,1); } </script>
 		
@@ -15,8 +15,6 @@
 		<link href='//fonts.googleapis.com/css?family=Fugaz+One' rel='stylesheet' type='text/css'>
 		<link href='//fonts.googleapis.com/css?family=Alegreya+Sans:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,800,800italic,900,900italic' rel='stylesheet' type='text/css'>
 		<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
-		<script type="text/javascript" src="js/jquery.min.js"></script>
-
 		<title>Baby On Board | Check Out</title>
     </head>
     
@@ -27,6 +25,12 @@
 	    	var loginStatus;
 		    var loginStatus = <%=session.getAttribute("loginStatus")%>;
 		    var contextPath = "<%=request.getContextPath()%>";
+		    
+		    // Proceed to logout if user not logged in
+		    if(loginStatus != true){
+		    	var logout_url =  window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + contextPath + "/logout";
+				window.location.href = logout_url;
+		    }
 	    </script>
 	    
 		<!-- Database Connection -->
@@ -37,7 +41,7 @@
 	
 		<!--HEADER SECTION -->
         <div class="header">
-            <a href="index.jsp"> <img src="images/baby.png" alt="logo" class="logo"> </a>
+            <a id="logo-link" href="/index"> <img src="images/baby.png" alt="logo" class="logo"> </a>
             <ul class="main-nav">
                     <li><a href="#features">Features</a></li>
                     <li><a href="#work">How it works</a></li>
@@ -252,16 +256,11 @@
 				</div>
 			</div>
 		</div>
-		
-		<script src="js/easyResponsiveTabs.js" type="text/javascript"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/easyResponsiveTabs.js"></script>
+		<script type="text/javascript" src="js/checkout.js"></script>
 		<script type="text/javascript">
-			$(document).ready(function () {
-				$('#horizontalTab').easyResponsiveTabs({
-					type: 'default', //Types: default, vertical, accordion           
-					width: 'auto', //auto or any width like 600px
-					fit: true   // 100% fit in a container
-				});
-			});
+			
 		</script>  
     </body>
 </html>

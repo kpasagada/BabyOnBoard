@@ -11,6 +11,9 @@
         <!--LINKS-->
         <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet">        
 		<link rel="stylesheet" type="text/css" href="css/index.css">
+		<!-- Scroll to top on reload -->
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+				function hideURLbar(){ window.scrollTo(0,1); } </script>
 		<title>Baby On Board | Landing</title>
     </head>
     
@@ -31,7 +34,7 @@
 	
 		<!--HEADER SECTION -->
         <div class="header">
-            <a href="bob.html"> <img src="images/baby.png" alt="logo" class="logo"> </a>
+            <a id="logo-link" href="/index"> <img src="images/baby.png" alt="logo" class="logo"> </a>
             <ul class="main-nav">
                     <li><a href="#features">Features</a></li>
                     <li><a href="#work">How it works</a></li>

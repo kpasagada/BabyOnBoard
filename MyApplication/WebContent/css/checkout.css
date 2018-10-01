@@ -233,8 +233,8 @@ table {
 
 th, td {
     text-align: center;
-    border: 3px solid #ddd;
-    padding: 10px;
+    border: 2px solid #ddd;
+    padding: 7px;
     
 }
 
@@ -261,6 +261,7 @@ label{
 /*-- main --*/
 .main {
     padding: 25px 0;
+    font-size: 15px;
 }
 .main h1{
 	font-size:35px;

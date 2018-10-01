@@ -25,11 +25,12 @@ INSERT INTO `customer` (`user_name`,`password`,`full_name`,`email`,`phone`) VALU
 CREATE TABLE `age_group` (
 	`id` int NOT NULL,
 	`name` char(25) NOT NULL UNIQUE,
-	PRIMARY KEY (id)
+	`description` char(100) NOT NULL,
+ 	PRIMARY KEY (id)
 );
 
 -- Dumping data for age group table
-INSERT INTO `age_group` (`id`,`name`) VALUES (1, "New Born"), (2, "Infant"), (3, "Toddler");
+INSERT INTO `age_group` (`id`,`name`,`description`) VALUES (1, "New Born", "0-2 Months"), (2, "Infant", "2 Months - 1 Year"), (3, "Toddler", "1-5 Years");
 
 -- Change auto increment for age group table
 ALTER TABLE `age_group` AUTO_INCREMENT=4;
@@ -110,6 +111,8 @@ CREATE TABLE `customer_subscription_mapping` (
 	`subscription_id` int NOT NULL,
 	`frequency` char(25) NOT NULL,
 	`quantity` int NOT NULL,
+	`duration` int NOT NULL,
+	`start_date` timestamp NOT NULL,
 	PRIMARY KEY (id),
 	CONSTRAINT fk_customer_subscription_mapping_customer_id FOREIGN KEY (`customer_id`) REFERENCES `customer`(`id`),
 	CONSTRAINT fk_customer_subscription_mapping_subscription_id FOREIGN KEY (`subscription_id`) REFERENCES `subscription`(`id`),

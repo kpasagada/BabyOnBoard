@@ -9,7 +9,7 @@
 	/*
 	 * Validates registration form
 	 */
-	function regValidate() {
+	function regValidate(e) {
 	
 		var username = document.forms["regform"]["username"].value;
 		var password = document.forms["regform"]["password"].value;
@@ -18,37 +18,43 @@
 		if (username == "") {
 	        alert("username must be filled out");
 	        document.forms["regform"]["username"].focus();
-	        return false;
+	        e.preventDefault();
+	        e.stopPropagation();
 	    }else if (password== "") {
 	        alert("password must be filled out");
 	        document.forms["regform"]["password"].focus();
-	        return false;
+	        e.preventDefault();
+	        e.stopPropagation();
 	    }else if (rpassword == "") {
 	        alert("retry-password must be filled out");
 	        document.forms["regform"]["retry-password"].focus();
-	        return false;
+	        e.preventDefault();
+	        e.stopPropagation();
 	    }else if(password != rpassword){
 	    	alert("password doesnt match");
 	        document.forms["regform"]["password"].focus();
-	        return false;
+	        e.preventDefault();
+	        e.stopPropagation();
 	    }
 	}
 	
 	/*
 	 * Validates login form
 	 */
-	function loginValidate(){
+	function loginValidate(e){
 		var username = document.forms["loginform"]["username"].value;
 		var password = document.forms["loginform"]["password"].value;
 		
 		if (username == "") {
 	        alert("username must be filled out");
 	        document.forms["loginform"]["username"].focus();
-	        return false;
+	        e.preventDefault();
+	        e.stopPropagation();
 	    }else if (password== "") {
 	        alert("password must be filled out");
 	        document.forms["loginform"]["password"].focus();
-	        return false;
+	        e.preventDefault();
+	        e.stopPropagation();
 	    }
 	}
 	
@@ -271,12 +277,36 @@
 	}
 	
 	/*
+	 *  Proceed to checkout
+	 */
+	function proceedToCheckout(){
+		var checkout_url =  window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + contextPath + "/checkout?age=" + selected_age_group + "&sub=" + selected_subscription + "&dur=" + selected_duration;
+		window.location.href = checkout_url;
+	}
+	
+	/*
+	 *  Watches selected subscription and duration variables to enable or disable checkout button
+	 */
+	function addSubscriptionSelectionListener(){
+		var interval = setInterval(function(){ 
+			if(selected_subscription == -1 || selected_duration == -1 || loginStatus != true){ return; }
+			document.getElementsByClassName("checkout_btn")[0].classList.remove("disabled");
+			clearInterval(interval);
+		}, 100);
+	}
+	
+	/*
 	 *  Function to initialize all event listeners 
 	 */
 	function initEventListeners(){
+		document.getElementById("login").addEventListener("submit", function(e){ loginValidate(e);});
+		document.getElementById("register").addEventListener("submit", function(e){ regValidate(e);});
 		document.getElementById("login-button").addEventListener("click", login);
 		document.getElementById("sign-up-button").addEventListener("click", register);
+		document.getElementsByClassName("checkout_btn")[0].addEventListener("click", proceedToCheckout);
+		addSubscriptionSelectionListener();
 		addSubscriptionDurationEventListeners();
+		
 	}
 	
 	/*
@@ -291,11 +321,11 @@
 			register(true);
 		}
 		
-		//Setting logout path and checkout page path
+		//Setting logout path
 		var logoutPath = contextPath + "/logout";
-		var checkoutPath = contextPath + "/checkout"
+		var indexPath = contextPath + "/index";
 	    document.getElementById("logout-button").getElementsByTagName("A")[0].setAttribute("href", logoutPath);
-	    document.getElementsByClassName("checkout_btn")[0].setAttribute("href", checkoutPath);
+	    document.getElementById("logo-link").setAttribute("href", indexPath);
 	    
 	    loadAgeGroups();
 	    initEventListeners();

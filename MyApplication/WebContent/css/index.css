@@ -14,10 +14,11 @@ html {
 }
 
 body {
-    font-family:'Lato','Arial', 'sans-serif'; 
-    font-size:12px;
-    height:100%;
-    margin:0px;
+    font-family: 'Lato','Arial', 'sans-serif'; 
+    font-size: 12px;
+    height: 100%;
+    margin: 0px;
+	overflow-x: hidden;    
 }
 
 h1 {
@@ -30,7 +31,7 @@ h2 {
 }
 
 li {
-	list-style:none;
+	list-style: none;
 }
 
 /*------------------------------------------------------------------------------
@@ -39,6 +40,7 @@ COMMON CLASSES
 
 .te-al-ce {
 	text-align: center;
+	font-weight: 700;
 }
 
 .hide {
@@ -49,10 +51,18 @@ COMMON CLASSES
 	cursor: pointer;
 }
 
+.outline-none{
+	outline: none;
+}
+
+.bo-sh-rgba:hover{
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
 /*------------------------------------------------------------------------------
 SECTION-LANDING PAGE
 --------------------------------------------------------------------------------*/
-
+/*-------Header--------*/
 .header {
 	background-color:#F1AF7F;
 	height:100px;
@@ -90,11 +100,16 @@ SECTION-LANDING PAGE
 
 }
 
+.color{
+	
+}
 .main-nav li a:hover,
 .main-nav li a:active {
     border-bottom: 2px solid #dd7a32;
 }
 
+
+/*----------------*/
 .home {
     background:url(../images/hero.png) no-repeat;
     width:100%;
@@ -104,7 +119,11 @@ SECTION-LANDING PAGE
 
 .human {   
     width: 23%;
-    margin-top:5%;
+    margin-top:8%;
+}
+
+.reg{
+	margin-top:4%;
 }
 
 .login {    
@@ -113,6 +132,11 @@ SECTION-LANDING PAGE
     font-size: 20px;
     text-align: center;
     margin: 4% 15%;
+   
+}
+
+.btn-1{
+	 border:none;
 }
 
 #login {
@@ -129,10 +153,15 @@ SECTION-LANDING PAGE
 
 .register {
     width: 70%;
-    height: 18px;
+    height: 5%;
     font-size: 13px;
     text-align: center;
-    margin: 2% 15%;
+    margin: 4% 0 0 15%;
+}
+
+.size1{
+	font-size:20px;
+	height:43px;
 }
 
 #register {
@@ -144,11 +173,20 @@ SECTION-LANDING PAGE
     box-shadow: 0px 2px 15px rgba(123, 125, 128, 0.78);
 }
 
+#incorrect-register{
+	color:red;
+	margin-top:2%;
+	font-size: 14px;
+}
+
 .button {    
+    color: #555555;
+    font-weight: 600;
     background: none;
     border: none;
     text-align: center;
-    text-align:center;
+    cursor:pointer;
+    text-decoration:underline;
 }
 
 /*------------------------------------------------------------------------------
@@ -269,6 +307,13 @@ SECTION-SUBSCRIPTION
     width: 42%;
     outline: none;
 }
+
+.subscription_button:hover {
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+	border:2px solid #F1AF7F;
+}
+
+
 /*------------------------------------------------------------------------------
 SECTION-SUBSCRIPTION DURATION
 --------------------------------------------------------------------------------*/
@@ -316,8 +361,11 @@ SECTION-SUBSCRIPTION DURATION
    	outline: none;
 }
 
-.duration_button:hover,
+.duration_button:hover{
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
 .duration_button.selected-dur {
+	    border: 3px solid #dea0502b;
 	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
@@ -325,23 +373,27 @@ SECTION-SUBSCRIPTION DURATION
 
 .checkout{
 	margin: 9% 0;
+	text-align: center;
 }
 .checkout_btn{
 	text-decoration: none;
-    background-color: #a2d6bf;
+    background-color: #2aaf74;
     color: #fff;
-    font-size: 33px;
+    font-size: 30px;
     font-weight: 500;
-    padding: 2%;
-    /* border-radius: 100px; */
+    padding: 15px;
+    border-radius: 5px;
     border-width: inherit;
-    margin: 0 43%;
+    outline: none;
+    cursor: pointer;
 }
 
+.checkout_btn.disabled{
+	pointer-events: none;
+	background-color: #a2d6bf;
+	cursor: not-allowed;
+}
 
-
-
-
-
-
-
+.checkout_btn:hover{
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}

@@ -18,6 +18,14 @@
 		<url-pattern>/checkout</url-pattern>
 	</servlet-mapping>
 	<servlet>
+		<servlet-name>Confirmation</servlet-name>
+		<jsp-file>/confirmation.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Confirmation</servlet-name>
+		<url-pattern>/confirmation</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>Logout</servlet-name>
 		<jsp-file>/logout.jsp</jsp-file>
 	</servlet>

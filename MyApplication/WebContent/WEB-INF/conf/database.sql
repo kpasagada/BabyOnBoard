@@ -116,7 +116,8 @@ CREATE TABLE `customer_subscription_mapping` (
 	PRIMARY KEY (id),
 	CONSTRAINT fk_customer_subscription_mapping_customer_id FOREIGN KEY (`customer_id`) REFERENCES `customer`(`id`),
 	CONSTRAINT fk_customer_subscription_mapping_subscription_id FOREIGN KEY (`subscription_id`) REFERENCES `subscription`(`id`),
-	CONSTRAINT ck_customer_subscription_mapping_frequency CHECK (`frequency` IN ("weekly","bi-weekly","monthly"))
+	CONSTRAINT ck_customer_subscription_mapping_frequency CHECK (`frequency` IN ("weekly","bi-weekly","monthly")),
+	CONSTRAINT ck_customer_subscription_mapping_duration CHECK (`duration` IN (3,6,9,12))
 );
 
 

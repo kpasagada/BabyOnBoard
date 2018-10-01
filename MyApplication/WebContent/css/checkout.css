@@ -37,27 +37,29 @@ body{
 	margin: 0px;
 }
 
-h2 {
-    text-align: center;
-    margin-bottom: 4%;
-}
-
 /*------------------------ Cart Container ----------------------------*/
 .heading{
 	color: #555;
 	display: block;
-    font-size: 1.5em;
-        margin: 4% 0;
     font-weight: bold;
     text-align: center;
+}
+
+.cart-payment-container{
+	padding: 10px;
+}
+
+.subscription-item{
+	border-bottom: 1px solid #e7ebee;
+    padding-bottom: 5px;
 }
 
 /* Dropdown Button */
 .dropbtn {
     background-color: #f1af7f;
     color: white;
-    padding: 12px;
-    font-size: 17px;
+    padding: 10px;
+    font-size: 13px;
     border: none;
     cursor: pointer;
     outline: none;
@@ -89,7 +91,7 @@ h2 {
 
 /* Links inside the dropdown */
 .dropdown-content a {
-    color: black;
+    color: #555;
     padding: 3px 8px;
     text-decoration: none;
     display: block;
@@ -108,39 +110,47 @@ h2 {
 }
 
 .subscription-details{
-	
-	padding: 0px 12.5%;
+	padding: 0px 2.5%;
 }
 
 .age-group{
-    font-size:17px;
-    text-align:left;
-        margin: 0px -6%;
+    font-size: 15px;
+    text-align: left;
 }
 
 .wi-25-di-in-bk{
 	width: 25%;
-	text-align:left;
     max-width: 25%;
     min-width: 25%;
     display: inline-block;
 }
 
-.quantity{
-	    margin: 0 10%;
-}
 .wi-15-di-in-bk{
-	
-	text-align:left;
-    
+    width: 15%;
+    max-width: 15%;
+    min-width: 15%;
     display: inline-block;
+}
+
+.wi-10-di-in-bk{
+    width: 10%;
+    max-width: 10%;
+    min-width: 10%;
+    display: inline-block;
+}
+
+.sub-quantity .input-value{
+	padding: 2px 4px;
+}
+
+.sub-total{
+	padding: 0 2.5%;
+    text-align: right;
 }
 
 /*-------------------------Common---------------------------*/
 .fo-we-bo{
 	font-weight: bold;
-	    margin: -11px 0px;
-	    margin-left: 26px;
 }
 
 .di-in-bl{
@@ -148,11 +158,27 @@ h2 {
 }
 
 .fo-si-13{
+	font-size: 13px;
+}
+
+.fo-si-15{
+	font-size: 15px;
+}
+
+.fo-si-17{
 	font-size: 17px;
 }
 
 .ou-no{
 	outline: none;	
+}
+
+.text-capitalize{
+	text-transform: capitalize;
+}
+
+.pointer{
+	cursor: pointer;
 }
 
 /*-------------------------Header---------------------------*/
@@ -234,7 +260,7 @@ label{
 
 /*-- main --*/
 .main {
-    padding: 45px 0;
+    padding: 25px 0;
 }
 .main h1{
 	font-size:35px;

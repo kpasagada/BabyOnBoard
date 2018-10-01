@@ -30,6 +30,9 @@
 		    	var logout_url =  window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + contextPath + "/logout";
 				window.location.href = logout_url;
 		    }
+		    
+		    // Get customer details from session
+		    var user = <%=session.getAttribute("customerDetails")%>;
 	    </script>
 	    
 		<!-- Database Connection -->
@@ -37,6 +40,17 @@
 			DbManager db = new DbManager();
 			Connection conn = (Connection) db.getConnection();
 		%>
+		
+		<script type="text/javascript">
+			var subscriptionId = <%=request.getParameter("sub")%>;
+			var ageGroupId = <%=request.getParameter("age")%>;
+			var duration = <%=request.getParameter("dur")%>;
+			
+			if(subscriptionId == null || ageGroupId == null || duration == null){
+				var logout_url =  window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + contextPath + "/logout";
+				window.location.href = logout_url;
+			}
+		</script>
 	
 		<!--HEADER SECTION -->
         <div class="header">
@@ -45,96 +59,13 @@
 	            <li><a href="#features">Features</a></li>
 	            <li><a href="#work">How it works</a></li>
 	            <li><a href="#contact">Contact</a></li>
-	            <li id="logout-button" class="hide"><a href="/logout">Logout</a></li>
+	            <li id="logout-button"><a href="/logout">Logout</a></li>
             </ul>
         </div>
         
 		<div class="cart-payment-container">
 			<div class="heading"><h2>Cart Details</h2></div>
-			<div class="subscription-details">
-				<div class="wi-25-di-in-bk fo-we-bo">1. Premium</div>
-				<div class="age-group wi-25-di-in-bk ">Age Group: Infants (1-2 months)</div>
-				<div id="duration-dropdown" class="dropdown wi-15-di-in-bk fo-we-bo">
-					<button class="dropbtn">Duration</button>
-					<div id="duration-dropdown-content" class="dropdown-content" data-name="Duration">
-						<a class="dropdown-item" href="#" data-val="3">3 Months</a> 
-						<a class="dropdown-item" href="#" data-val="6">6 Months</a>
-						<a class="dropdown-item" href="#" data-val="9">9 Months</a>
-						<a class="dropdown-item" href="#" data-val="12">12 Months</a>
-					</div>
-				</div>
-				<div id="frequency-dropdown" class="dropdown wi-15-di-in-bk fo-we-bo">
-					<button class="dropbtn">Frequency</button>
-					<div id="frequency-dropdown-content" class="dropdown-content" data-name="Frequency">
-						<a class="dropdown-item" href="#" data-val="1">Weekly</a> 
-						<a class="dropdown-item" href="#" data-val="2">Bi-Weekly</a>
-						<a class="dropdown-item" href="#" data-val="3">Monthly</a>
-					</div>
-				</div>
-				<div class="sub-quantity wi-15-di-in-bk quantity">
-					<span class="di-in-bl fo-si-13">Quantity: </span>
-					<input class="di-in-bl ou-no" type="number" value="2" name="quantity" min="1" max="30">
-				</div>
-			</div>
-		
-			<div class="main">
-				<div>
-					<table width="200" border="1">
-						<tbody>
-							<tr>
-								<th scope="col">S.No</th>
-								<th scope="col">Product</th>
-								<th scope="col">Brand</th>
-								<th scope="col">Category</th>
-								<th scope="col">Quantity</th>
-								<th scope="col">Number</th>
-								<th scope="col">Price</th>
-								<th scope="col">Total</th>
-							</tr>
-							<tr>
-								<td>&nbsp;</td>
-								<td>&nbsp;</td>
-								<td>&nbsp;</td>
-								<td>&nbsp;</td>
-								<td>&nbsp;</td>
-								<td><input type="number" name="quantity" min="1" max="30"></td>
-								<td>$&nbsp;</td>
-								<td>$&nbsp;</td>
-							</tr>
-							<tr>
-								<td>&nbsp;</td>
-								<td>&nbsp;</td>
-								<td>&nbsp;</td>
-								<td>&nbsp;</td>
-								<td>&nbsp;</td>
-								<td><input type="number" name="quantity" min="1" max="30"></td>
-								<td>$&nbsp;</td>
-								<td>$&nbsp;</td>
-							</tr>
-							<tr>
-								<td>&nbsp;</td>
-								<td>&nbsp;</td>
-								<td>&nbsp;</td>
-								<td>&nbsp;</td>
-								<td>&nbsp;</td>
-								<td><input type="number" name="quantity" min="1" max="30"></td>
-								<td>$&nbsp;</td>
-								<td>$&nbsp;</td>
-							</tr>
-							<tr>
-								<td>&nbsp;</td>
-								<td>&nbsp;</td>
-								<td>&nbsp;</td>
-								<td>&nbsp;</td>
-								<td>&nbsp;</td>
-								<td><input type="number" name="quantity" min="1" max="30"></td>
-								<td>$&nbsp;</td>
-								<td>$&nbsp;</td>
-							</tr>
-						</tbody>
-					</table>
-	
-				</div>
+			<div id="cart-container">
 			</div>
 			
 			</br>
@@ -218,7 +149,7 @@
 										</div>
 										<div class="clear"></div>
 									</div>
-									<a href="#">Continue</a>
+									<a class="submit-payment pointer">Continue</a>
 								</div>
 							</div>
 							<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-2">
@@ -289,7 +220,7 @@
 											</div>
 											<div class="clear"></div>
 										</div>
-										<input type="submit" value="SUBMIT" id=submit>
+										<input type="submit" value="SUBMIT" id="submit">
 									</form>
 									<div class="single-bottom">
 										<ul>

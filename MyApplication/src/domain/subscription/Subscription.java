@@ -7,6 +7,8 @@ public class Subscription {
 	private int id;
 	private String name;
 	private int ageGroup;
+	private String ageGroupName;
+	private String ageGroupDescription;
 	List<Product> products;
 	
 	public int getId() {
@@ -26,6 +28,18 @@ public class Subscription {
 	}
 	public void setAgeGroup(int ageGroup) {
 		this.ageGroup = ageGroup;
+	}
+	public String getAgeGroupName() {
+		return ageGroupName;
+	}
+	public void setAgeGroupName(String ageGroupName) {
+		this.ageGroupName = ageGroupName;
+	}
+	public String getAgeGroupDescription() {
+		return ageGroupDescription;
+	}
+	public void setAgeGroupDescription(String ageGroupDescription) {
+		this.ageGroupDescription = ageGroupDescription;
 	}
 	public List<Product> getProducts() {
 		return products;

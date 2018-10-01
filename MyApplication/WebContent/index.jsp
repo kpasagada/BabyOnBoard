@@ -89,7 +89,7 @@
             <ul class="subscription-duration">
                 <h2> Choose the subscription Duration in Months</h2>
                 <div class="border"></div>
-                <div class="duration_list">
+  <div class="duration_list">
 	                <li>
 	                  <button type="button" data-val="3" class="duration_button pointer"> 03</button>  
 	                </li>

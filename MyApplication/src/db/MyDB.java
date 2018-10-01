@@ -8,8 +8,8 @@ package db;
  */
 public interface MyDB {
 
-	String USER="<username>";
-	String PASS="<password>";
+	String USER="root";
+	String PASS="1234";
 	String CONN_URL="jdbc:mysql://localhost:3306/baby_db?useSSL=false";
 	
 	

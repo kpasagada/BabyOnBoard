@@ -58,7 +58,7 @@
 				
 				xhr.onreadystatechange = function() {
 				    if(xhr.readyState == 4 && xhr.status == 200) {
-				    	console.log(xhr.responseText)
+				    	
 				    	var response = JSON.parse(xhr.responseText);
 				    	var result = "fail";
 				    	if(response['status'] > 0){

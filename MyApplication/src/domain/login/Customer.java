@@ -1,7 +1,7 @@
 package domain.login;
 /**
  * 
- * @author mehra
+ * @author karthik
  *
  */
 public class Customer {

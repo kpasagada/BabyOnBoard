@@ -10,6 +10,14 @@
 		<url-pattern>/index</url-pattern>
 	</servlet-mapping>
 	<servlet>
+		<servlet-name>Checkout</servlet-name>
+		<jsp-file>/checkout.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Checkout</servlet-name>
+		<url-pattern>/checkout</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>Logout</servlet-name>
 		<jsp-file>/logout.jsp</jsp-file>
 	</servlet>

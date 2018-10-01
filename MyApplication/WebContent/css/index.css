@@ -32,15 +32,21 @@ h2 {
 li {
 	list-style:none;
 }
+
 /*------------------------------------------------------------------------------
 COMMON CLASSES
 --------------------------------------------------------------------------------*/
+
 .te-al-ce {
 	text-align: center;
 }
 
 .hide {
 	display: none !important;
+}
+
+.pointer{
+	cursor: pointer;
 }
 
 /*------------------------------------------------------------------------------
@@ -149,7 +155,6 @@ SECTION-LANDING PAGE
 SECTION-AGE
 --------------------------------------------------------------------------------*/
 
-
 .age {
     float:none;
     list-style: none;
@@ -168,6 +173,16 @@ SECTION-AGE
     margin-left: 3%;
     margin-right: 3%;
     text-align: center;
+    padding: 5px;
+}
+
+.age li.selected-age {
+	background: #f1af7f54;
+    border-radius: 5%;
+}
+
+.age button {
+	outline: none;
 }
 
 .size {
@@ -178,15 +193,13 @@ SECTION-AGE
     width: 300px;
     height: 300px;
     border-radius: 50%;
-    img{border:solid 1px red; margin:10px;} 
-    /*for the purpose of highligthing the image when it gets selected */
 }
 
 .border {
 	border-bottom: 0px solid rgba(123, 125, 128, 0.16);
     border-width: 3px;
     width: 10%;
-     margin: -2% 0px 3% 45%;
+    margin: -2% 0px 3% 45%;
 }
 
 .age_border{
@@ -194,25 +207,9 @@ SECTION-AGE
 	 border:none;
 }
 
-/*for the purpose of highligthing the image when it gets selected*/
-.selected {
-   box-shadow:0px 12px 22px 1px #333; 
-}
-
 /*------------------------------------------------------------------------------
 SECTION-SUBSCRIPTION 
 --------------------------------------------------------------------------------*/
-#sub_newborn {
-	display:block;
-}
-
-#sub_infants {
-	display:none;
-}
-
-#sub_toddlers{
-	display:none;
-}
 
 .subscription {
 	float:none;
@@ -243,7 +240,8 @@ SECTION-SUBSCRIPTION
 	text-align: left;
 }
 
-.card:hover {
+.card:hover, 
+.card.sub-selected {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
@@ -269,6 +267,7 @@ SECTION-SUBSCRIPTION
     border-width: inherit;
     margin: 3% 25%;
     width: 42%;
+    outline: none;
 }
 /*------------------------------------------------------------------------------
 SECTION-SUBSCRIPTION DURATION
@@ -305,6 +304,7 @@ SECTION-SUBSCRIPTION DURATION
 .duration_list {
 	    margin: 0 -60% 0 -69%;
 }
+
 .duration_button {
 	background-color: #F1AF7F;
     color: #fff;
@@ -313,7 +313,12 @@ SECTION-SUBSCRIPTION DURATION
     border-radius: 200px;
     border-width: inherit;
     margin: 3% 25%;
-   
+   	outline: none;
+}
+
+.duration_button:hover,
+.duration_button.selected-dur {
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
 /*----------checkout_btn-----------*/

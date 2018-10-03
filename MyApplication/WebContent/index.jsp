@@ -53,8 +53,8 @@
                  <input type="text" name="username" class="login outline-none" placeholder="Username">
                  <input type="password" name="password" class="login outline-none" placeholder="Password">
                  <button type="submit" class="login bo-sh-rgba pointer btn-1 outline-none" name="submit" value="login">Login</button>
-                 <a href="#"><h3 style="text-align:center;color:#555555;text-decoration:none;"> <br>Forgot Your Password? <br><br></h3></a>
-                 <button id="sign-up-button" type="button" class="button outline-none" style="padding: 0px 56px;" > Not a registered user yet? Sign Up!</button>
+                 <a class="hide" href="#"><h3 style="text-align:center;color:#555555;text-decoration:none;"> <br>Forgot Your Password? <br><br></h3></a>
+                 <button id="sign-up-button" type="button" class="button outline-none" style="padding: 10px 56px;" > Not a registered user yet? Sign Up!</button>
            </form>
            <!-- Register -->
            <form id="register" name="regform" action="LoginController" method="post">

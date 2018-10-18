@@ -12,10 +12,11 @@
         
         <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet">        
 		<link rel="stylesheet" type="text/css" href="css/index.css">
-		
+	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<!-- Scroll to top on reload -->
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 				function hideURLbar(){ window.scrollTo(0,1); } </script>
+				
 		<title>Baby On Board | Landing</title>
     </head>
     
@@ -38,12 +39,71 @@
         <div class="header">
             <a id="logo-link" href="/index"> <img src="images/baby.png" alt="logo" class="logo"> </a>
             <ul class="main-nav">
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#work">How it works</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li id="logout-button" class="hide"><a href="/logout">Logout </a></li>
+                    <li><a href="#features">FEATURES</a></li>
+                    <li><a href="#work">HOW IT WORKS</a></li>
+                    <li><a href="#contact">CONTACT</a></li>                           
+                    <li><button id="user-button" class="user hide"><i class="fa fa-user-circle-o" style="font-size:30px;color:#fff;"></i>
+                    <div class = "user_dropdown ">
+						<ul class="dropdown_nav" >
+							<li><a href="#">User profile</a></li>
+							<li><a id="transaction" href="/transactionHistory">Transaction history</a></li>
+							<li><a id="logout_button" href="/logout">Logout</a></li>
+						</ul>
+						</div>
+                    
+                    </button></li>
+                    <li><button id="cart_btn" class="cart_btn_class hide"><i class="fa fa-shopping-cart cart" style="font-size:30px;color:white"></i></button>
+                             
             </ul>
         </div>
+        
+        <!-- CART MODAL -->
+        
+        <div id="cart_Modal" class="modal">
+        <div class="modal-content">
+         <span class="close">&times;</span>
+         <table class="cart_table" >
+				<tr>
+					<th>Item no</th>
+					<th>Age Group</th>
+					<th>Subscription Category</th>
+					<th>Price</th>
+					<th>Delete</th>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>Infant</td>
+					<td>Economy</td>
+					<td>80$</td>
+					<td><button class="delete_cart"><span>&times;</span>Delete</button>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>Infant</td>
+					<td>Economy</td>
+					<td>80$</td><td><button class="delete_cart"><span>&times;</span>Delete</button>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>Infant</td>
+					<td>Economy</td>
+					<td>80$</td><td><button class="delete_cart"><span>&times;</span>Delete</button>
+				</tr>
+				<tr><td>1</td><td>Infant</td><td>Economy</td><td>80$</td><td><button class="delete_cart"><span>&times;</span>Delete</button></tr>
+				<tr><td>1</td><td>Infant</td><td>Economy</td><td>80$</td><td><button class="delete_cart"><span>&times;</span>Delete</button></tr>
+				<tr><td>1</td><td>Infant</td><td>Economy</td><td>80$</td><td><button class="delete_cart"><span>&times;</span>Delete</button></tr>
+				<tr><td>1</td><td>Infant</td><td>Economy</td><td>80$</td><td><button class="delete_cart"><span>&times;</span>Delete</button></tr>
+				<tr><td>1</td><td>Infant</td><td>Economy</td><td>80$</td><td><button class="delete_cart"><span>&times;</span>Delete</button></tr>
+				<tr><td>1</td><td>Infant</td><td>Economy</td><td>80$</td><td><button class="delete_cart"><span>&times;</span>Delete</button></tr>
+				<tr><td>1</td><td>Infant</td><td>Economy</td><td>80$</td><td><button class="delete_cart"><span>&times;</span>Delete</button></tr>
+				<tr><td>1</td><td>Infant</td><td>Economy</td><td>80$</td><td><button class="delete_cart"><span>&times;</span>Delete</button></tr>
+				<tr><td>1</td><td>Infant</td><td>Economy</td><td>80$</td><td><button class="delete_cart"><span>&times;</span>Delete</button></tr>
+			</table>
+         
+         </div>
+         </div>
+        <!--modal done  -->
+        
         
         <!--LANDING PAGE-->
         <div class="home">

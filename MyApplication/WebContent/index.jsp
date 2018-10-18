@@ -9,8 +9,13 @@
         <meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!--LINKS-->
+        
         <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet">        
 		<link rel="stylesheet" type="text/css" href="css/index.css">
+		
+		<!-- Scroll to top on reload -->
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+				function hideURLbar(){ window.scrollTo(0,1); } </script>
 		<title>Baby On Board | Landing</title>
     </head>
     
@@ -26,112 +31,86 @@
 		<!-- Database Connection -->
 		<%
 			DbManager db = new DbManager();
-			Connection conn = (Connection) db.getConnection();
+			Connection conn = (Connection)db.getConnection();
 		%>
 	
 		<!--HEADER SECTION -->
         <div class="header">
-            <a href="bob.html"> <img src="images/baby.png" alt="logo" class="logo"> </a>
+            <a id="logo-link" href="/index"> <img src="images/baby.png" alt="logo" class="logo"> </a>
             <ul class="main-nav">
                     <li><a href="#features">Features</a></li>
                     <li><a href="#work">How it works</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <li id="logout-button" class="hide"><a href="/logout">Logout</a></li>
+                    <li id="logout-button" class="hide"><a href="/logout">Logout </a></li>
             </ul>
         </div>
         
         <!--LANDING PAGE-->
         <div class="home">
-           <form id="login" name="loginform" action="LoginController" method="post" onsubmit="return loginValidate()" >
-                 <h1 style="text-align:center;"><img class="human" src="images/human.png"/> <br><br>LOGIN</h1>
-                 <input type="text" name="username" class="login" placeholder="Username">
-                 <input type="password" name="password" class="login" placeholder="Password">
-                 <button type="submit" class="login" name="submit" value="login">Login</button>
-                 <h3 style="text-align:center;"> Forgot Your Password? <br><br></h3>
-                 <button type="button" onclick="register()" class="button" style="padding: 0px 56px;" > Not a registered user yet? Sign Up!</button>
+        <!-- Login -->
+           <form id="login" name="loginform" action="LoginController" method="post">
+                 <h1 style="text-align:center;"><img class="human" src="images/human.png"/> <br><span style="font-size:35px;">LOGIN </span><br></h1>
+                 <input type="text" name="username" class="login outline-none" placeholder="Username">
+                 <input type="password" name="password" class="login outline-none" placeholder="Password">
+                 <button type="submit" class="login bo-sh-rgba pointer btn-1 outline-none" name="submit" value="login">Login</button>
+                 <a class="hide" href="#"><h3 style="text-align:center;color:#555555;text-decoration:none;"> <br>Forgot Your Password? <br><br></h3></a>
+                 <button id="sign-up-button" type="button" class="button outline-none" style="padding: 10px 56px;" > Not a registered user yet? Sign Up!</button>
            </form>
-           <form id="register" name="regform" action="LoginController" method="post" onsubmit="return regValidate()">
+           <!-- Register -->
+           <form id="register" name="regform" action="LoginController" method="post">
            	 <p id="incorrect-register" class="te-al-ce hide">Login details invalid, register to continue!</p>
-             <h1 class="te-al-ce"><img class="human" src="images/human.png"/> <br><br>REGISTER</h1>
-             <input type="text" name="name" class="register" placeholder="Full Name">
-             <input type="text" name="email" class="register" placeholder="Email Address">
-             <input type="number" name="phone" class="register" placeholder="Phone Number">
-             <input type="text" name="username" class="register" placeholder="Username">
-             <input type="password" name="password" class="register" placeholder="Password">
-             <input type="password" name="retry-password" class="register" placeholder="Confirm Password">
-             <button type="submit" name="submit" class="register" value="register">Register</button>
-             <button type="button" onclick="login()" class="button" style="padding: 15px 85px;" > Already registered? LOGIN</button>
+             <h1 class="te-al-ce"><img class="human reg" src="images/human.png"/> <br>REGISTER</h1>
+             <input type="text" name="name" class="register outline-none" placeholder="Full Name">
+             <input type="text" name="email" class="register outline-none" placeholder="Email Address">
+             <input type="text" name="phone" class="register outline-none" placeholder="Phone Number">
+             <input type="text" name="username" class="register outline-none" placeholder="Username">
+             <input type="password" name="password" class="register outline-none" placeholder="Password">
+             <input type="password" name="retry-password" class="register outline-none" placeholder="Confirm Password">
+             <button type="submit" name="submit" class="register bo-sh-rgba pointer btn-1 size1 outline-none" value="register">Register</button>
+             <button id="login-button" type="button" class="button outline-none" style="padding: 15px 85px;" > Already registered? LOGIN</button>
            </form>
         </div>
         
         <!--AGE CATEGORY-->
-        <div>
-            <ul class="age">
+        <div >
+            <ul id="age-group-list" class="age">
                 <h2>Choose a category</h2>
-                <li>
-                    <a href="#"><img class="box-age" alt="Newborns" src="images/newborn.jpg"></a>
-                    <p href="#newborn">Newborns</p>
-                </li>
-                <li>
-                    <a href="#"><img class="box-age" alt="Infant" src="images/infant.jpeg"></a>
-                    <p href="#infant">Infants</p>
-                </li>
-                <li>
-                    <a href="#"><img class="box-age" alt="Toddler" src="images/toddler.jpg"></a>
-                    <p href="#toddler">Toddlers</p>
-                </li>
             </ul>
         </div>
         
         
-        <!--SUBSCRIPTION MODEL--> 
-        <div>
-        	<ul class="subscription">
-        		<h2>Choose a subscription Model</h2>
-        		<div class="subscription-box">
-        			<h3>Premium</h3>
-        				<ul class="card">
-        					<li>$550 / month</li>
-        					<li>Free Home Delivery</li>
-        				</ul>
-        		</div>
-        		<div class="subscription-box">
-        			<h3>Standard</h3>
-        				<ul class="card">
-        					<li>$350 / month</li>
-        					<li>Home Delivery within a week</li>
-        				</ul>
-        		</div>
-        		<div class="subscription-box">
-        			<h3>Premium</h3>
-        				<ul class="card">
-        					<li>$250 / month</li>
-        					<li>Home Delivery at $15</li>
-        				</ul>
-        		</div>
-        	</ul>
+        <!--SUBSCRIPTION MODEL-->
+        <div id="subscription-container"> 
         </div>
         
         
         <!-- SUBSCRIPTION DURATION-->
-         <div>
+         <div>            
             <ul class="subscription-duration">
-                <h2>Choose the subscription Duration</h2>
-                <li>
-                    <a href="#"><img class="duration-circle" alt="3" src="images/3.jpg"></a>
-                </li>
-                <li>
-                    <a href="#"><img class="duration-circle" alt="6" src="images/6.jpg"></a>
-                </li>
-                <li>
-                    <a href="#"><img class="duration-circle" alt="9" src="images/9.jpg"></a>
-                </li>
-                <li>
-                    <a href="#"><img class="duration-circle" alt="12" src="images/12.jpg"></a>
-                </li>
+                <h2> Choose the subscription Duration in Months</h2>
+                <div class="border"></div>
+  <div class="duration_list">
+	                <li>
+	                  <button type="button" data-val="3" class="duration_button pointer"> 03</button>  
+	                </li>
+	                <li>
+	                   <button type="button" data-val="6" class="duration_button pointer"> 06</button>
+	                </li>
+	                <li>
+	                   <button type="button" data-val="9" class="duration_button pointer"> 09</button>
+	                </li>
+	                <li>
+	                    <button type="button" data-val="12" class="duration_button pointer">12</button>
+	                </li>
+                </div>
             </ul>
         </div>
         
+       	<!--  Proceed to checkout -->
+       	<div class="checkout">
+			<button class="checkout_btn disabled">Proceed to Checkout</button>
+       	</div>
+       
        
        <!--JAVA SCRIPTS -->
         <script type="text/javascript" src="js/index.js"></script>

@@ -8,13 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 /**
  * Servlet implementation class Login
  */
 @WebServlet("/LoginController")
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    
+	Gson gson = new Gson();
 
     public LoginController() {}
     
@@ -33,6 +37,7 @@ public class LoginController extends HttpServlet {
 		
 		if(submitType.equals("login") && c != null && c.getFullName() != null && c.getUsername() != null){
 			session.setAttribute("loginStatus", "true");
+			session.setAttribute("customerDetails", gson.toJson(c, new TypeToken<Customer>(){}.getType()));
 			response.sendRedirect(request.getContextPath()+"/index");
 		}else if(submitType.equals("register")){
 			c.setFullName(request.getParameter("name"));
@@ -45,6 +50,7 @@ public class LoginController extends HttpServlet {
 			}
 			else {
 				session.setAttribute("loginStatus", "true");
+				session.setAttribute("customerDetails", gson.toJson(c, new TypeToken<Customer>(){}.getType()));
 			}
 			response.sendRedirect(request.getContextPath()+"/index");
 		}else{

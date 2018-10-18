@@ -1,10 +1,13 @@
 /**
  *  Functions for index page
  */
-
+	
 (function() {
 	
 	var age_groups, selected_age_group = 1, selected_subscription = -1, selected_duration = -1;
+	
+	
+	
 	
 	/*
 	 * Validates registration form
@@ -139,6 +142,7 @@
 		});
 		
 		loadPredefinedSubscriptions();
+		initializeCart();
 	};
 	
 	/*
@@ -214,6 +218,7 @@
 										'<li>' + subscription_desc[sub_object['name'].toLowerCase()][2] + '</li><br>' +
 										'<li>' + sub_object['products'].length + ' Product package</li><br>' + 
 										'<li><button type="button" class="subscription_button pointer">SELECT</button></li>'+
+										'<li><button type="button" class="addToCart_button pointer">ADD TO CART</button></li>'+
 										'</ul>' +
 										'</div>';
 			
@@ -241,6 +246,45 @@
 			});
 		}
 	}
+	
+	
+	/*
+	 * Add to cart event handler
+	 * */
+	
+	function initializeCart(){
+		var modal = document.getElementById('cart_Modal');
+
+		// Get the button that opens the modal
+		var btn = document.getElementById("cart_btn");
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close")[0];
+		var cartButton=document.getElementById("addToCart_button");
+		var table=document.getElementById("cart_table");
+		var row;
+		var cell;
+		
+		// When the user clicks the button, open the modal 
+		btn.addEventListener("click", function(){			
+		    modal.style.display = "block";
+		    });
+		   
+		// When the user clicks on <span> (x), close the modal
+		span.addEventListener("click", function(){	
+		    modal.style.display = "none";
+		    });
+		
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.addEventListener("click", function(event){
+		    if (event.target == modal) {
+		        modal.style.display = "none";
+		    }
+		});
+		
+	}
+	
 	
 	/*
 	 *  Fetches predefined subscription data
@@ -284,6 +328,7 @@
 		window.location.href = checkout_url;
 	}
 	
+	
 	/*
 	 *  Watches selected subscription and duration variables to enable or disable checkout button
 	 */
@@ -315,7 +360,8 @@
 	function initIndex(){
 		if(loginStatus == true){
 			document.getElementsByClassName("home")[0].style.display="none";
-			document.getElementById("logout-button").classList.remove("hide");
+			document.getElementById("user-button").classList.remove("hide");
+			document.getElementById("cart_btn").classList.remove("hide");
 		}
 		else if(loginStatus == false){
 			register(true);
@@ -324,11 +370,15 @@
 		//Setting logout path
 		var logoutPath = contextPath + "/logout";
 		var indexPath = contextPath + "/index";
-	    document.getElementById("logout-button").getElementsByTagName("A")[0].setAttribute("href", logoutPath);
+		var transactionPath = contextPath + "/transactionHistory";
+	    
+	    document.getElementById("logout_button").setAttribute("href", logoutPath);
+	    document.getElementById("transaction").setAttribute("href", transactionPath);
 	    document.getElementById("logo-link").setAttribute("href", indexPath);
 	    
 	    loadAgeGroups();
 	    initEventListeners();
+	    
 	}
 	
 	/*

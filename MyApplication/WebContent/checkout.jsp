@@ -12,7 +12,7 @@
 				function hideURLbar(){ window.scrollTo(0,1); } </script>
 		
 		<link href="css/checkout.css" rel="stylesheet" type="text/css" media="all" />
-		
+	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet">  
 		<title>Baby On Board | Check Out</title>
     </head>
@@ -59,7 +59,16 @@
 	            <li><a href="#features">Features</a></li>
 	            <li><a href="#work">How it works</a></li>
 	            <li><a href="#contact">Contact</a></li>
-	            <li id="logout-button"><a href="/logout">Logout</a></li>
+	            <li><button id="user-button" class="user hide"><i class="fa fa-user-circle-o" style="font-size:30px;color:#fff;"></i>
+	             <div class = "user_dropdown ">
+						<ul class="dropdown_nav" >
+							<li>User profile</li>
+							<li><a href="transactionHistory.jsp">Transaction history</a></li>
+							<li><a href="/logout" id="logout_button">Logout</a></li>
+						</ul>
+						</div>
+	            
+	            </button></li>
             </ul>
         </div>
         

@@ -12,7 +12,7 @@
 		var logoutPath = contextPath + "/logout";
 		var indexPath = contextPath + "/index";
 		
-	    document.getElementById("logout-button").getElementsByTagName("A")[0].setAttribute("href", logoutPath);
+	    document.getElementById("user-button").getElementsByTagName("A")[0].setAttribute("href", logoutPath);
 	    document.getElementById("logo-link").setAttribute("href", indexPath);
 	    document.getElementsByClassName("continue_link")[0].setAttribute("href", indexPath);
 	    document.getElementsByClassName("go_back")[0].setAttribute("href", indexPath);

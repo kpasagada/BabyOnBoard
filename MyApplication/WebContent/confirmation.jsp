@@ -12,6 +12,7 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet">  
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">      
 		<link rel="stylesheet" type="text/css" href="css/confirmation.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<!-- Scroll to top on reload -->
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 				function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -50,10 +51,19 @@
         <div class="header">
             <a id="logo-link" href="/index"> <img src="images/baby.png" alt="logo" class="logo"> </a>
             <ul class="main-nav">
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#work">How it works</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li id="logout-button"><a href="/logout">Logout</a></li>
+                    <li><a href="#features">FEATURES</a></li>
+                    <li><a href="#work">HOW IT WORKS</a></li>
+                    <li><a href="#contact">CONTACT</a></li>
+                   <li><button id="user-button" class="user"><i class="fa fa-user-circle-o" style="font-size:30px;color:#fff;"></i>
+                    <div class = "user_dropdown ">
+						<ul class="dropdown_nav" >
+							<li>User profile</li>
+							<li><a href="transactionHistory.jsp">Transaction history</a></li>
+							<li><a href="/logout">Logout</a></li>
+						</ul>
+						</div>
+                    
+                    </button></li>
             </ul>
         </div>
         

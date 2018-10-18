@@ -270,7 +270,7 @@
 		//Setting logout path
 		var logoutPath = contextPath + "/logout";
 		var indexPath = contextPath + "/index";
-	    document.getElementById("logout-button").getElementsByTagName("A")[0].setAttribute("href", logoutPath);
+	    document.getElementById("logout_button").setAttribute("href", logoutPath);
 	    document.getElementById("logo-link").setAttribute("href", indexPath);
 	    
 	    frameOrderDetails();

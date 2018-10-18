@@ -30,6 +30,15 @@
 		<jsp-file>/logout.jsp</jsp-file>
 	</servlet>
 	<servlet-mapping>
+		<servlet-name>transactionHistory</servlet-name>
+		<url-pattern>/transactionHistory</url-pattern>
+	</servlet-mapping>
+     <servlet>
+		<servlet-name>transactionHistory</servlet-name>
+		<jsp-file>/transactionHistory.jsp</jsp-file>
+	</servlet>
+
+	<servlet-mapping>
 		<servlet-name>Logout</servlet-name>
 		<url-pattern>/logout</url-pattern>
 	</servlet-mapping>

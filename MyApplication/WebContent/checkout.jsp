@@ -63,7 +63,7 @@
 	             <div class = "user_dropdown ">
 						<ul class="dropdown_nav" >
 							<li>User profile</li>
-							<li><a href="transactionHistory.jsp">Transaction history</a></li>
+							<li><a href="/transactionHistory" id="transaction">Transaction history</a></li>
 							<li><a href="/logout" id="logout_button">Logout</a></li>
 						</ul>
 						</div>

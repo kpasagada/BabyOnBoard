@@ -37,6 +37,15 @@
 		<servlet-name>transactionHistory</servlet-name>
 		<jsp-file>/transactionHistory.jsp</jsp-file>
 	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>userProfile</servlet-name>
+		<url-pattern>/userProfile</url-pattern>
+	</servlet-mapping>
+     <servlet>
+		<servlet-name>userProfile</servlet-name>
+		<jsp-file>/userProfile.jsp</jsp-file>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>Logout</servlet-name>

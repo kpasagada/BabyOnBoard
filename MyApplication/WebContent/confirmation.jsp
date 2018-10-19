@@ -57,7 +57,7 @@
                    <li><button id="user-button" class="user"><i class="fa fa-user-circle-o" style="font-size:30px;color:#fff;"></i>
                     <div class = "user_dropdown ">
 						<ul class="dropdown_nav" >
-							<li><a href="#">User profile</a></li>
+							<li><a href="/userProfile" id="user_profile">User profile</a></li>
 							<li><a href="/transactionHistory" id="transaction">Transaction history</a></li>
 							<li><a href="/logout" id="logout_button">Logout</a></li>
 						</ul>

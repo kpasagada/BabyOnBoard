@@ -371,10 +371,12 @@
 		var logoutPath = contextPath + "/logout";
 		var indexPath = contextPath + "/index";
 		var transactionPath = contextPath + "/transactionHistory";
+		var userPath=contextPath + "/userProfile";
 	    
 	    document.getElementById("logout_button").setAttribute("href", logoutPath);
 	    document.getElementById("transaction").setAttribute("href", transactionPath);
 	    document.getElementById("logo-link").setAttribute("href", indexPath);
+	    document.getElementById("user_profile").setAttribute("href", userPath);
 	    
 	    loadAgeGroups();
 	    initEventListeners();

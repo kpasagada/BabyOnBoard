@@ -10,8 +10,8 @@
 		var userPath=contextPath + "/userProfile";
 		
 	    document.getElementById("logout_button").setAttribute("href", logoutPath);
-	    document.getElementById("transaction").setAttribute("href", trasactionPath);
 	    document.getElementById("user_profile").setAttribute("href", userPath);
+	    document.getElementById("transaction").setAttribute("href", trasactionPath);
 	    document.getElementById("logo-link").setAttribute("href", indexPath);
 	    
 	}

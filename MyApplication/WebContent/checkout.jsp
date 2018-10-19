@@ -100,55 +100,49 @@
 									<h3>Personal Information</h3>
 									<form>
 										<div class="tab-for">
-											<h5>EMAIL ADDRESS</h5>
-											<input type="text" value="">
-											<h5>FIRST NAME</h5>
-											<input type="text" value="">
+											<h5>BILLING ADDRESS</h5>
+											<input id="card_addr" type="text" value="">
 										</div>
 									</form>
 									<h3 class="pay-title">Credit Card Info</h3>
 									<form>
 										<div class="tab-for">
 											<h5>NAME ON CARD</h5>
-											<input type="text" value="">
+											<input id="card_name" type="text" value="">
 											<h5>CARD NUMBER</h5>
-											<input class="pay-logo" type="text"
-												value="0000-0000-0000-0000" onfocus="this.value = '';"
-												onblur="if (this.value == '') {this.value = '0000-0000-0000-0000';}"
+											<input id="card_no" class="pay-logo" type="text"
+												placeholder="0000-0000-0000-0000"
 												required="">
 										</div>
 										<div class="transaction">
 											<div class="tab-form-left user-form">
 												<h5>EXPIRATION</h5>
 												<ul>
-													<li><input type="number" class="text_box" type="text"
-														value="6" min="1" /></li>
-													<li><input type="number" class="text_box" type="text"
-														value="1988" min="1" /></li>
-
+													<li><input id="card_exp_month" type="number" class="text_box" type="text"
+														placeholder="MM" /></li>
+													<li><input id="card_exp_year" type="number" class="text_box" type="text"
+														placeholder="YYYY" /></li>
 												</ul>
 											</div>
 											<div class="tab-form-right user-form-rt">
 												<h5>CVV NUMBER</h5>
-												<input type="text" value="xxxx" onfocus="this.value = '';"
-													onblur="if (this.value == '') {this.value = 'xxxx';}"
+												<input id="card_cvv" type="number" placeholder="XXX"
 													required="">
 											</div>
 											<div class="clear"></div>
 										</div>
-										<a class="submit-payment pointer">Continue</a>
+										<a data-type="card" class="submit-payment pointer">Continue</a>
 									</form>
-									<div class="single-bottom">
-										<ul class="ma-to-10">
-											<li><input type="checkbox" id="brand" value="">
-												<label for="brand"><span></span>By checking this
-													box, I agree to the Terms & Conditions & Privacy Policy.</label></li>
-										</ul>
-									</div>
 								</div>
 							</div>
 							<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-1">
 								<div class="payment-info">
+									<form>
+										<div class="tab-for">
+											<h5>BILLING ADDRESS</h5>
+											<input id="cash_addr" type="text" value="">
+										</div>
+									</form>
 									<h3>Cash On Delivery</h3>
 									<div class="radio-btns">
 										<div class="swit">
@@ -156,7 +150,7 @@
 										</div>
 										<div class="clear"></div>
 									</div>
-									<a class="submit-payment pointer">Continue</a>
+									<a data-type="cash" class="submit-payment pointer">Continue</a>
 								</div>
 							</div>
 							<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-2">
@@ -198,6 +192,10 @@
 					</div>
 				</div>
 			</div>
+		</div>
+		
+		<div id="pop-up-message">
+			Success message has been added
 		</div>
 		
 		<script type="text/javascript" src="js/jquery.min.js"></script>

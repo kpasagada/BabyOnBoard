@@ -45,7 +45,7 @@
                     <li><button id="user-button" class="user hide"><i class="fa fa-user-circle-o" style="font-size:30px;color:#fff;"></i>
                     <div class = "user_dropdown ">
 						<ul class="dropdown_nav" >
-							<li><a href="#">User profile</a></li>
+							<li><a href="/userProfile" id="user_profile">User profile</a></li>
 							<li><a id="transaction" href="/transactionHistory">Transaction history</a></li>
 							<li><a id="logout_button" href="/logout">Logout</a></li>
 						</ul>

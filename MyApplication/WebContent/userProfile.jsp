@@ -11,13 +11,13 @@
         <!--LINKS-->
         
         <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet">        
-		<link rel="stylesheet" type="text/css" href="css/transactionHistory.css">
+		<link rel="stylesheet" type="text/css" href="css/userProfile.css">
 	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<!-- Scroll to top on reload -->
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 				function hideURLbar(){ window.scrollTo(0,1); } </script>
 				
-		<title>Baby On Board | Transaction History</title>
+		<title>Baby On Board | User Profile</title>
     </head>
     
     <body>
@@ -78,7 +78,7 @@
     
     
     <!--JAVA SCRIPTS -->
-        <script type="text/javascript" src="js/transactionHistory.js"></script>
+        <script type="text/javascript" src="js/userProfile.js"></script>
     </body>
     </html>
     

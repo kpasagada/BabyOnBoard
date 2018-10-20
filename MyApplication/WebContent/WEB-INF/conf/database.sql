@@ -113,7 +113,7 @@ CREATE TABLE `customer_subscription_mapping` (
 	`quantity` int NOT NULL,
 	`duration` int NOT NULL,
 	`start_date` timestamp NOT NULL,
-	`status`, boolean NOT NULL DEFAULT 1, 
+	`status` boolean NOT NULL DEFAULT 1, 
 	PRIMARY KEY (id),
 	CONSTRAINT fk_customer_subscription_mapping_customer_id FOREIGN KEY (`customer_id`) REFERENCES `customer`(`id`),
 	CONSTRAINT fk_customer_subscription_mapping_subscription_id FOREIGN KEY (`subscription_id`) REFERENCES `subscription`(`id`),
@@ -121,23 +121,28 @@ CREATE TABLE `customer_subscription_mapping` (
 	CONSTRAINT ck_customer_subscription_mapping_duration CHECK (`duration` IN (3,6,9,12))
 );
 
+-- Transaction table
 CREATE TABLE `transaction` (
 	`id` int NOT NULL AUTO_INCREMENT,
 	`transaction_date` timestamp NOT NULL,
-	`mode` char(100) NOT NULL,
+	`payment_mode` char(100) NOT NULL,
 	`address` char(200) NOT NULL,
 	`amount` float(10,2) NOT NULL,
-	`card_no` INT,
-	PRIMARY KEY(id)
+	`card_name` char(50),
+	`card_no` char(20),
+	`card_expiration` char(7),
+	`card_cvv` int,
+	PRIMARY KEY(id),
+	CONSTRAINT ck_transaction_payment_mode CHECK (`payment_mode` IN ("cash","card","paypal"))
 );
 
-
+-- Transaction Customer Subscription mapping table
 CREATE TABLE `transaction_customer_subscription_mapping` (
 	`id` int NOT NULL AUTO_INCREMENT,
 	`transaction_id` int NOT NULL,
 	`customer_subscription_id` int NOT NULL,
 	PRIMARY KEY(id),
-	CONSTRAINT fk_transaction_customer_subscription_mapping_customer_subscription_id FOREIGN KEY (`customer_subscription_id`) REFERENCES `customer_subscription_mapping`(`id`),
+	CONSTRAINT fk_transaction_customer_subscription_mapping_cust_sub_id FOREIGN KEY (`customer_subscription_id`) REFERENCES `customer_subscription_mapping`(`id`),
 	CONSTRAINT fk_transaction_customer_subscription_mapping_transaction_id FOREIGN KEY (`transaction_id`) REFERENCES `transaction`(`id`)
 );
 

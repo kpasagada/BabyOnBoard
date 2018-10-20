@@ -3,6 +3,7 @@ package domain.subscription;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,11 +38,18 @@ public class CustomerSubscriptionController extends HttpServlet{
 		JsonArray customerSubDetails = transactionDetails.getAsJsonArray("subscribed_items");
 		
 		SubscriptionProductDao subProdDao = new SubscriptionProductDaoImpl();
-		int status = subProdDao.saveCustomerSubscriptions(customerSubDetails);
+		ArrayList<Integer> generatedIds = subProdDao.saveCustomerSubscriptions(customerSubDetails);
+		
+		int custSubstatus = 0;
+		if(customerSubDetails.size() == generatedIds.size()) {
+			custSubstatus = 1;
+		}
+		
+		
 		
 		resp.setContentType("application/json");
     	resp.setCharacterEncoding("UTF-8");
-        resp.getWriter().write("{\"status\":" + status + "}");
+        resp.getWriter().write("{\"status\":" + custSubstatus + "}");
         resp.flushBuffer();
 	}
 }

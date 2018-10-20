@@ -135,9 +135,9 @@ public class SubscriptionProductDaoImpl implements SubscriptionProductDao{
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public int saveCustomerSubscriptions(JsonArray subscriptionDetails) {
+	public ArrayList<Integer> saveCustomerSubscriptions(JsonArray subscriptionDetails) {
 		
-		int status = 0;
+		ArrayList<Integer> generatedIds = new ArrayList<Integer>();
 		
 		for(JsonElement subDetail: subscriptionDetails) {
 			JsonObject subDetailObj = subDetail.getAsJsonObject();
@@ -152,11 +152,11 @@ public class SubscriptionProductDaoImpl implements SubscriptionProductDao{
 				ps.setInt(5, subDetailObj.get("duration").getAsInt());
 				String[] date = subDetailObj.get("start_date").getAsString().split("/");
 				ps.setTimestamp(6, new Timestamp(Integer.parseInt(date[2]) - 1900, Integer.parseInt(date[0]), Integer.parseInt(date[1]), 0, 0, 0, 0));
-				status += ps.executeUpdate();
+				ps.executeUpdate();
 				
 				ResultSet rs = ps.getGeneratedKeys();
 				while(rs.next()) {
-					System.out.println(rs.getString(1));
+					generatedIds.add(rs.getInt(1));
 				}
 				
 				conn.close();
@@ -165,7 +165,7 @@ public class SubscriptionProductDaoImpl implements SubscriptionProductDao{
 			}
 		}
 		
-		return status == subscriptionDetails.size() ? 1 : 0;
+		return generatedIds;
 	}
 	
 }

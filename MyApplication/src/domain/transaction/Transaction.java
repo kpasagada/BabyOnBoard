@@ -12,25 +12,29 @@
 
 package domain.transaction;
 
+import java.util.Date;
+
 public class Transaction {
 	private int id;
-	private String mode;
+	private String paymentMode;
 	private String address;
 	private float amount;
-	private long card_no;
-	//private datefield
-	
+	private Date transactionDate;
+	private String cardName;
+	private String cardNumber;
+	private String cardExpiration;
+	private String cardCVV;
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getMode() {
-		return mode;
+	public String getPaymentMode() {
+		return paymentMode;
 	}
-	public void setMode(String mode) {
-		this.mode = mode;
+	public void setPaymentMode(String paymentMode) {
+		this.paymentMode = paymentMode;
 	}
 	public String getAddress() {
 		return address;
@@ -44,12 +48,35 @@ public class Transaction {
 	public void setAmount(float amount) {
 		this.amount = amount;
 	}
-	public long getCard_no() {
-		return card_no;
+	public Date getTransactionDate() {
+		return transactionDate;
 	}
-	public void setCard_no(long card_no) {
-		this.card_no = card_no;
+	public void setTransactionDate(Date transactionDate) {
+		this.transactionDate = transactionDate;
 	}
-
+	public String getCardName() {
+		return cardName;
+	}
+	public void setCardName(String cardName) {
+		this.cardName = cardName;
+	}
+	public String getCardNumber() {
+		return cardNumber;
+	}
+	public void setCardNumber(String cardNumber) {
+		this.cardNumber = cardNumber;
+	}
+	public String getCardExpiration() {
+		return cardExpiration;
+	}
+	public void setCardExpiration(String cardExpiration) {
+		this.cardExpiration = cardExpiration;
+	}
+	public String getCardCVV() {
+		return cardCVV;
+	}
+	public void setCardCVV(String cardCVV) {
+		this.cardCVV = cardCVV;
+	}
 	
 }

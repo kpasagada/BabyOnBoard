@@ -1,5 +1,6 @@
 package domain.subscription;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.JsonArray;
@@ -19,5 +20,5 @@ public interface SubscriptionProductDao {
 	/*
 	 *  Inserts subscriptions for customers
 	 */
-	public int saveCustomerSubscriptions(JsonArray subscriptionDetails);
+	public ArrayList<Integer> saveCustomerSubscriptions(JsonArray subscriptionDetails);
 }

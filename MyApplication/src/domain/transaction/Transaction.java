@@ -12,7 +12,11 @@
 
 package domain.transaction;
 
+import domain.subscription.*;
 import java.util.Date;
+import java.util.List;
+
+import domain.subscription.Product;
 
 public class Transaction {
 	private int id;
@@ -24,6 +28,9 @@ public class Transaction {
 	private String cardNumber;
 	private String cardExpiration;
 	private String cardCVV;
+	
+	List<Subscription> subscriptions;
+	
 	public int getId() {
 		return id;
 	}
@@ -79,4 +86,10 @@ public class Transaction {
 		this.cardCVV = cardCVV;
 	}
 	
+	public List<Subscription> getSubscriptions() {
+		return subscriptions;
+	}
+	public void setSubscriptions(List<Subscription> subscriptions) {
+		this.subscriptions = subscriptions;
+	}
 }

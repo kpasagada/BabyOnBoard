@@ -15,6 +15,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import domain.transaction.TransactionDao;
+import domain.transaction.TransactionDaoImpl;
+
 @WebServlet("/CustomerSubscriptions")
 public class CustomerSubscriptionController extends HttpServlet{
 	
@@ -38,18 +41,27 @@ public class CustomerSubscriptionController extends HttpServlet{
 		JsonArray customerSubDetails = transactionDetails.getAsJsonArray("subscribed_items");
 		
 		SubscriptionProductDao subProdDao = new SubscriptionProductDaoImpl();
-		ArrayList<Integer> generatedIds = subProdDao.saveCustomerSubscriptions(customerSubDetails);
+		ArrayList<Integer> custSubscriptionIds = subProdDao.saveCustomerSubscriptions(customerSubDetails);
 		
-		int custSubstatus = 0;
-		if(customerSubDetails.size() == generatedIds.size()) {
+		int custSubstatus = -1;
+		if(customerSubDetails.size() == custSubscriptionIds.size()) {
 			custSubstatus = 1;
 		}
 		
+		TransactionDao transactionDao = new TransactionDaoImpl();
+		int transactionId = transactionDao.createTransaction(transactionDetails);
 		
+		int status = 0;
+		if(custSubstatus != -1 && transactionId != -1) {
+			int subTransStatus = transactionDao.saveCustomerSubsciptionTransactions(transactionId, custSubscriptionIds);
+			if(subTransStatus == custSubscriptionIds.size()) {
+				status = 1;
+			}
+		}
 		
 		resp.setContentType("application/json");
     	resp.setCharacterEncoding("UTF-8");
-        resp.getWriter().write("{\"status\":" + custSubstatus + "}");
+        resp.getWriter().write("{\"status\":" + status + "}");
         resp.flushBuffer();
 	}
 }

@@ -1,6 +1,9 @@
 package domain.transaction;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.google.gson.JsonObject;
 
 
 /**
@@ -13,4 +16,14 @@ public interface TransactionDao {
 	 * Retrieves transaction details from the database 
 	 */
 	public List<Transaction> fetchTransactions();
+	
+	/*
+	 *  Insert a transaction record into the database
+	 */
+	public int createTransaction(JsonObject transactionDetails);
+	
+	/*
+	 *  Create transaction and customer subscription mappings
+	 */
+	public int saveCustomerSubsciptionTransactions(int transactionId, ArrayList<Integer> custSubscriptionIds);
 }

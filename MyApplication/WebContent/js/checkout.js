@@ -13,7 +13,7 @@
 						   {"name": "amount", "display_name": "Number"},
 						   {"name": "price", "display_name": "Price ($)"}];
 	var subscribed_items = [];
-	
+	var transaction_total;
 	/*
 	 *  Popup message rendering 
 	 */
@@ -82,14 +82,14 @@
 		
 		// Name on card validation
 		var name_on_card = document.getElementById(transaction_type + "_name");
-		if(name_on_card != null && name_on_card.value.trim() == ""){
-			showPopupMessage("error","Name on card is empty!");
-			return false;
-		}
-		else{
+		if(name_on_card != null){
+			if(name_on_card.value.trim() == ""){
+				showPopupMessage("error","Name on card is empty!");
+				return false;
+			}
+			
 			transaction['name_on_card'] = name_on_card.value.trim();
 		}
-		
 		// Card number validation
 		var card_no = document.getElementById(transaction_type + "_no");
 		if(card_no != null){
@@ -162,6 +162,8 @@
 			
 			transaction['card_cvv'] = card_cvv.value.trim();
 		}
+		
+		transaction['amount'] = transaction_total;
 		
 		return transaction;
 	}
@@ -253,6 +255,8 @@
 		var new_total = subscribed_items[sub_index]['quantity'] * subscribed_items[sub_index]['total'];
 		var content = "Sub total: $" + Number(new_total).toFixed(2);
 		sub_total_element.textContent = content;
+		
+		transaction_total = new_total;
 	}
 	
 	/*
@@ -345,6 +349,8 @@
 			
 			order_details_string += '</tbody></table></div></div>';
 			order_details_string += '<div class="sub-total">Sub total: $' + Number(total).toFixed(2) + '</div>';
+			
+			transaction_total = total;
 		}
 		
 		subscribed_items.push({

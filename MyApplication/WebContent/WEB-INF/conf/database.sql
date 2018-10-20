@@ -131,7 +131,7 @@ CREATE TABLE `transaction` (
 	`card_name` char(50),
 	`card_no` char(20),
 	`card_expiration` char(7),
-	`card_cvv` int,
+	`card_cvv` char(3),
 	PRIMARY KEY(id),
 	CONSTRAINT ck_transaction_payment_mode CHECK (`payment_mode` IN ("cash","card","paypal"))
 );

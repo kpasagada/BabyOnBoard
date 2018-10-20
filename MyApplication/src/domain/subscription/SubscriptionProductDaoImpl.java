@@ -3,6 +3,7 @@ package domain.subscription;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -143,7 +144,7 @@ public class SubscriptionProductDaoImpl implements SubscriptionProductDao{
 			
 			try {
 				conn = db.getConnection();
-				ps = conn.prepareStatement("INSERT INTO customer_subscription_mapping (`customer_id`,`subscription_id`,`frequency`, `quantity`, `duration`, `start_date`) VALUES(?,?,?,?,?,?)");
+				ps = conn.prepareStatement("INSERT INTO customer_subscription_mapping (`customer_id`,`subscription_id`,`frequency`, `quantity`, `duration`, `start_date`,`status`) VALUES(?,?,?,?,?,?,1)", Statement.RETURN_GENERATED_KEYS);
 				ps.setInt(1, subDetailObj.get("customer_id").getAsInt());
 				ps.setInt(2, subDetailObj.get("subscription_id").getAsInt());
 				ps.setString(3, subDetailObj.get("frequency").getAsString());
@@ -152,6 +153,12 @@ public class SubscriptionProductDaoImpl implements SubscriptionProductDao{
 				String[] date = subDetailObj.get("start_date").getAsString().split("/");
 				ps.setTimestamp(6, new Timestamp(Integer.parseInt(date[2]) - 1900, Integer.parseInt(date[0]), Integer.parseInt(date[1]), 0, 0, 0, 0));
 				status += ps.executeUpdate();
+				
+				ResultSet rs = ps.getGeneratedKeys();
+				while(rs.next()) {
+					System.out.println(rs.getString(1));
+				}
+				
 				conn.close();
 			}catch(Exception e){
 				System.out.println(e);

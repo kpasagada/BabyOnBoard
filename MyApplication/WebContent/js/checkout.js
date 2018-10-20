@@ -66,7 +66,11 @@
 	 *  Validate transcation details
 	 */
 	function validateTranscationDetails(event){
+		var transaction = {};
+		
 		var transaction_type = event.target.getAttribute("data-type");
+		transaction['payment_mode'] = transaction_type;
+		transaction['date']  = new Date().toLocaleDateString();
 		
 		// Address validation
 		var address = document.getElementById(transaction_type + "_addr").value;
@@ -74,12 +78,16 @@
 			showPopupMessage("error","Billing address is empty!");
 			return false;
 		}
+		transaction['address'] = address.trim();
 		
 		// Name on card validation
 		var name_on_card = document.getElementById(transaction_type + "_name");
 		if(name_on_card != null && name_on_card.value.trim() == ""){
 			showPopupMessage("error","Name on card is empty!");
 			return false;
+		}
+		else{
+			transaction['name_on_card'] = name_on_card.value.trim();
 		}
 		
 		// Card number validation
@@ -97,6 +105,8 @@
 				showPopupMessage("error","Card number format is invalid");
 				return false;
 			}
+			
+			transaction['card_no'] = card_no.value.trim();
 		}
 		
 		// Expiry date validation
@@ -113,6 +123,8 @@
 				showPopupMessage("error","Expiry month is out of range!");
 				return false;
 			}
+			
+			transaction['exp_month'] = exp_month.value.trim();
 		}
 		
 		var exp_year = document.getElementById(transaction_type + "_exp_year");
@@ -128,6 +140,8 @@
 				showPopupMessage("error","Expiry year is out of range! Allowed range [1900-2100]");
 				return false;
 			}
+			
+			transaction['exp_year'] = exp_year.value.trim();
 		}
 		
 		// CVV number validation
@@ -145,9 +159,11 @@
 				showPopupMessage("error","CVV Number format is invalid!");
 				return false;
 			}
+			
+			transaction['card_cvv'] = card_cvv.value.trim();
 		}
 		
-		return false;
+		return transaction;
 	}
 	
 	/*
@@ -158,9 +174,13 @@
 		for(var i = 0; i < submit_elements.length; i++){
 			submit_elements[i].addEventListener("click", function(e){
 				
-				if(!validateTranscationDetails(e)){
+				var transaction = validateTranscationDetails(e);
+				
+				if(!transaction){
 					return false;
 				}
+				
+				transaction['subscribed_items'] = subscribed_items;
 				
 				var xhr = new XMLHttpRequest();
 				
@@ -180,7 +200,7 @@
 				
 				xhr.open("POST", "CustomerSubscriptions", true);
 				xhr.setRequestHeader('Content-Type', 'application/json');
-				xhr.send(JSON.stringify(subscribed_items));
+				xhr.send(JSON.stringify(transaction));
 			});
 		}
 	}

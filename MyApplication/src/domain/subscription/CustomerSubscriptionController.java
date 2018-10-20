@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 @WebServlet("/CustomerSubscriptions")
 public class CustomerSubscriptionController extends HttpServlet{
@@ -32,7 +33,8 @@ public class CustomerSubscriptionController extends HttpServlet{
 		}
 		in.close();
 		
-		JsonArray customerSubDetails = gson.fromJson(data, JsonArray.class);
+		JsonObject transactionDetails = gson.fromJson(data, JsonObject.class);
+		JsonArray customerSubDetails = transactionDetails.getAsJsonArray("subscribed_items");
 		
 		SubscriptionProductDao subProdDao = new SubscriptionProductDaoImpl();
 		int status = subProdDao.saveCustomerSubscriptions(customerSubDetails);

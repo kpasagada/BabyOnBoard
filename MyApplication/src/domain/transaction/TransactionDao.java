@@ -15,7 +15,7 @@ public interface TransactionDao {
 	/*
 	 * Retrieves transaction details from the database 
 	 */
-	public List<Transaction> fetchTransactionsbyName();
+	public List<Transaction> fetchTransactionsByName(String userName);
 	
 	/*
 	 *  Insert a transaction record into the database

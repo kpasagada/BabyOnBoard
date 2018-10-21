@@ -26,10 +26,10 @@ public class TransactionDaoImpl implements TransactionDao {
 	static PreparedStatement ps;
 	DbManager db = new DbManager();
 	
-	public List<Transaction> fetchTransactionsbyName(){
+	public List<Transaction> fetchTransactionsbyName(String username){
 		
 		List<Transaction> transactionList = new ArrayList<Transaction>();
-		String username = "admin"; // get the username from the controller
+		//String username = "admin"; // get the username from the controller
 		
 		try {
 			conn = db.getConnection();
@@ -109,6 +109,8 @@ public class TransactionDaoImpl implements TransactionDao {
 		return transactionList;
 	}
 
+	
+	
 	@SuppressWarnings("deprecation")
 	@Override
 	public int createTransaction(JsonObject transactionDetails) {
@@ -181,3 +183,7 @@ public class TransactionDaoImpl implements TransactionDao {
 		return status;
 	}
 }
+	
+	
+	
+	

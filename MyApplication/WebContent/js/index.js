@@ -4,8 +4,11 @@
 	
 (function() {
 	
-	var age_groups, selected_age_group = 1, selected_subscription = -1, selected_duration = -1;
-	
+	var age_groups, subscriptions, selected_age_group = 1, selected_subscription = -1, selected_duration = -1;
+	var sessionArray= new Array();
+	var item=0;
+	var index=1;
+
 	
 	
 	
@@ -87,7 +90,6 @@
 	function loadAgeGroupsSuccessHandler(response){
 		
 		response = JSON.parse(response);
-		
 		// Sorting by ids
 		response.sort(function(a, b){return a['id'] - b['id']});
 		age_groups = response;
@@ -101,6 +103,7 @@
 	        					+ '<button type="button" class="age_border pointer"><img class="box-age" alt="' + age_group_object['name'] + '" src="images/' + age_group_object['name'].replace(" ","").trim().toLowerCase() + '.jpg"></button>'
 	        					+ '<p class="size"><br> ' + age_group_object['name'] + '</p>'
 	        					+ '</li>';
+		    
 		}
 		
 		var age_group_list_element = document.getElementById("age-group-list");
@@ -122,6 +125,7 @@
 				
 				parentNode.classList.add("selected-age");
 				selected_age_group = parentNode.getAttribute("data-id");
+			
 				
 				var inner_sub_elements = document.getElementsByClassName("inner-subscription-container");
 				
@@ -187,7 +191,8 @@
 		response = JSON.parse(response);
 		
 		response.sort(function(a, b){return a['ageGroup'] - b['ageGroup']});
-		
+		subscriptions=response;
+		//console.log(response.length);
 		var subscription_list_string = "";
 		var age_group_visited = [];
 		
@@ -234,19 +239,67 @@
 		// Event handler for subscription select action
 		var subscription_buttons = document.getElementsByClassName("subscription_button");
 		
+		
 		for(var l = 0; l < subscription_buttons.length; l++){
 			subscription_buttons[l].addEventListener("click", function(e){
 				if(e.target && e.target.tagName == "BUTTON"){
 					if(document.getElementsByClassName("sub-selected").length){
-						document.getElementsByClassName("sub-selected")[0].classList.remove("sub-selected");
+						document.getElementsByClassName("sub-selected")[0].classList.removes("sub-selected");
 					}
 					e.target.parentNode.parentNode.classList.add("sub-selected");
 					selected_subscription = e.target.parentNode.parentNode.getAttribute("data-id");
 				}
 			});
 		}
+		
+		// Event handler for subscription add to cart action
+		var cart_buttons =document.getElementsByClassName("addToCart_button");
+		var modal= document.getElementById("cart_table1");
+		for(var l = 0; l < cart_buttons.length; l++){
+			cart_buttons[l].addEventListener("click", function(e){
+				if(e.target && e.target.tagName == "BUTTON"){
+					//if(document.getElementsByClassName("sub-selected").length){
+					//document.getElementsByClassName("sub-selected")[0].classList.removes("sub-selected");
+			//	}
+					//e.target.parentNode.parentNode.classList.add("sub-selected");
+					selected_subscription = e.target.parentNode.parentNode.getAttribute("data-id");	
+					//console.log(selected_subscription);
+					
+					for(var i=0;i<subscriptions.length;i++){
+						if(subscriptions[i].id==selected_subscription){
+							//console.log(subscriptions[i]);
+							//console.log(age_groups[i]);
+							sessionArray.push(item+1);
+							for(var k=0;k<age_groups.length;k++){
+								//console.log(age_groups.length);
+								if(age_groups[k].id==subscriptions[i].ageGroup){
+									//console.log(age_groups[k].name);
+									sessionArray.push(age_groups[k].name);
+								}
+							}
+							sessionArray.push(subscriptions[i].name);
+							if (typeof(Storage) !== "undefined") {
+								 localStorage.setItem(index,sessionArray);
+								 console.log(localStorage.getItem(index));
+								 index=index+3;
+							} else {
+							    // Sorry! No Web Storage support..
+							}
+							var split=localStorage.getItem(index).split(",");
+							var row = modal.insertRow(1);
+							var cell1 = row.insertCell(0);
+						    var cell2 = row.insertCell(1);
+						    var cell3 = row.insertCell(2);
+						    cell1.innerHTML=split[0];
+						    cell2.innerHTML=split[1];
+						   // cell3.innerHTML=sessionArray[index+2];
+						  //  index=index+6;
+						}
+					}
+			}
+			});	
 	}
-	
+}
 	
 	/*
 	 * Add to cart event handler
@@ -260,7 +313,7 @@
 
 		// Get the <span> element that closes the modal
 		var span = document.getElementsByClassName("close")[0];
-		var cartButton=document.getElementById("addToCart_button");
+		//var cartButton=document.getElementById("addToCart_button");
 		var table=document.getElementById("cart_table");
 		var row;
 		var cell;

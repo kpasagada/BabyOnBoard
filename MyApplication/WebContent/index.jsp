@@ -62,7 +62,7 @@
         <div id="cart_Modal" class="modal">
         <div class="modal-content">
          <span class="close">&times;</span>
-         <table class="cart_table" >
+         <table id="cart_table1" class="cart_table" >
 				<tr>
 					<th>Item no</th>
 					<th>Age Group</th>
@@ -70,7 +70,7 @@
 					<th>Price</th>
 					<th>Delete</th>
 				</tr>
-				<tr>
+				<!--  <tr>
 					<td>1</td>
 					<td>Infant</td>
 					<td>Economy</td>
@@ -89,15 +89,7 @@
 					<td>Economy</td>
 					<td>80$</td><td><button class="delete_cart"><span>&times;</span>Delete</button>
 				</tr>
-				<tr><td>1</td><td>Infant</td><td>Economy</td><td>80$</td><td><button class="delete_cart"><span>&times;</span>Delete</button></tr>
-				<tr><td>1</td><td>Infant</td><td>Economy</td><td>80$</td><td><button class="delete_cart"><span>&times;</span>Delete</button></tr>
-				<tr><td>1</td><td>Infant</td><td>Economy</td><td>80$</td><td><button class="delete_cart"><span>&times;</span>Delete</button></tr>
-				<tr><td>1</td><td>Infant</td><td>Economy</td><td>80$</td><td><button class="delete_cart"><span>&times;</span>Delete</button></tr>
-				<tr><td>1</td><td>Infant</td><td>Economy</td><td>80$</td><td><button class="delete_cart"><span>&times;</span>Delete</button></tr>
-				<tr><td>1</td><td>Infant</td><td>Economy</td><td>80$</td><td><button class="delete_cart"><span>&times;</span>Delete</button></tr>
-				<tr><td>1</td><td>Infant</td><td>Economy</td><td>80$</td><td><button class="delete_cart"><span>&times;</span>Delete</button></tr>
-				<tr><td>1</td><td>Infant</td><td>Economy</td><td>80$</td><td><button class="delete_cart"><span>&times;</span>Delete</button></tr>
-				<tr><td>1</td><td>Infant</td><td>Economy</td><td>80$</td><td><button class="delete_cart"><span>&times;</span>Delete</button></tr>
+				-->
 			</table>
          
          </div>

@@ -19,7 +19,7 @@ public class TransactionDaoImpl implements TransactionDao {
 	static PreparedStatement ps;
 	DbManager db = new DbManager();
 	
-	public List<Transaction> fetchTransactions(){
+	public List<Transaction> fetchTransactionsByName(char[] userName){
 		
 		List<Transaction> transaction = new ArrayList<Transaction>();
 		

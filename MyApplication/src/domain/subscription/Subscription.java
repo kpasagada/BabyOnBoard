@@ -9,6 +9,7 @@ public class Subscription {
 	private int ageGroup;
 	private String ageGroupName;
 	private String ageGroupDescription;
+	boolean status;
 	List<Product> products;
 	
 	public int getId() {
@@ -41,6 +42,15 @@ public class Subscription {
 	public void setAgeGroupDescription(String ageGroupDescription) {
 		this.ageGroupDescription = ageGroupDescription;
 	}
+	
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+	
+	public boolean getStatus() {
+		return this.status;
+	}
+	
 	public List<Product> getProducts() {
 		return products;
 	}

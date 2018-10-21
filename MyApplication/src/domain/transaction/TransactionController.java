@@ -28,13 +28,13 @@ public class TransactionController extends HttpServlet
 		String str = (req.getParameter("name"));
 		char[] userName = str.toCharArray();
 	
-		Transaction transactionDetails = (Transaction) transactionDao.fetchTransactionsByName(userName);
+		Transaction transactionList = (Transaction) transactionDao.fetchTransactionsByName(userName);
 		
-		String transactionDetailsString = gson.toJson(transactionDetails, new TypeToken<Transaction>(){}.getType());
+		String transactionListString = gson.toJson(transactionList, new TypeToken<Transaction>(){}.getType());
 	
 		resp.setContentType("application/json");
     	resp.setCharacterEncoding("UTF-8");
-        resp.getWriter().write(transactionDetailsString);
+        resp.getWriter().write(transactionListString);
         resp.flushBuffer();
 	}
 }

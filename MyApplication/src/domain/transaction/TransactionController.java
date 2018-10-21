@@ -1,6 +1,7 @@
 package domain.transaction;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,10 +26,10 @@ public class TransactionController extends HttpServlet
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		TransactionDao transactionDao = new TransactionDaoImpl();
-		String str = (req.getParameter("name"));
-		char[] userName = str.toCharArray();
+		String username = (req.getParameter("name"));
+		//char[] userName = str.toCharArray();
 	
-		Transaction transactionList = (Transaction) transactionDao.fetchTransactionsByName(userName);
+		List<Transaction> transactionList =  transactionDao.fetchTransactionsByName(username);
 		
 		String transactionListString = gson.toJson(transactionList, new TypeToken<Transaction>(){}.getType());
 	

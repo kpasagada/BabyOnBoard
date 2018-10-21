@@ -26,7 +26,7 @@ public class TransactionDaoImpl implements TransactionDao {
 	static PreparedStatement ps;
 	DbManager db = new DbManager();
 	
-	public List<Transaction> fetchTransactionsbyName(String username){
+	public List<Transaction> fetchTransactionsByName(String userName){
 		
 		List<Transaction> transactionList = new ArrayList<Transaction>();
 		//String username = "admin"; // get the username from the controller
@@ -34,7 +34,7 @@ public class TransactionDaoImpl implements TransactionDao {
 		try {
 			conn = db.getConnection();
 			ps = conn.prepareStatement("SELECT id from customer where user_name = ?");
-			ps.setString(1, username);
+			ps.setString(1, userName);
 			
 			ResultSet rs1 = ps.executeQuery();
 			int userId = rs1.getInt(1);

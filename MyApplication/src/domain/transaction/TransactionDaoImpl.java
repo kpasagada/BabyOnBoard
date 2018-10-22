@@ -26,32 +26,28 @@ public class TransactionDaoImpl implements TransactionDao {
 	static PreparedStatement ps;
 	DbManager db = new DbManager();
 	
-	public List<Transaction> fetchTransactionsByName(String userName){
+	public List<Transaction> fetchTransactionsById(int userId){
 		
 		List<Transaction> transactionList = new ArrayList<Transaction>();
-		//String username = "admin"; // get the username from the controller
 		
 		try {
 			conn = db.getConnection();
-			ps = conn.prepareStatement("SELECT id from customer where user_name = ?");
-			ps.setString(1, userName);
 			
-			ResultSet rs1 = ps.executeQuery();
-			int userId = rs1.getInt(1);
-			
-			ps =  conn.prepareStatement("SELECT t.id, t.transaction_date, s.name, t.payment_mode, t.amount, cs.status, ag.name from transaction t JOIN transaction_customer_subscription_mapping tcs ON t.id=tcs.transaction_id JOIN customer_subscription_mapping cs ON tcs.customer_subscription_id = cs.id JOIN subscription s ON cs.subscription_id = s.id JOIN age_group ag ON s.age_group = ag.id where cs.customer_id = ? GROUP BY t.id ");
+			ps =  conn.prepareStatement("SELECT t.id, t.transaction_date, s.name, t.payment_mode, t.amount, cs.status, ag.name, t.address, cs.quantity FROM transaction t JOIN transaction_customer_subscription_mapping tcs ON t.id = tcs.transaction_id JOIN customer_subscription_mapping cs ON tcs.customer_subscription_id = cs.id JOIN subscription s ON cs.subscription_id = s.id JOIN age_group ag ON s.age_group = ag.id WHERE cs.customer_id = ? GROUP BY t.id");
 			ps.setInt(1, userId);
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				//getting all the values
+				// Getting all the values
 				int transactionId = rs.getInt(1); 
 				Date date = rs.getDate(2);
-				String subscription_name = rs.getString(3);
-				String payment_mode = rs.getString(4);
+				String subscriptionName = rs.getString(3);
+				String paymentMode = rs.getString(4);
 				float amount = rs.getInt(5);
 				boolean status = rs.getBoolean(6);
 				String ageGroup = rs.getString(7);
+				String address = rs.getString(8);
+				int quantity = rs.getInt(9);
 				
 				//setting all the values into their fields
 				Transaction transaction = new Transaction();
@@ -59,41 +55,39 @@ public class TransactionDaoImpl implements TransactionDao {
 				transaction.setId(transactionId);
 				transaction.setTransactionDate(date);
 				transaction.setAmount(amount);
-				transaction.setPaymentMode(payment_mode);
+				transaction.setPaymentMode(paymentMode);
+				transaction.setAddress(address);
 				
 				List<Subscription> subscriptionsList = new ArrayList<Subscription>();
 				
 				Subscription subscription = new Subscription();
-				subscription.setName(subscription_name);
+				subscription.setName(subscriptionName);
 				subscription.setStatus(status);
 				subscription.setAgeGroupName(ageGroup);
+				subscription.setQuantity(quantity);
 				
 				subscriptionsList.add(subscription);
 				
 				while(rs.next()) {
 					if(transactionId == rs.getInt(1)) {
-						// getting all the values
-						
-						//Date date = rs.getDate(2);
-						subscription_name = rs.getString(3);
-						//String payment_mode = rs.getString(4);
-						//float amount = rs.getInt(5);
+						//getting all the values
+						subscriptionName = rs.getString(3);
 						status = rs.getBoolean(6);
 						ageGroup = rs.getString(7);
+						quantity = rs.getInt(9);
 						
 						//setting all the values into their respective fields
 						Subscription subscription1 = new Subscription();
-						subscription1.setName(subscription_name);
+						subscription1.setName(subscriptionName);
 						subscription1.setStatus(status);
 						subscription1.setAgeGroupName(ageGroup);
+						subscription1.setQuantity(quantity);
 						
 						subscriptionsList.add(subscription1);
-						
 					}
 					else {
 						break;
 					}
-					
 				}
 				
 				transaction.setSubscriptions(subscriptionsList);

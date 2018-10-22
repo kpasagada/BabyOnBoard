@@ -26,12 +26,11 @@ public class TransactionController extends HttpServlet
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		TransactionDao transactionDao = new TransactionDaoImpl();
-		String username = (req.getParameter("name"));
-		//char[] userName = str.toCharArray();
+		int userId = Integer.parseInt(req.getParameter("id"));
 	
-		List<Transaction> transactionList =  transactionDao.fetchTransactionsByName(username);
+		List<Transaction> transactionList =  transactionDao.fetchTransactionsById(userId);
 		
-		String transactionListString = gson.toJson(transactionList, new TypeToken<Transaction>(){}.getType());
+		String transactionListString = gson.toJson(transactionList, new TypeToken<List<Transaction>>(){}.getType());
 	
 		resp.setContentType("application/json");
     	resp.setCharacterEncoding("UTF-8");

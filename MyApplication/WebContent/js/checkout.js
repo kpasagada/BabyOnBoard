@@ -13,6 +13,21 @@
 						   {"name": "amount", "display_name": "Number"},
 						   {"name": "price", "display_name": "Price ($)"}];
 	var subscribed_items = [];
+	var transaction_total;
+	/*
+	 *  Popup message rendering 
+	 */
+	function showPopupMessage(type, message){
+		var messageElement = document.getElementById("pop-up-message");
+		messageElement.classList.add(type);
+		messageElement.innerHTML = message;
+		messageElement.classList.add("visible");
+		
+		setTimeout(function(){
+			messageElement.classList.remove("visible");
+			messageElement.classList.remove(type);
+		}, 4000);
+	}
 	
 	/*
 	 *  Toggling the dropdown 
@@ -48,12 +63,127 @@
 	}
 	
 	/*
+	 *  Validate transcation details
+	 */
+	function validateTranscationDetails(event){
+		var transaction = {};
+		
+		var transaction_type = event.target.getAttribute("data-type");
+		transaction['payment_mode'] = transaction_type;
+		transaction['date']  = new Date().toLocaleDateString();
+		
+		// Address validation
+		var address = document.getElementById(transaction_type + "_addr").value;
+		if(address.trim() == ""){
+			showPopupMessage("error","Billing address is empty!");
+			return false;
+		}
+		transaction['address'] = address.trim();
+		
+		// Name on card validation
+		var name_on_card = document.getElementById(transaction_type + "_name");
+		if(name_on_card != null){
+			if(name_on_card.value.trim() == ""){
+				showPopupMessage("error","Name on card is empty!");
+				return false;
+			}
+			
+			transaction['name_on_card'] = name_on_card.value.trim();
+		}
+		// Card number validation
+		var card_no = document.getElementById(transaction_type + "_no");
+		if(card_no != null){
+			// If card number is empty
+			if(card_no.value.trim() == ""){
+				showPopupMessage("error","Card number is empty!");
+				return false;
+			}
+			
+			// If card number format is invalid
+			var regex = /^([0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4})$/g;
+			if(!regex.test(card_no.value)){
+				showPopupMessage("error","Card number format is invalid");
+				return false;
+			}
+			
+			transaction['card_no'] = card_no.value.trim();
+		}
+		
+		// Expiry date validation
+		var exp_month = document.getElementById(transaction_type + "_exp_month");
+		if(exp_month != null){
+			// If expiry month is empty
+			if(exp_month.value.trim() == ""){
+				showPopupMessage("error","Expiry month is empty!");
+				return false;
+			}
+			
+			// If expiry month out of range
+			if(parseInt(exp_month.value.trim()) < 1 || parseInt(exp_month.value.trim()) > 12){
+				showPopupMessage("error","Expiry month is out of range!");
+				return false;
+			}
+			
+			transaction['exp_month'] = exp_month.value.trim();
+		}
+		
+		var exp_year = document.getElementById(transaction_type + "_exp_year");
+		if(exp_year != null){
+			// If expiry year is empty
+			if(exp_year.value.trim() == ""){
+				showPopupMessage("error","Expiry year is empty!");
+				return false;
+			}
+			
+			// If expiry year out of range
+			if(parseInt(exp_year.value.trim()) < 1900 || parseInt(exp_year.value.trim()) > 2100){
+				showPopupMessage("error","Expiry year is out of range! Allowed range [1900-2100]");
+				return false;
+			}
+			
+			transaction['exp_year'] = exp_year.value.trim();
+		}
+		
+		// CVV number validation
+		var card_cvv = document.getElementById(transaction_type + "_cvv");
+		if(card_cvv != null){
+			// If CVV is empty
+			if(card_cvv.value.trim() == ""){
+				showPopupMessage("error","CVV Number is empty!");
+				return false;
+			}
+			
+			// If CVV has invalid format
+			var regex = /^([0-9]{3})$/g;
+			if(!regex.test(card_cvv.value)){
+				showPopupMessage("error","CVV Number format is invalid!");
+				return false;
+			}
+			
+			transaction['card_cvv'] = card_cvv.value.trim();
+		}
+		
+		transaction['amount'] = transaction_total;
+		
+		return transaction;
+	}
+	
+	/*
 	 *  Adds event listeners for payment submit button
 	 */
 	function addListenerForSubmitPayment(){
 		var submit_elements = document.getElementsByClassName("submit-payment");
 		for(var i = 0; i < submit_elements.length; i++){
 			submit_elements[i].addEventListener("click", function(e){
+				
+				var transaction = validateTranscationDetails(e);
+				
+				if(!transaction){
+					return false;
+				}
+				
+				transaction['subscribed_items'] = subscribed_items;
+				
 				var xhr = new XMLHttpRequest();
 				
 				xhr.onreadystatechange = function() {
@@ -72,7 +202,7 @@
 				
 				xhr.open("POST", "CustomerSubscriptions", true);
 				xhr.setRequestHeader('Content-Type', 'application/json');
-				xhr.send(JSON.stringify(subscribed_items));
+				xhr.send(JSON.stringify(transaction));
 			});
 		}
 	}
@@ -125,6 +255,8 @@
 		var new_total = subscribed_items[sub_index]['quantity'] * subscribed_items[sub_index]['total'];
 		var content = "Sub total: $" + Number(new_total).toFixed(2);
 		sub_total_element.textContent = content;
+		
+		transaction_total = new_total;
 	}
 	
 	/*
@@ -217,6 +349,8 @@
 			
 			order_details_string += '</tbody></table></div></div>';
 			order_details_string += '<div class="sub-total">Sub total: $' + Number(total).toFixed(2) + '</div>';
+			
+			transaction_total = total;
 		}
 		
 		subscribed_items.push({

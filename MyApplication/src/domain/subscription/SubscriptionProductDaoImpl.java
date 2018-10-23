@@ -3,6 +3,7 @@ package domain.subscription;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -134,16 +135,16 @@ public class SubscriptionProductDaoImpl implements SubscriptionProductDao{
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public int saveCustomerSubscriptions(JsonArray subscriptionDetails) {
+	public ArrayList<Integer> saveCustomerSubscriptions(JsonArray subscriptionDetails) {
 		
-		int status = 0;
+		ArrayList<Integer> generatedIds = new ArrayList<Integer>();
 		
 		for(JsonElement subDetail: subscriptionDetails) {
 			JsonObject subDetailObj = subDetail.getAsJsonObject();
 			
 			try {
 				conn = db.getConnection();
-				ps = conn.prepareStatement("INSERT INTO customer_subscription_mapping (`customer_id`,`subscription_id`,`frequency`, `quantity`, `duration`, `start_date`) VALUES(?,?,?,?,?,?)");
+				ps = conn.prepareStatement("INSERT INTO customer_subscription_mapping (`customer_id`,`subscription_id`,`frequency`, `quantity`, `duration`, `start_date`,`status`) VALUES(?,?,?,?,?,?,1)", Statement.RETURN_GENERATED_KEYS);
 				ps.setInt(1, subDetailObj.get("customer_id").getAsInt());
 				ps.setInt(2, subDetailObj.get("subscription_id").getAsInt());
 				ps.setString(3, subDetailObj.get("frequency").getAsString());
@@ -151,14 +152,85 @@ public class SubscriptionProductDaoImpl implements SubscriptionProductDao{
 				ps.setInt(5, subDetailObj.get("duration").getAsInt());
 				String[] date = subDetailObj.get("start_date").getAsString().split("/");
 				ps.setTimestamp(6, new Timestamp(Integer.parseInt(date[2]) - 1900, Integer.parseInt(date[0]), Integer.parseInt(date[1]), 0, 0, 0, 0));
-				status += ps.executeUpdate();
+				ps.executeUpdate();
+				
+				ResultSet rs = ps.getGeneratedKeys();
+				while(rs.next()) {
+					generatedIds.add(rs.getInt(1));
+				}
+				
 				conn.close();
 			}catch(Exception e){
 				System.out.println(e);
 			}
 		}
 		
-		return status == subscriptionDetails.size() ? 1 : 0;
+		return generatedIds;
+	}
+
+	@Override
+	public List<Subscription> fetchActiveSubscriptions(int userId) {
+		
+		List<Subscription> subList = new ArrayList<Subscription>();
+		
+		try{
+			conn = db.getConnection();
+			ps = conn.prepareStatement("SELECT csm.id, csm.frequency, csm.quantity, csm.duration, csm.start_date, s.age_group, ag.name, s.id, s.name, p.id, p.name, p.brand, p.category, p.quantity, p.price, spm.quantity FROM customer_subscription_mapping csm JOIN subscription s ON csm.subscription_id = s.id JOIN subscription_product_mapping spm ON spm.subscription_id = s.id JOIN product p ON p.id = spm.product_id JOIN age_group ag ON ag.id = s.age_group WHERE csm.customer_id = 1 AND csm.status = 1 ORDER BY csm.start_date DESC, csm.id DESC");
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				int currentSubscriptionMappingId = rs.getInt(1);
+				
+				Subscription subscription = new Subscription();
+				subscription.setId(rs.getInt(8));
+				subscription.setName(rs.getString(9));
+				subscription.setAgeGroup(rs.getInt(6));
+				subscription.setAgeGroupName(rs.getString(7));
+				subscription.setQuantity(rs.getInt(3));
+				subscription.setFrequency(rs.getString(2));
+				subscription.setDuration(rs.getInt(4));
+				subscription.setStartDate(rs.getDate(5));
+				
+				List<Product> productLists = new ArrayList<Product>();
+				
+				Product p = new Product();
+				p.setId(rs.getInt(10));
+				p.setName(rs.getString(11));
+				p.setBrand(rs.getString(12));
+				p.setCategory(rs.getString(13));
+				p.setQuantity(rs.getString(14));
+				p.setAmount(rs.getInt(16));
+				p.setPrice(rs.getDouble(15));
+				productLists.add(p);
+				
+				while(rs.next()) {
+					if(currentSubscriptionMappingId == rs.getInt(1)) {
+						Product product = new Product();
+						product.setId(rs.getInt(10));
+						product.setName(rs.getString(11));
+						product.setBrand(rs.getString(12));
+						product.setCategory(rs.getString(13));
+						product.setQuantity(rs.getString(14));
+						product.setAmount(rs.getInt(16));
+						product.setPrice(rs.getDouble(15));
+						productLists.add(product);
+					}
+					else {
+						break;
+					}
+				}
+				
+				subscription.setProducts(productLists);
+				subList.add(subscription);
+				rs.previous();
+			}
+			
+			conn.close();
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		
+		return subList;
 	}
 	
 }

@@ -21,4 +21,9 @@ public interface SubscriptionProductDao {
 	 *  Inserts subscriptions for customers
 	 */
 	public ArrayList<Integer> saveCustomerSubscriptions(JsonArray subscriptionDetails);
+	
+	/*
+	 *  Fetches all subscriptions information for a customer
+	 */
+	public List<Subscription> fetchActiveSubscriptions(int userId);
 }

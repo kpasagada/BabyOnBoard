@@ -33,7 +33,7 @@ public class TransactionDaoImpl implements TransactionDao {
 		try {
 			conn = db.getConnection();
 			
-			ps =  conn.prepareStatement("SELECT t.id, t.transaction_date, s.name, t.payment_mode, t.amount, cs.status, ag.name, t.address, cs.quantity FROM transaction t JOIN transaction_customer_subscription_mapping tcs ON t.id = tcs.transaction_id JOIN customer_subscription_mapping cs ON tcs.customer_subscription_id = cs.id JOIN subscription s ON cs.subscription_id = s.id JOIN age_group ag ON s.age_group = ag.id WHERE cs.customer_id = ? GROUP BY t.id");
+			ps =  conn.prepareStatement("SELECT t.id, t.transaction_date, s.name, t.payment_mode, t.amount, cs.status, ag.name, t.address, cs.quantity FROM transaction t JOIN transaction_customer_subscription_mapping tcs ON t.id = tcs.transaction_id JOIN customer_subscription_mapping cs ON tcs.customer_subscription_id = cs.id JOIN subscription s ON cs.subscription_id = s.id JOIN age_group ag ON s.age_group = ag.id WHERE cs.customer_id = ? ORDER BY t.id DESC, t.transaction_date DESC");
 			ps.setInt(1, userId);
 			ResultSet rs = ps.executeQuery();
 			

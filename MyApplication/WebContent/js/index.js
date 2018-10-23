@@ -5,13 +5,13 @@
 (function() {
 	
 	var age_groups, subscriptions, selected_age_group = 1, selected_subscription = -1, selected_duration = -1;
-	var sessionArray= new Array();
+	var cartArray= [];
 	var item=0;
 	var index=1;
-
-	
-	
-	
+    var data="";
+    var cartSession=[];
+	var split;
+	var cartItems=[{"number":"number", "agegrp":"agegrp", "sub":"sub"}];
 	/*
 	 * Validates registration form
 	 */
@@ -147,6 +147,7 @@
 		
 		loadPredefinedSubscriptions();
 		initializeCart();
+		
 	};
 	
 	/*
@@ -252,58 +253,91 @@
 			});
 		}
 		
-		// Event handler for subscription add to cart action
 		var cart_buttons =document.getElementsByClassName("addToCart_button");
-		var modal= document.getElementById("cart_table1");
+		var age=[];
+		var sub=[];
+		var count=0;var p=0;
 		for(var l = 0; l < cart_buttons.length; l++){
 			cart_buttons[l].addEventListener("click", function(e){
 				if(e.target && e.target.tagName == "BUTTON"){
-					//if(document.getElementsByClassName("sub-selected").length){
-					//document.getElementsByClassName("sub-selected")[0].classList.removes("sub-selected");
-			//	}
-					//e.target.parentNode.parentNode.classList.add("sub-selected");
-					selected_subscription = e.target.parentNode.parentNode.getAttribute("data-id");	
-					//console.log(selected_subscription);
-					
+					e.target.parentNode.parentNode.classList.add("sub-selected");
+					selected_subscription = e.target.parentNode.parentNode.getAttribute("data-id");						
+					count++;
+					//console.log(count);
 					for(var i=0;i<subscriptions.length;i++){
 						if(subscriptions[i].id==selected_subscription){
-							//console.log(subscriptions[i]);
-							//console.log(age_groups[i]);
-							sessionArray.push(item+1);
+						
 							for(var k=0;k<age_groups.length;k++){
-								//console.log(age_groups.length);
 								if(age_groups[k].id==subscriptions[i].ageGroup){
-									//console.log(age_groups[k].name);
-									sessionArray.push(age_groups[k].name);
+							     age.push(age_groups[k].name);
+							    
 								}
 							}
-							sessionArray.push(subscriptions[i].name);
-							if (typeof(Storage) !== "undefined") {
-								 localStorage.setItem(index,sessionArray);
-								 console.log(localStorage.getItem(index));
-								 index=index+3;
-							} else {
-							    // Sorry! No Web Storage support..
-							}
-							var split=localStorage.getItem(index).split(",");
-							var row = modal.insertRow(1);
-							var cell1 = row.insertCell(0);
-						    var cell2 = row.insertCell(1);
-						    var cell3 = row.insertCell(2);
-						    cell1.innerHTML=split[0];
-						    cell2.innerHTML=split[1];
-						   // cell3.innerHTML=sessionArray[index+2];
-						  //  index=index+6;
+							sub.push(subscriptions[i].name);	
 						}
 					}
-			}
-			});	
-	}
+						if(p<count){
+						cartArray.push(p+1);
+						cartArray.push(age[p]);
+						cartArray.push(sub[p]);
+						//console.log(cartArray.length);
+						p++;
+						}
+		            sessionCart(cartArray);
 }
 	
 	/*
-	 * Add to cart event handler
-	 * */
+	 * 	Add to cart session Storage
+	 */
+	function sessionCart(cartArray){
+		// Event handler for subscription add to cart action
+		
+					if(typeof(Storage) !== "undefined") 
+					{
+			        if (sessionStorage.clickcount)
+			        {
+			            sessionStorage.clickcount = Number(sessionStorage.clickcount)+1;
+			           
+			        } else
+			        {
+			            sessionStorage.clickcount = 1;
+			        }
+			        sessionStorage.setItem("cartItem", JSON.stringify(cartArray));
+				    split= JSON.parse(sessionStorage.getItem("cartItem"));
+				    displayTable(split);
+			        document.getElementById("count").innerHTML = sessionStorage.clickcount;
+					}
+			      }
+			});	
+	     }
+	}
+	
+	var x=0;
+	//display table in cart
+	function displayTable(split){
+		
+		if(typeof(Storage) !== "undefined") {
+		console.log(split);
+		if(x < split.length)
+		{
+		data='<tr><td>'+split[x]+'</td>';
+		data+='<td>'+split[x+1]+'</td>';
+		data+='<td>'+split[x+2]+'</td>';
+		data+='<td>$75</td>';
+		data+='<td><button class="delete_cart">Delete</button>'; //<span>&times;</span>
+		
+		x=x+3;
+		document.getElementById("cart_table1").innerHTML += data;
+		}
+		}
+		else{
+			document.getElementById("cart_table1").innerHTML += "";
+		}
+	}
+	
+	/*
+	 * 	Add to cart event handler
+	 */
 	
 	function initializeCart(){
 		var modal = document.getElementById('cart_Modal');
@@ -314,13 +348,11 @@
 		// Get the <span> element that closes the modal
 		var span = document.getElementsByClassName("close")[0];
 		//var cartButton=document.getElementById("addToCart_button");
-		var table=document.getElementById("cart_table");
-		var row;
-		var cell;
 		
 		// When the user clicks the button, open the modal 
 		btn.addEventListener("click", function(){			
 		    modal.style.display = "block";
+		    
 		    });
 		   
 		// When the user clicks on <span> (x), close the modal
@@ -389,6 +421,8 @@
 		var interval = setInterval(function(){ 
 			if(selected_subscription == -1 || selected_duration == -1 || loginStatus != true){ return; }
 			document.getElementsByClassName("checkout_btn")[0].classList.remove("disabled");
+			document.getElementsByClassName("cartCheckout_btn")[0].classList.remove("disabled");
+
 			clearInterval(interval);
 		}, 100);
 	}
@@ -402,6 +436,8 @@
 		document.getElementById("login-button").addEventListener("click", login);
 		document.getElementById("sign-up-button").addEventListener("click", register);
 		document.getElementsByClassName("checkout_btn")[0].addEventListener("click", proceedToCheckout);
+		document.getElementsByClassName("cartCheckout_btn")[0].addEventListener("click", proceedToCheckout);
+
 		addSubscriptionSelectionListener();
 		addSubscriptionDurationEventListeners();
 		
@@ -431,6 +467,10 @@
 	    document.getElementById("logo-link").setAttribute("href", indexPath);
 	    document.getElementById("user_profile").setAttribute("href", userPath);
 	    
+	    if(sessionStorage.clickcount>0){
+	    document.getElementById("count").innerHTML = sessionStorage.clickcount;
+	    }
+	   
 	    loadAgeGroups();
 	    initEventListeners();
 	    

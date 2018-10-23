@@ -52,7 +52,7 @@
 						</div>
                     
                     </button></li>
-                    <li><button id="cart_btn" class="cart_btn_class hide"><i class="fa fa-shopping-cart cart" style="font-size:30px;color:white"></i></button>
+                    <li><button id="cart_btn" class="cart_btn_class hide"><span class="count" id="count">0</span><i class="fa fa-shopping-cart cart" style="font-size:30px;color:white"></i></button>
                              
             </ul>
         </div>
@@ -91,7 +91,10 @@
 				</tr>
 				-->
 			</table>
-         
+       	<div class="cartCheckout">
+			<button class="cartCheckout_btn ">Checkout</button>
+       	</div>
+       	
          </div>
          </div>
         <!--modal done  -->

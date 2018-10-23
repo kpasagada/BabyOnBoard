@@ -15,11 +15,9 @@ import java.util.List;
 import java.util.Date;
 import domain.subscription.*;
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import db.DbManager;
-import domain.agegroup.AgeGroup;
 
 public class TransactionDaoImpl implements TransactionDao {
 	static Connection conn;

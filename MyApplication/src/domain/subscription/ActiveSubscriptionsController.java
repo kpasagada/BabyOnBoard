@@ -12,10 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import domain.transaction.Transaction;
-import domain.transaction.TransactionDao;
-import domain.transaction.TransactionDaoImpl;
-
 @WebServlet("/GetActiveSubscriptions")
 
 public class ActiveSubscriptionsController extends HttpServlet {

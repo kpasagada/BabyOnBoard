@@ -13,12 +13,18 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet">        
 		<link rel="stylesheet" type="text/css" href="css/transactionHistory.css">
 	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+		<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Overpass:300,400,600,800'>
+		<link rel="stylesheet" href="css/tab-style.css">
 		<!-- Scroll to top on reload -->
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 				function hideURLbar(){ window.scrollTo(0,1); } </script>
 				
 		<title>Baby On Board | Transaction History</title>
+
+
     </head>
+
     
     <body>
     
@@ -61,17 +67,257 @@
                              
             </ul>
         </div>
-    
-    <!-- CART MODAL -->
-        
-        <div id="cart_Modal" class="modal">
+        </br>
 
-        <div class="modal-content">
-         <span class="close">&times;</span>
-         </div>
-         </div>
-        <!--modal done  -->
-        
+
+
+<div class="tabset">
+  <!-- Tab 1 -->
+  <input type="radio"  name="tabset" id="tab1" aria-controls="Subscriptions" checked>
+  <label  for="tab1">Active Subscription</label>
+  <!-- Tab 2 -->
+  <input type="radio" name="tabset" id="tab2" aria-controls="Transaction">
+  <label  for="tab2">Transaction History</label>
+  <!-- Tab 3 -->
+
+  
+  <div class="tab-panels" >
+    <section id="Subscriptions" class="tab-panel">
+      <h2 style="padding-left: 20%">Active Subscriptions</h2></br>
+      <div style="padding-left: 20%">
+      	<div style="border:2px solid;border-color:#D4D2D2; background-color: #F6F6F6 ;border-top-left-radius: 5px;border-top-right-radius: 5px;">
+      		<ul style="margin-top:20px;margin-bottom:20px">
+      			<li style="padding-left: 1rem;">Subscription: Premium </li> 
+      			<li style="padding-left: 3rem">Quantity: 2 </li>
+      			<li style="padding-left: 3rem">Frequency: Bi Weekly</li>
+      			<li style="padding-left: 6rem">Duration: 12 Months</li>
+      		</ul>
+      	</div>
+      	<div style="border:3px solid;border-top:0.5px solid;border-color:#D4D2D2;">
+			<table>
+			  <tr>
+			    <th >S.No</th>
+			    <th>Product Name</th>
+			    <th>Quantity</th>
+			  </tr>
+			  <tr>
+			    <td>1</td>
+			    <td>Diapers</td>
+			    <td>20</td>
+			  </tr>
+			  <tr>
+			    <td>2</td>
+			    <td>Cerlac</td>
+			    <td>10</td>
+			  </tr>
+			  <tr>
+			    <td>3</td>
+			    <td>Baby Soap</td>
+			    <td>4</td>
+			  </tr>  
+			  
+			</table>
+      	</div>  
+      </div>
+      </br>
+      <div style="padding-left: 20%">
+      	<div style="border:2px solid;border-color:#D4D2D2; background-color: #F6F6F6 ;border-top-left-radius: 5px;border-top-right-radius: 5px;">
+      		<ul style="margin-top:20px;margin-bottom:20px">
+      			<li style="padding-left: 1rem;">Subscription: Premium </li> 
+      			<li style="padding-left: 3rem">Quantity: 2 </li>
+      			<li style="padding-left: 3rem">Frequency: Bi Weekly</li>
+      			<li style="padding-left: 6rem">Duration: 12 Months</li>
+      		</ul>
+      	</div>
+      	<div style="border:3px solid;border-top:0.5px solid;border-color:#D4D2D2;">
+			<table>
+			  <tr>
+			    <th >S.No</th>
+			    <th>Product Name</th>
+			    <th>Quantity</th>
+			  </tr>
+			  <tr>
+			    <td>1</td>
+			    <td>Diapers</td>
+			    <td>20</td>
+			  </tr>
+			  <tr>
+			    <td>2</td>
+			    <td>Cerlac</td>
+			    <td>10</td>
+			  </tr>
+			  <tr>
+			    <td>3</td>
+			    <td>Baby Soap</td>
+			    <td>4</td>
+			  </tr>  
+			  
+			</table>
+      	</div>
+      </div>
+      </br>
+            <div style="padding-left: 20%">
+      	<div style="border:2px solid;border-color:#D4D2D2; background-color: #F6F6F6 ;border-top-left-radius: 5px;border-top-right-radius: 5px;">
+      		<ul style="margin-top:20px;margin-bottom:20px">
+      			<li style="padding-left: 1rem;">Subscription: Premium </li> 
+      			<li style="padding-left: 3rem">Quantity: 2 </li>
+      			<li style="padding-left: 3rem">Frequency: Bi Weekly</li>
+      			<li style="padding-left: 6rem">Duration: 12 Months</li>
+      		</ul>
+      	</div>
+      	<div style="border:3px solid;border-top:0.5px solid;border-color:#D4D2D2;">
+			<table>
+			  <tr>
+			    <th >S.No</th>
+			    <th>Product Name</th>
+			    <th>Quantity</th>
+			  </tr>
+			  <tr>
+			    <td>1</td>
+			    <td>Diapers</td>
+			    <td>20</td>
+			  </tr>
+			  <tr>
+			    <td>2</td>
+			    <td>Cerlac</td>
+			    <td>10</td>
+			  </tr>
+			  <tr>
+			    <td>3</td>
+			    <td>Baby Soap</td>
+			    <td>4</td>
+			  </tr>  
+			  
+			</table>
+      	</div>
+      </div>
+  </section>
+    <section id="Transaction" class="tab-panel">
+    	<h2 style="padding-left: 20%">Transaction History</h2></br>
+      <div style="padding-left: 20%">
+      	<div style="border:2px solid;border-color:#D4D2D2; background-color: #F6F6F6 ;border-top-left-radius: 5px;border-top-right-radius: 5px;">
+      		<ul style="margin-top:20px;margin-bottom:20px">
+      			<li style="padding-left: 1rem;">Order No:5678 </li> 
+      			<li style="padding-left: 5rem">Total:$80 </li>
+      			<li style="padding-left: 5rem">Billed Address</li>
+      			<li style="padding-left: 8rem">Order Placed:Date</li>
+      		</ul>
+      	</div>
+      	<div style="border:3px solid;border-top:0.5px solid;border-color:#D4D2D2;">
+			<table>
+			  <tr>
+			    <th >Subscription Name</th>
+			    <th>Amount</th>
+			    <th>Status</th>
+			    <th>&nbsp;</th>
+			  </tr>
+			  <tr>
+			    <td>Premium</td>
+			    <td>$15</td>
+			    <td>Active</td>
+			    <td><a href="">View Details</a></td>
+			  </tr>
+			  <tr>
+			    <td>Economy</td>
+			    <td>$5</td>
+			    <td>Cancelled</td>
+			    <td><a href="">View Details</a></td>
+			  </tr>
+			  <tr>
+			    <td>Standard</td>
+			    <td>$10</td>
+			    <td>Active</td>
+			    <td><a href="">View Details</a></td>
+			  </tr>
+			  
+			</table>
+      	</div>
+      </div>
+  </br>
+        <div style="padding-left: 20%">
+      	<div style="border:2px solid;border-color:#D4D2D2; background-color: #F6F6F6 ;border-top-left-radius: 5px;border-top-right-radius: 5px;">
+      		<ul style="margin-top:20px;margin-bottom:20px">
+      			<li style="padding-left: 1rem;">Order No:5678 </li> 
+      			<li style="padding-left: 5rem">Total:$80 </li>
+      			<li style="padding-left: 5rem">Billed Address</li>
+      			<li style="padding-left: 8rem">Order Placed:Date</li>
+      		</ul>
+      	</div>
+      	<div style="border:3px solid;border-top:0.5px solid;border-color:#D4D2D2;">
+			<table>
+			  <tr>
+			    <th >Subscription Name</th>
+			    <th>Amount</th>
+			    <th>Status</th>
+			    <th>&nbsp;</th>
+			  </tr>
+			  <tr>
+			    <td>Premium</td>
+			    <td>$15</td>
+			    <td>Active</td>
+			    <td><a href="">View Details</a></td>
+			  </tr>
+			  <tr>
+			    <td>Economy</td>
+			    <td>$5</td>
+			    <td>Cancelled</td>
+			    <td><a href="">View Details</a></td>
+			  </tr>
+			  <tr>
+			    <td>Standard</td>
+			    <td>$10</td>
+			    <td>Active</td>
+			    <td><a href="">View Details</a></td>
+			  </tr>
+			  
+			</table>
+      	</div>
+      </div>
+  </br>
+        <div style="padding-left: 20%">
+      	<div style="border:2px solid;border-color:#D4D2D2; background-color: #F6F6F6 ;border-top-left-radius: 5px;border-top-right-radius: 5px;">
+      		<ul style="margin-top:20px;margin-bottom:20px">
+      			<li style="padding-left: 1rem;">Order No:5678 </li> 
+      			<li style="padding-left: 5rem">Total:$80 </li>
+      			<li style="padding-left: 5rem">Billed Address</li>
+      			<li style="padding-left: 8rem">Order Placed:Date</li>
+      		</ul>
+      	</div>
+      	<div style="border:3px solid;border-top:0.5px solid;border-color:#D4D2D2;">
+			<table>
+			  <tr>
+			    <th >Subscription Name</th>
+			    <th>Amount</th>
+			    <th>Status</th>
+			    <th>&nbsp;</th>
+			  </tr>
+			  <tr>
+			    <td>Premium</td>
+			    <td>$15</td>
+			    <td>Active</td>
+			    <td><a href="">View Details</a></td>
+			  </tr>
+			  <tr>
+			    <td>Economy</td>
+			    <td>$5</td>
+			    <td>Cancelled</td>
+			    <td><a href="">View Details</a></td>
+			  </tr>
+			  <tr>
+			    <td>Standard</td>
+			    <td>$10</td>
+			    <td>Active</td>
+			    <td><a href="">View Details</a></td>
+			  </tr>
+			  
+			</table>
+      	</div>
+      </div>
+    </section>
+
+  </div>
+  
+</div>
     
     
     

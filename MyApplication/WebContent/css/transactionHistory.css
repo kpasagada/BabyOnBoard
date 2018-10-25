@@ -30,8 +30,27 @@ h2 {
 	margin-bottom: 4%;
 }
 
-li {
-	list-style: none;
+ul li{
+	display: inline;
+	line-height: 1.5;
+	padding-left: 3rem;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+td, th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+}
+
+.center {
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
 }
 
 /*------------------------------------------------------------------------------

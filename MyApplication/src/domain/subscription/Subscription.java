@@ -1,5 +1,6 @@
 package domain.subscription;
 
+import java.util.Date;
 import java.util.List;
 
 public class Subscription {
@@ -9,7 +10,11 @@ public class Subscription {
 	private int ageGroup;
 	private String ageGroupName;
 	private String ageGroupDescription;
-	boolean status;
+	private boolean status;
+	private int quantity;
+	private Date startDate;
+	private String frequency;
+	private int duration;
 	List<Product> products;
 	
 	public int getId() {
@@ -42,15 +47,36 @@ public class Subscription {
 	public void setAgeGroupDescription(String ageGroupDescription) {
 		this.ageGroupDescription = ageGroupDescription;
 	}
-	
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
-	
 	public boolean getStatus() {
 		return this.status;
 	}
-	
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+	public Date getStartDate() {
+		return startDate;
+	}
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+	public String getFrequency() {
+		return frequency;
+	}
+	public void setFrequency(String frequency) {
+		this.frequency = frequency;
+	}
+	public int getDuration() {
+		return duration;
+	}
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
 	public List<Product> getProducts() {
 		return products;
 	}

@@ -1,4 +1,4 @@
-package domain.transaction;
+package domain.subscription;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,29 +12,29 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+@WebServlet("/GetActiveSubscriptions")
 
-@WebServlet("/GetTransactionInfo")
-
-public class TransactionController extends HttpServlet
-{
+public class ActiveSubscriptionsController extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 	private static Gson gson = new Gson();
 	
-	public TransactionController() {}
+	public ActiveSubscriptionsController() {}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		TransactionDao transactionDao = new TransactionDaoImpl();
+		SubscriptionProductDao subscriptionDao = new SubscriptionProductDaoImpl();
 		int userId = Integer.parseInt(req.getParameter("id"));
 	
-		List<Transaction> transactionList =  transactionDao.fetchTransactionsById(userId);
+		List<Subscription> subscriptionList =  subscriptionDao.fetchActiveSubscriptions(userId);
 		
-		String transactionListString = gson.toJson(transactionList, new TypeToken<List<Transaction>>(){}.getType());
+		String subscriptionListString = gson.toJson(subscriptionList, new TypeToken<List<Subscription>>(){}.getType());
 	
 		resp.setContentType("application/json");
     	resp.setCharacterEncoding("UTF-8");
-        resp.getWriter().write(transactionListString);
+        resp.getWriter().write(subscriptionListString);
         resp.flushBuffer();
 	}
+	
 }

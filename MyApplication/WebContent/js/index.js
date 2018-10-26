@@ -4,11 +4,14 @@
 	
 (function() {
 	
-	var age_groups, selected_age_group = 1, selected_subscription = -1, selected_duration = -1;
-	
-	
-	
-	
+	var age_groups, subscriptions, selected_age_group = 1, selected_subscription = -1, selected_duration = -1;
+	var cartArray= [];
+	var item=0;
+	var index=1;
+    var data="";
+    var cartSession=[];
+	var split;
+	var cartItems=[{"number":"number", "agegrp":"agegrp", "sub":"sub"}];
 	/*
 	 * Validates registration form
 	 */
@@ -87,7 +90,6 @@
 	function loadAgeGroupsSuccessHandler(response){
 		
 		response = JSON.parse(response);
-		
 		// Sorting by ids
 		response.sort(function(a, b){return a['id'] - b['id']});
 		age_groups = response;
@@ -101,6 +103,7 @@
 	        					+ '<button type="button" class="age_border pointer"><img class="box-age" alt="' + age_group_object['name'] + '" src="images/' + age_group_object['name'].replace(" ","").trim().toLowerCase() + '.jpg"></button>'
 	        					+ '<p class="size"><br> ' + age_group_object['name'] + '</p>'
 	        					+ '</li>';
+		    
 		}
 		
 		var age_group_list_element = document.getElementById("age-group-list");
@@ -122,6 +125,7 @@
 				
 				parentNode.classList.add("selected-age");
 				selected_age_group = parentNode.getAttribute("data-id");
+			
 				
 				var inner_sub_elements = document.getElementsByClassName("inner-subscription-container");
 				
@@ -143,6 +147,7 @@
 		
 		loadPredefinedSubscriptions();
 		initializeCart();
+		
 	};
 	
 	/*
@@ -187,7 +192,8 @@
 		response = JSON.parse(response);
 		
 		response.sort(function(a, b){return a['ageGroup'] - b['ageGroup']});
-		
+		subscriptions=response;
+		//console.log(response.length);
 		var subscription_list_string = "";
 		var age_group_visited = [];
 		
@@ -234,23 +240,104 @@
 		// Event handler for subscription select action
 		var subscription_buttons = document.getElementsByClassName("subscription_button");
 		
+		
 		for(var l = 0; l < subscription_buttons.length; l++){
 			subscription_buttons[l].addEventListener("click", function(e){
 				if(e.target && e.target.tagName == "BUTTON"){
 					if(document.getElementsByClassName("sub-selected").length){
-						document.getElementsByClassName("sub-selected")[0].classList.remove("sub-selected");
+						document.getElementsByClassName("sub-selected")[0].classList.removes("sub-selected");
 					}
 					e.target.parentNode.parentNode.classList.add("sub-selected");
 					selected_subscription = e.target.parentNode.parentNode.getAttribute("data-id");
 				}
 			});
 		}
-	}
-	
+		
+		var cart_buttons =document.getElementsByClassName("addToCart_button");
+		var age=[];
+		var sub=[];
+		var count=0;var p=0;
+		for(var l = 0; l < cart_buttons.length; l++){
+			cart_buttons[l].addEventListener("click", function(e){
+				if(e.target && e.target.tagName == "BUTTON"){
+					e.target.parentNode.parentNode.classList.add("sub-selected");
+					selected_subscription = e.target.parentNode.parentNode.getAttribute("data-id");						
+					count++;
+					//console.log(count);
+					for(var i=0;i<subscriptions.length;i++){
+						if(subscriptions[i].id==selected_subscription){
+						
+							for(var k=0;k<age_groups.length;k++){
+								if(age_groups[k].id==subscriptions[i].ageGroup){
+							     age.push(age_groups[k].name);
+							    
+								}
+							}
+							sub.push(subscriptions[i].name);	
+						}
+					}
+						if(p<count){
+						cartArray.push(p+1);
+						cartArray.push(age[p]);
+						cartArray.push(sub[p]);
+						//console.log(cartArray.length);
+						p++;
+						}
+		            sessionCart(cartArray);
+}
 	
 	/*
-	 * Add to cart event handler
-	 * */
+	 * 	Add to cart session Storage
+	 */
+	function sessionCart(cartArray){
+		// Event handler for subscription add to cart action
+		
+					if(typeof(Storage) !== "undefined") 
+					{
+			        if (sessionStorage.clickcount)
+			        {
+			            sessionStorage.clickcount = Number(sessionStorage.clickcount)+1;
+			           
+			        } else
+			        {
+			            sessionStorage.clickcount = 1;
+			        }
+			        sessionStorage.setItem("cartItem", JSON.stringify(cartArray));
+				    split= JSON.parse(sessionStorage.getItem("cartItem"));
+				    displayTable(split);
+			        document.getElementById("count").innerHTML = sessionStorage.clickcount;
+					}
+			      }
+			});	
+	     }
+	}
+	
+	var x=0;
+	//display table in cart
+	function displayTable(split){
+		
+		if(typeof(Storage) !== "undefined") {
+		console.log(split);
+		if(x < split.length)
+		{
+		data='<tr><td>'+split[x]+'</td>';
+		data+='<td>'+split[x+1]+'</td>';
+		data+='<td>'+split[x+2]+'</td>';
+		data+='<td>$75</td>';
+		data+='<td><button class="delete_cart">Delete</button>'; //<span>&times;</span>
+		
+		x=x+3;
+		document.getElementById("cart_table1").innerHTML += data;
+		}
+		}
+		else{
+			document.getElementById("cart_table1").innerHTML += "";
+		}
+	}
+	
+	/*
+	 * 	Add to cart event handler
+	 */
 	
 	function initializeCart(){
 		var modal = document.getElementById('cart_Modal');
@@ -260,14 +347,12 @@
 
 		// Get the <span> element that closes the modal
 		var span = document.getElementsByClassName("close")[0];
-		var cartButton=document.getElementById("addToCart_button");
-		var table=document.getElementById("cart_table");
-		var row;
-		var cell;
+		//var cartButton=document.getElementById("addToCart_button");
 		
 		// When the user clicks the button, open the modal 
 		btn.addEventListener("click", function(){			
 		    modal.style.display = "block";
+		    
 		    });
 		   
 		// When the user clicks on <span> (x), close the modal
@@ -336,6 +421,8 @@
 		var interval = setInterval(function(){ 
 			if(selected_subscription == -1 || selected_duration == -1 || loginStatus != true){ return; }
 			document.getElementsByClassName("checkout_btn")[0].classList.remove("disabled");
+			document.getElementsByClassName("cartCheckout_btn")[0].classList.remove("disabled");
+
 			clearInterval(interval);
 		}, 100);
 	}
@@ -349,6 +436,8 @@
 		document.getElementById("login-button").addEventListener("click", login);
 		document.getElementById("sign-up-button").addEventListener("click", register);
 		document.getElementsByClassName("checkout_btn")[0].addEventListener("click", proceedToCheckout);
+		document.getElementsByClassName("cartCheckout_btn")[0].addEventListener("click", proceedToCheckout);
+
 		addSubscriptionSelectionListener();
 		addSubscriptionDurationEventListeners();
 		
@@ -378,6 +467,10 @@
 	    document.getElementById("logo-link").setAttribute("href", indexPath);
 	    document.getElementById("user_profile").setAttribute("href", userPath);
 	    
+	    if(sessionStorage.clickcount>0){
+	    document.getElementById("count").innerHTML = sessionStorage.clickcount;
+	    }
+	   
 	    loadAgeGroups();
 	    initEventListeners();
 	    

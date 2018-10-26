@@ -16,8 +16,6 @@ import domain.subscription.*;
 import java.util.Date;
 import java.util.List;
 
-import domain.subscription.Product;
-
 public class Transaction {
 	private int id;
 	private String paymentMode;

@@ -21,310 +21,302 @@
 				function hideURLbar(){ window.scrollTo(0,1); } </script>
 				
 		<title>Baby On Board | Transaction History</title>
-
-
     </head>
-
-    
-    <body>
-    
-    <!-- Login Validation -->
-	    <script type="text/javascript">
-	    	var loginStatus;
-		    var loginStatus = <%=session.getAttribute("loginStatus")%>;
-		    var contextPath = "<%=request.getContextPath()%>";
-		    
-		    // Proceed to logout if user not logged in
-		    if(loginStatus != true){
-		    	var logout_url =  window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + contextPath + "/logout";
-				window.location.href = logout_url;
-		    }
-		    
-		    // Get customer details from session
-		    var user = <%=session.getAttribute("customerDetails")%>;
-	  
-		
-
-		</script>
-    <!--HEADER SECTION -->
-        <div class="header">
-            <a id="logo-link" href="/index"> <img src="images/baby.png" alt="logo" class="logo"> </a>
-            <ul class="main-nav">
-                    <li><a href="#features">FEATURES</a></li>
-                    <li><a href="#work">HOW IT WORKS</a></li>
-                    <li><a href="#contact">CONTACT</a></li>                           
-                    <li><button id="user-button" class="user"><i class="fa fa-user-circle-o" style="font-size:30px;color:#fff;"></i>
-                    <div class = "user_dropdown ">
-						<ul class="dropdown_nav" >
-							<li><a href="/userProfile" id="user_profile">User profile</a></li>
-							<li><a id="transaction" href="/transactionHistory">Transaction history</a></li>
-							<li><a href="/logout" id="logout_button">Logout</a></li>
-						</ul>
+	<body>
+	
+		<!-- Login Validation -->
+		<script type="text/javascript">
+		    	var loginStatus;
+			    var loginStatus = <%=session.getAttribute("loginStatus")%>;
+			    var contextPath = "<%=request.getContextPath()%>";
+			    
+			    // Proceed to logout if user not logged in
+			    if(loginStatus != true){
+			    	var logout_url =  window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + contextPath + "/logout";
+					window.location.href = logout_url;
+			    }
+			    
+			    // Get customer details from session
+			    var user = <%=session.getAttribute("customerDetails")%>;
+		  
+			
+	
+			</script>
+		<!--HEADER SECTION -->
+		<div class="header">
+			<a id="logo-link" href="/index"> <img src="images/baby.png"
+				alt="logo" class="logo">
+			</a>
+			<ul class="main-nav">
+				<li><a href="#features">FEATURES</a></li>
+				<li><a href="#work">HOW IT WORKS</a></li>
+				<li><a href="#contact">CONTACT</a></li>
+				<li><button id="user-button" class="user">
+						<i class="fa fa-user-circle-o"
+							style="font-size: 30px; color: #fff;"></i>
+						<div class="user_dropdown ">
+							<ul class="dropdown_nav">
+								<li><a href="/userProfile" id="user_profile">User
+										profile</a></li>
+								<li><a id="transaction" href="/transactionHistory">Transaction
+										history</a></li>
+								<li><a href="/logout" id="logout_button">Logout</a></li>
+							</ul>
 						</div>
-                    
-                    </button></li>
-                     <li><button id="cart_btn" class="cart_btn_class"><i class="fa fa-shopping-cart cart" style="font-size:30px;color:white"></i></button>
-                             
-            </ul>
-        </div>
-        </br>
-
-
-
-<div class="tabset">
-  <!-- Tab 1 -->
-  <input type="radio"  name="tabset" id="tab1" aria-controls="Subscriptions" checked>
-  <label  for="tab1">Active Subscription</label>
-  <!-- Tab 2 -->
-  <input type="radio" name="tabset" id="tab2" aria-controls="Transaction">
-  <label  for="tab2">Transaction History</label>
-  <!-- Tab 3 -->
-
-  
-  <div class="tab-panels" >
-    <section id="Subscriptions" class="tab-panel">
-      <h2 style="padding-left: 20%">Active Subscriptions</h2></br>
-      <div style="padding-left: 20%">
-      	<div style="border:2px solid;border-color:#D4D2D2; background-color: #F6F6F6 ;border-top-left-radius: 5px;border-top-right-radius: 5px;">
-      		<ul style="margin-top:20px;margin-bottom:20px">
-      			<li style="padding-left: 1rem;">Subscription: Premium </li> 
-      			<li style="padding-left: 3rem">Quantity: 2 </li>
-      			<li style="padding-left: 3rem">Frequency: Bi Weekly</li>
-      			<li style="padding-left: 6rem">Duration: 12 Months</li>
-      		</ul>
-      	</div>
-      	<div style="border:3px solid;border-top:0.5px solid;border-color:#D4D2D2;">
-			<table>
-			  <tr>
-			    <th >S.No</th>
-			    <th>Product Name</th>
-			    <th>Quantity</th>
-			  </tr>
-			  <tr>
-			    <td>1</td>
-			    <td>Diapers</td>
-			    <td>20</td>
-			  </tr>
-			  <tr>
-			    <td>2</td>
-			    <td>Cerlac</td>
-			    <td>10</td>
-			  </tr>
-			  <tr>
-			    <td>3</td>
-			    <td>Baby Soap</td>
-			    <td>4</td>
-			  </tr>  
-			  
-			</table>
-      	</div>  
-      </div>
-      </br>
-      <div style="padding-left: 20%">
-      	<div style="border:2px solid;border-color:#D4D2D2; background-color: #F6F6F6 ;border-top-left-radius: 5px;border-top-right-radius: 5px;">
-      		<ul style="margin-top:20px;margin-bottom:20px">
-      			<li style="padding-left: 1rem;">Subscription: Premium </li> 
-      			<li style="padding-left: 3rem">Quantity: 2 </li>
-      			<li style="padding-left: 3rem">Frequency: Bi Weekly</li>
-      			<li style="padding-left: 6rem">Duration: 12 Months</li>
-      		</ul>
-      	</div>
-      	<div style="border:3px solid;border-top:0.5px solid;border-color:#D4D2D2;">
-			<table>
-			  <tr>
-			    <th >S.No</th>
-			    <th>Product Name</th>
-			    <th>Quantity</th>
-			  </tr>
-			  <tr>
-			    <td>1</td>
-			    <td>Diapers</td>
-			    <td>20</td>
-			  </tr>
-			  <tr>
-			    <td>2</td>
-			    <td>Cerlac</td>
-			    <td>10</td>
-			  </tr>
-			  <tr>
-			    <td>3</td>
-			    <td>Baby Soap</td>
-			    <td>4</td>
-			  </tr>  
-			  
-			</table>
-      	</div>
-      </div>
-      </br>
-            <div style="padding-left: 20%">
-      	<div style="border:2px solid;border-color:#D4D2D2; background-color: #F6F6F6 ;border-top-left-radius: 5px;border-top-right-radius: 5px;">
-      		<ul style="margin-top:20px;margin-bottom:20px">
-      			<li style="padding-left: 1rem;">Subscription: Premium </li> 
-      			<li style="padding-left: 3rem">Quantity: 2 </li>
-      			<li style="padding-left: 3rem">Frequency: Bi Weekly</li>
-      			<li style="padding-left: 6rem">Duration: 12 Months</li>
-      		</ul>
-      	</div>
-      	<div style="border:3px solid;border-top:0.5px solid;border-color:#D4D2D2;">
-			<table>
-			  <tr>
-			    <th >S.No</th>
-			    <th>Product Name</th>
-			    <th>Quantity</th>
-			  </tr>
-			  <tr>
-			    <td>1</td>
-			    <td>Diapers</td>
-			    <td>20</td>
-			  </tr>
-			  <tr>
-			    <td>2</td>
-			    <td>Cerlac</td>
-			    <td>10</td>
-			  </tr>
-			  <tr>
-			    <td>3</td>
-			    <td>Baby Soap</td>
-			    <td>4</td>
-			  </tr>  
-			  
-			</table>
-      	</div>
-      </div>
-  </section>
-    <section id="Transaction" class="tab-panel">
-    	<h2 style="padding-left: 20%">Transaction History</h2></br>
-      <div style="padding-left: 20%">
-      	<div style="border:2px solid;border-color:#D4D2D2; background-color: #F6F6F6 ;border-top-left-radius: 5px;border-top-right-radius: 5px;">
-      		<ul style="margin-top:20px;margin-bottom:20px">
-      			<li style="padding-left: 1rem;">Order No:5678 </li> 
-      			<li style="padding-left: 5rem">Total:$80 </li>
-      			<li style="padding-left: 5rem">Billed Address</li>
-      			<li style="padding-left: 8rem">Order Placed:Date</li>
-      		</ul>
-      	</div>
-      	<div style="border:3px solid;border-top:0.5px solid;border-color:#D4D2D2;">
-			<table>
-			  <tr>
-			    <th >Subscription Name</th>
-			    <th>Amount</th>
-			    <th>Status</th>
-			    <th>&nbsp;</th>
-			  </tr>
-			  <tr>
-			    <td>Premium</td>
-			    <td>$15</td>
-			    <td>Active</td>
-			    <td><a href="">View Details</a></td>
-			  </tr>
-			  <tr>
-			    <td>Economy</td>
-			    <td>$5</td>
-			    <td>Cancelled</td>
-			    <td><a href="">View Details</a></td>
-			  </tr>
-			  <tr>
-			    <td>Standard</td>
-			    <td>$10</td>
-			    <td>Active</td>
-			    <td><a href="">View Details</a></td>
-			  </tr>
-			  
-			</table>
-      	</div>
-      </div>
-  </br>
-        <div style="padding-left: 20%">
-      	<div style="border:2px solid;border-color:#D4D2D2; background-color: #F6F6F6 ;border-top-left-radius: 5px;border-top-right-radius: 5px;">
-      		<ul style="margin-top:20px;margin-bottom:20px">
-      			<li style="padding-left: 1rem;">Order No:5678 </li> 
-      			<li style="padding-left: 5rem">Total:$80 </li>
-      			<li style="padding-left: 5rem">Billed Address</li>
-      			<li style="padding-left: 8rem">Order Placed:Date</li>
-      		</ul>
-      	</div>
-      	<div style="border:3px solid;border-top:0.5px solid;border-color:#D4D2D2;">
-			<table>
-			  <tr>
-			    <th >Subscription Name</th>
-			    <th>Amount</th>
-			    <th>Status</th>
-			    <th>&nbsp;</th>
-			  </tr>
-			  <tr>
-			    <td>Premium</td>
-			    <td>$15</td>
-			    <td>Active</td>
-			    <td><a href="">View Details</a></td>
-			  </tr>
-			  <tr>
-			    <td>Economy</td>
-			    <td>$5</td>
-			    <td>Cancelled</td>
-			    <td><a href="">View Details</a></td>
-			  </tr>
-			  <tr>
-			    <td>Standard</td>
-			    <td>$10</td>
-			    <td>Active</td>
-			    <td><a href="">View Details</a></td>
-			  </tr>
-			  
-			</table>
-      	</div>
-      </div>
-  </br>
-        <div style="padding-left: 20%">
-      	<div style="border:2px solid;border-color:#D4D2D2; background-color: #F6F6F6 ;border-top-left-radius: 5px;border-top-right-radius: 5px;">
-      		<ul style="margin-top:20px;margin-bottom:20px">
-      			<li style="padding-left: 1rem;">Order No:5678 </li> 
-      			<li style="padding-left: 5rem">Total:$80 </li>
-      			<li style="padding-left: 5rem">Billed Address</li>
-      			<li style="padding-left: 8rem">Order Placed:Date</li>
-      		</ul>
-      	</div>
-      	<div style="border:3px solid;border-top:0.5px solid;border-color:#D4D2D2;">
-			<table>
-			  <tr>
-			    <th >Subscription Name</th>
-			    <th>Amount</th>
-			    <th>Status</th>
-			    <th>&nbsp;</th>
-			  </tr>
-			  <tr>
-			    <td>Premium</td>
-			    <td>$15</td>
-			    <td>Active</td>
-			    <td><a href="">View Details</a></td>
-			  </tr>
-			  <tr>
-			    <td>Economy</td>
-			    <td>$5</td>
-			    <td>Cancelled</td>
-			    <td><a href="">View Details</a></td>
-			  </tr>
-			  <tr>
-			    <td>Standard</td>
-			    <td>$10</td>
-			    <td>Active</td>
-			    <td><a href="">View Details</a></td>
-			  </tr>
-			  
-			</table>
-      	</div>
-      </div>
-    </section>
-
-  </div>
-  
-</div>
-    
-    
-    
-    
-    
-    <!--JAVA SCRIPTS -->
-        <script type="text/javascript" src="js/transactionHistory.js"></script>
-    </body>
-    </html>
+	
+					</button></li>
+				<li><button id="cart_btn" class="cart_btn_class"><i class="fa fa-shopping-cart cart" style="font-size: 30px; color: white"></i></button></li>
+			</ul>
+		</div>
+		
+		<!-- Active Subscriptions and controllers -->
+		<div class="tabset">
+			<!-- Tab 1 -->
+			<input type="radio" name="tabset" id="tab1"
+				aria-controls="Subscriptions" checked> <label for="tab1">Active
+				Subscription</label>
+			<!-- Tab 2 -->
+			<input type="radio" name="tabset" id="tab2"
+				aria-controls="Transaction"> <label for="tab2">Transaction
+				History</label>
+			<!-- Tab 3 -->
+	
+			<div class="tab-panels">
+				<section id="Subscriptions" class="tab-panel">
+					<h2>Active Subscriptions</h2>
+					<div class="item-container">
+						<div class="item-heading">
+							<ul class="item-heading-content">
+								<li class="di-in-bl padding-5-10">Subscription: Premium</li>
+								<li class="di-in-bl padding-5-10">Age Group: Infant</li>
+								<li class="di-in-bl padding-5-10">Start Date: Nov 26, 2018</li>
+								<li class="di-in-bl padding-5-10">Quantity: 2</li>
+								<li class="di-in-bl padding-5-10">Frequency: Bi Weekly</li>
+								<li class="di-in-bl padding-5-10">Duration: 12 Months</li>
+							</ul>
+						</div>
+						<div class="item-body">
+							<table>
+								<tr>
+									<th>S.No</th>
+									<th>Product Name</th>
+									<th>Quantity</th>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>Diapers</td>
+									<td>20</td>
+								</tr>
+								<tr>
+									<td>2</td>
+									<td>Cerlac</td>
+									<td>10</td>
+								</tr>
+								<tr>
+									<td>3</td>
+									<td>Baby Soap</td>
+									<td>4</td>
+								</tr>
+	
+							</table>
+						</div>
+					</div>
+					<div class="item-container">
+						<div class="item-heading">
+							<ul class="item-heading-content">
+								<li class="di-in-bl padding-5-10">Subscription: Premium</li>
+								<li class="di-in-bl padding-5-10">Quantity: 2</li>
+								<li class="di-in-bl padding-5-10">Frequency: Bi Weekly</li>
+								<li class="di-in-bl padding-5-10">Duration: 12 Months</li>
+							</ul>
+						</div>
+						<div class="item-body">
+							<table>
+								<tr>
+									<th>S.No</th>
+									<th>Product Name</th>
+									<th>Quantity</th>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>Diapers</td>
+									<td>20</td>
+								</tr>
+								<tr>
+									<td>2</td>
+									<td>Cerlac</td>
+									<td>10</td>
+								</tr>
+								<tr>
+									<td>3</td>
+									<td>Baby Soap</td>
+									<td>4</td>
+								</tr>
+	
+							</table>
+						</div>
+					</div>
+					<div class="item-container">
+						<div class="item-heading">
+							<ul class="item-heading-content">
+								<li class="di-in-bl padding-5-10">Subscription: Premium</li>
+								<li class="di-in-bl padding-5-10">Quantity: 2</li>
+								<li class="di-in-bl padding-5-10">Frequency: Bi Weekly</li>
+								<li class="di-in-bl padding-5-10">Duration: 12 Months</li>
+							</ul>
+						</div>
+						<div class="item-body">
+							<table>
+								<tr>
+									<th>S.No</th>
+									<th>Product Name</th>
+									<th>Quantity</th>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>Diapers</td>
+									<td>20</td>
+								</tr>
+								<tr>
+									<td>2</td>
+									<td>Cerlac</td>
+									<td>10</td>
+								</tr>
+								<tr>
+									<td>3</td>
+									<td>Baby Soap</td>
+									<td>4</td>
+								</tr>
+	
+							</table>
+						</div>
+					</div>
+				</section>
+				<section id="Transaction" class="tab-panel">
+					<h2>Transaction History</h2>
+					<div class="item-container">
+						<div class="item-heading">
+							<ul class="item-heading-content">
+								<li class="di-in-bl padding-5-10">Order No: 1</li>
+								<li class="di-in-bl padding-5-10">Payment Mode: Cash</li>
+								<li class="di-in-bl padding-5-10">Amount: $80.00</li>
+								<li class="di-in-bl padding-5-10">Billed Address: Chennai, India, 75252</li>
+								<li class="di-in-bl padding-5-10">Order Date: 26 Nov, 2018</li>
+							</ul>
+						</div>
+						<div class="item-body">
+							<table>
+								<tr>
+									<th>Subscription Name</th>
+									<th>Amount</th>
+									<th>Status</th>
+									<th>&nbsp;</th>
+								</tr>
+								<tr>
+									<td>Premium</td>
+									<td>$15</td>
+									<td>Active</td>
+									<td><a href="">View Details</a></td>
+								</tr>
+								<tr>
+									<td>Economy</td>
+									<td>$5</td>
+									<td>Cancelled</td>
+									<td><a href="">View Details</a></td>
+								</tr>
+								<tr>
+									<td>Standard</td>
+									<td>$10</td>
+									<td>Active</td>
+									<td><a href="">View Details</a></td>
+								</tr>
+	
+							</table>
+						</div>
+					</div>
+					<div class="item-container">
+						<div class="item-heading">
+							<ul class="item-heading-content">
+								<li class="di-in-bl padding-5-10">Order No:5678</li>
+								<li class="di-in-bl padding-5-10">Total:$80</li>
+								<li class="di-in-bl padding-5-10">Billed Address</li>
+								<li class="di-in-bl padding-5-10">Order Placed:Date</li>
+							</ul>
+						</div>
+						<div class="item-body">
+							<table>
+								<tr>
+									<th>Subscription Name</th>
+									<th>Amount</th>
+									<th>Status</th>
+									<th>&nbsp;</th>
+								</tr>
+								<tr>
+									<td>Premium</td>
+									<td>$15</td>
+									<td>Active</td>
+									<td><a href="">View Details</a></td>
+								</tr>
+								<tr>
+									<td>Economy</td>
+									<td>$5</td>
+									<td>Cancelled</td>
+									<td><a href="">View Details</a></td>
+								</tr>
+								<tr>
+									<td>Standard</td>
+									<td>$10</td>
+									<td>Active</td>
+									<td><a href="">View Details</a></td>
+								</tr>
+	
+							</table>
+						</div>
+					</div>
+					<div class="item-container">
+						<div class="item-heading">
+							<ul class="item-heading-content">
+								<li class="di-in-bl padding-5-10">Order No:5678</li>
+								<li class="di-in-bl padding-5-10">Total:$80</li>
+								<li class="di-in-bl padding-5-10">Billed Address</li>
+								<li class="di-in-bl padding-5-10">Order Placed:Date</li>
+							</ul>
+						</div>
+						<div class="item-body">
+							<table>
+								<tr>
+									<th>Subscription Name</th>
+									<th>Amount</th>
+									<th>Status</th>
+									<th>&nbsp;</th>
+								</tr>
+								<tr>
+									<td>Premium</td>
+									<td>$15</td>
+									<td>Active</td>
+									<td><a href="">View Details</a></td>
+								</tr>
+								<tr>
+									<td>Economy</td>
+									<td>$5</td>
+									<td>Cancelled</td>
+									<td><a href="">View Details</a></td>
+								</tr>
+								<tr>
+									<td>Standard</td>
+									<td>$10</td>
+									<td>Active</td>
+									<td><a href="">View Details</a></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+	
+		<!--JAVA SCRIPTS -->
+		<script type="text/javascript" src="js/transactionHistory.js"></script>
+	</body>
+</html>
     

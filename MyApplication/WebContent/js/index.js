@@ -512,6 +512,11 @@
 	 */
 	function proceedToCheckout(){
 		
+		if(loginStatus == false){
+			showPopupMessage("error", "Login to proceed to checkout!");
+			return;	
+		}
+		
 		if(selected_subscription == -1 || selected_duration == -1 || selected_age_group == -1){
 			showPopupMessage("error", "Select an age group, subscription and duration before checkout!");
 			return;

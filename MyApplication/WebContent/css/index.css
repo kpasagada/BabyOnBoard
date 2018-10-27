@@ -167,6 +167,42 @@ SECTION-LANDING PAGE
 .dropdown_nav li:hover{
 	background-color:#dfdedc;
 }
+
+/*-------------------------Pop-up-message---------------------------*/
+#pop-up-message{
+	position: fixed;
+    top: 30px;
+    right: 30px;
+    z-index: 10;
+    border: 1px solid gray;
+    border-radius: 5px;
+    color: gray;
+    padding: 10px;
+    background-color: #ddd;
+    font-size: 15px;	
+    visibility: hidden;
+	opacity: 0;
+    transition: ease-in all 500ms;
+}
+
+#pop-up-message.success{
+	border: 1px solid #40a53a;
+	color: #40a53a;
+	background-color: #a2ecaf;
+}
+
+#pop-up-message.error{
+	border: 1px solid #dc2510;
+	color: #dc2510;
+	background-color: #f5aca5;
+}
+
+#pop-up-message.visible{
+	visibility: visible;
+	opacity: 1
+}
+
+/*------- Cart CSS--------*/
 .cart {
 	font-size: 35px;
 	color: #fff;
@@ -233,23 +269,23 @@ SECTION-LANDING PAGE
 	cursor: pointer;
 }
 
-.cart_table{
+.cart-table{
 	font-size:20px;
 	width:100%;	
 	border:1px solid #a2d6bf;
 	margin-top:7%;
 }
-.cart_table th{
+.cart-table th{
 	background-color:#a2d6bf;
 	color:#fff;
 	padding:10px;
 }
 
-.cart_table td{
+.cart-table td{
 	text-align:center;
 	padding:10px;
 }
-.cart_table td:last-child{
+.cart-table td:last-child{
 	padding:0px;
 	
 }
@@ -271,7 +307,7 @@ SECTION-LANDING PAGE
 	font-size:20px;
 	padding:0 3px;
 }
-.cart_table tr{
+.cart-table tr{
 		background-color:#d8d4d445;
 }
 
@@ -306,8 +342,6 @@ SECTION-LANDING PAGE
 .cartCheckout_btn:hover {
 	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
-
-
 
 /*----------------*/
 .home {

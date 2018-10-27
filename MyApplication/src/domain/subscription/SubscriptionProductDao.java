@@ -15,7 +15,7 @@ public interface SubscriptionProductDao {
 	/*
 	 *  Fetches each subscription information with products
 	 */
-	public Subscription getSubscriptionInfoById(int subscriptionId);
+	public List<Subscription> getSubscriptionInfoById(String subscriptionIds);
 	
 	/*
 	 *  Inserts subscriptions for customers

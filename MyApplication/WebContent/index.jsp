@@ -52,53 +52,34 @@
 						</div>
                     
                     </button></li>
-                    <li><button id="cart_btn" class="cart_btn_class hide"><span class="count" id="count">0</span><i class="fa fa-shopping-cart cart" style="font-size:30px;color:white"></i></button>
+                    <li><button id="cart_btn" class="cart_btn_class hide"><span class="count" id="cart-count">0</span><i class="fa fa-shopping-cart cart" style="font-size:30px;color:white"></i></button>
                              
             </ul>
         </div>
         
         <!-- CART MODAL -->
-        
-        <div id="cart_Modal" class="modal">
-        <div class="modal-content">
-         <span class="close">&times;</span>
-         <table id="cart_table1" class="cart_table" >
-				<tr>
-					<th>Item no</th>
-					<th>Age Group</th>
-					<th>Subscription Category</th>
-					<th>Price</th>
-					<th>Delete</th>
-				</tr>
-				<!--  <tr>
-					<td>1</td>
-					<td>Infant</td>
-					<td>Economy</td>
-					<td>80$</td>
-					<td><button class="delete_cart"><span>&times;</span>Delete</button>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>Infant</td>
-					<td>Economy</td>
-					<td>80$</td><td><button class="delete_cart"><span>&times;</span>Delete</button>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>Infant</td>
-					<td>Economy</td>
-					<td>80$</td><td><button class="delete_cart"><span>&times;</span>Delete</button>
-				</tr>
-				-->
-			</table>
-       	<div class="cartCheckout">
-			<button class="cartCheckout_btn ">Checkout</button>
-       	</div>
-       	
-         </div>
-         </div>
-        <!--modal done  -->
-        
+		<div id="cart-modal" class="modal">
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<table class="cart-table">
+					<thead>
+						<tr>
+							<th>Item No</th>
+							<th>Age Group</th>
+							<th>Subscription Name</th>
+							<th>Quantity</th>
+							<th>Price</th>
+							<th>Delete</th>
+						</tr>
+					</thead>
+					<tbody id="cart-table1">
+					</tbody>
+				</table>
+				<div class="cartCheckout">
+					<button class="cartCheckout_btn ">Checkout</button>
+				</div>
+			</div>
+		</div>
         
         <!--LANDING PAGE-->
         <div class="home">
@@ -144,7 +125,7 @@
             <ul class="subscription-duration">
                 <h2> Choose the subscription Duration in Months</h2>
                 <div class="border"></div>
-  <div class="duration_list">
+  				<div class="duration_list">
 	                <li>
 	                  <button type="button" data-val="3" class="duration_button pointer"> 03</button>  
 	                </li>
@@ -163,9 +144,11 @@
         
        	<!--  Proceed to checkout -->
        	<div class="checkout">
-			<button class="checkout_btn disabled">Proceed to Checkout</button>
+			<button class="checkout_btn">Proceed to Checkout</button>
        	</div>
        
+       	<div id="pop-up-message">
+		</div>
        
        <!--JAVA SCRIPTS -->
         <script type="text/javascript" src="js/index.js"></script>

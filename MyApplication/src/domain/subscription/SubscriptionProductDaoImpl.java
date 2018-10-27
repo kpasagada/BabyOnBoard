@@ -1,5 +1,6 @@
 package domain.subscription;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -81,17 +82,18 @@ public class SubscriptionProductDaoImpl implements SubscriptionProductDao{
 	}
 
 	@Override
-	public Subscription getSubscriptionInfoById(int subscriptionId) {
+	public List<Subscription> getSubscriptionInfoById(String subscriptionIds) {
 		
-		Subscription subscription = null;
+		List<Subscription> subscriptionList = new ArrayList<Subscription>();
 		try{
 			conn = db.getConnection();
-			ps = conn.prepareStatement("SELECT s.id, s.name, s.age_group, spm.quantity, p.id, p.name, p.brand, p.category, p.quantity, p.price, ag.name, ag.description FROM subscription s JOIN subscription_product_mapping spm ON s.id = spm.subscription_id JOIN product p ON p.id = spm.product_id JOIN age_group ag ON ag.id = s.age_group WHERE s.id=?");
-			ps.setInt(1, subscriptionId);
+			ps = conn.prepareStatement("SELECT s.id, s.name, s.age_group, spm.quantity, p.id, p.name, p.brand, p.category, p.quantity, p.price, ag.name, ag.description FROM subscription s JOIN subscription_product_mapping spm ON s.id = spm.subscription_id JOIN product p ON p.id = spm.product_id JOIN age_group ag ON ag.id = s.age_group WHERE s.id IN (" + subscriptionIds + ") ORDER BY FIELD(s.id," + subscriptionIds + ")");
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				subscription = new Subscription();
+				int currentSubscriptionMappingId = rs.getInt(1);
+				
+				Subscription subscription = new Subscription();
 				subscription.setId(rs.getInt(1));
 				subscription.setName(rs.getString(2));
 				subscription.setAgeGroup(rs.getInt(3));
@@ -111,18 +113,25 @@ public class SubscriptionProductDaoImpl implements SubscriptionProductDao{
 				productLists.add(p);
 				
 				while(rs.next()) {
-					Product product = new Product();
-					product.setId(rs.getInt(5));
-					product.setName(rs.getString(6));
-					product.setBrand(rs.getString(7));
-					product.setCategory(rs.getString(8));
-					product.setQuantity(rs.getString(9));
-					product.setAmount(rs.getInt(4));
-					product.setPrice(rs.getDouble(10));
-					productLists.add(product);
+					if(currentSubscriptionMappingId == rs.getInt(1)) {
+						Product product = new Product();
+						product.setId(rs.getInt(5));
+						product.setName(rs.getString(6));
+						product.setBrand(rs.getString(7));
+						product.setCategory(rs.getString(8));
+						product.setQuantity(rs.getString(9));
+						product.setAmount(rs.getInt(4));
+						product.setPrice(rs.getDouble(10));
+						productLists.add(product);
+					}
+					else {
+						break;
+					}
 				}
 				
 				subscription.setProducts(productLists);
+				subscriptionList.add(subscription);
+				rs.previous();
 			}
 			
 			conn.close();
@@ -130,7 +139,7 @@ public class SubscriptionProductDaoImpl implements SubscriptionProductDao{
 			System.out.println(e);
 		}
 		
-		return subscription;
+		return subscriptionList;
 	}
 
 	@SuppressWarnings("deprecation")

@@ -168,6 +168,7 @@ SECTION-LANDING PAGE
 	background-color:#dfdedc;
 }
 
+/*------- Cart CSS--------*/
 .cart {
 	font-size: 35px;
 	color: #fff;
@@ -184,28 +185,40 @@ SECTION-LANDING PAGE
 	cursor: pointer;
 }
 
+.count{
+	    color: #f1af7f;
+    padding: 2px;
+    background: white;
+    margin: -26px -20px;
+    bottom: 28px;
+    border: 1px solid white;
+    border-radius: 200px;
+    font-weight:bold;
+    position: relative;
+}
 .modal {
-	display: none; /* Hidden by default */
-	position: fixed; /* Stay in place */
-	z-index: 1; /* Sit on top */
-	padding-top: 100px; /* Location of the box */
+	display: none; 
+	position: fixed; 
+	z-index: 1; 
+	padding-top: 100px; 
 	left: 0;
 	top: 0;
-	width: 100%; /* Full width */
-	height: 100%; /* Full height */
-	overflow: auto; /* Enable scroll if needed */
-	background-color: rgb(0, 0, 0); /* Fallback color */
-	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	width: 100%; 
+	height: 100%; 
+	
+	background-color: rgb(0, 0, 0); 
+	background-color: rgba(0, 0, 0, 0.4); 
 }
 
 /* Modal Content */
 .modal-content {
 	background-color: #fefefe;
-	margin: -1% 6%;
-	padding: 20px;
-	border: 1px solid #888;
-	width: 50%;
-	float: right;
+    margin: auto;
+    padding: 20px;
+    height: -webkit-fill-available;
+    border: 1px solid #888;
+    width: 50%;
+    overflow:auto;
 }
 
 /* The Close Button */
@@ -222,6 +235,76 @@ SECTION-LANDING PAGE
 	cursor: pointer;
 }
 
-.cart_table{
-	display:none;
+.cart-table{
+	font-size:20px;
+	width:100%;	
+	border:1px solid #a2d6bf;
+	margin-top:7%;
+}
+.cart-table th{
+	background-color:#a2d6bf;
+	color:#fff;
+	padding:10px;
+}
+
+.cart-table td{
+	text-align:center;
+	padding:10px;
+}
+.cart-table td:last-child{
+	padding:0px;
+	
+}
+.delete_cart{
+    outline: none;
+    background-color: #2aaf74;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 13px;
+    border-width: inherit;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.delete_cart span{
+	color:white;
+	font-weight:bold;
+	float:left;
+	font-size:20px;
+	padding:0 3px;
+}
+.cart-table tr{
+		background-color:#d8d4d445;
+}
+
+.cartCheckout {
+	
+	text-align: center;   
+	 bottom: 0;
+    
+    text-align: center;
+    position: relative;
+}
+
+.cartCheckout_btn {
+    text-decoration: none;
+    background-color: #2aaf74;
+    color: #fff;
+    font-size: 25px;
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 5px;
+    border-width: inherit;
+    outline: none;
+    cursor: pointer;
+}
+
+.cartCheckout_btn.disabled {
+	pointer-events: none;
+	background-color: #a2d6bf;
+	cursor: not-allowed;
+}
+
+.cartCheckout_btn:hover {
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }

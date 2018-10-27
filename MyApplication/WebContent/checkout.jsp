@@ -12,7 +12,7 @@
 				function hideURLbar(){ window.scrollTo(0,1); } </script>
 		
 		<link href="css/checkout.css" rel="stylesheet" type="text/css" media="all" />
-	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet">  
 		<title>Baby On Board | Check Out</title>
     </head>
@@ -45,8 +45,9 @@
 			var subscriptionId = <%=request.getParameter("sub")%>;
 			var ageGroupId = <%=request.getParameter("age")%>;
 			var duration = <%=request.getParameter("dur")%>;
+			var checkoutType = "<%=request.getParameter("type")%>";
 			
-			if(subscriptionId == null || ageGroupId == null || duration == null){
+			if((subscriptionId == null || ageGroupId == null || duration == null) && checkoutType == "null"){
 				var logout_url =  window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + contextPath + "/logout";
 				window.location.href = logout_url;
 			}
@@ -69,8 +70,33 @@
 						</div>
 	            
 	            </button></li>
+	            <li><button id="cart_btn" class="cart_btn_class"><span class="count" id="cart-count">0</span><i class="fa fa-shopping-cart cart" style="font-size:30px;color:white"></i></button>
             </ul>
         </div>
+        
+        <!-- CART MODAL -->
+		<div id="cart-modal" class="modal">
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<table class="cart-table">
+					<thead>
+						<tr>
+							<th>Item No</th>
+							<th>Age Group</th>
+							<th>Subscription Name</th>
+							<th>Quantity</th>
+							<th>Price</th>
+							<th>Delete</th>
+						</tr>
+					</thead>
+					<tbody id="cart-table1">
+					</tbody>
+				</table>
+				<div class="cartCheckout">
+					<button class="cartCheckout_btn ">Checkout</button>
+				</div>
+			</div>
+		</div>
         
 		<div class="cart-payment-container">
 			<div class="heading"><h2>Cart Details</h2></div>
@@ -195,7 +221,6 @@
 		</div>
 		
 		<div id="pop-up-message">
-			Success message has been added
 		</div>
 		
 		<script type="text/javascript" src="js/jquery.min.js"></script>

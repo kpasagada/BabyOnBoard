@@ -7,10 +7,12 @@
 <title>Baby On Board | Logout</title>
 </head>
 <body>
+<script type="text/javascript">localStorage.clear();</script>
 <%
 	session.invalidate();
 	response.sendRedirect(request.getContextPath()+"/index");
 %>
+
 
 </body>
 </html>

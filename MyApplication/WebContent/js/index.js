@@ -5,13 +5,22 @@
 (function() {
 	
 	var age_groups, subscriptions, selected_age_group = 1, selected_subscription = -1, selected_duration = -1;
-	var cartArray= [];
-	var item=0;
-	var index=1;
-    var data="";
-    var cartSession=[];
-	var split;
-	var cartItems=[{"number":"number", "agegrp":"agegrp", "sub":"sub"}];
+	
+	/*
+	 *  Popup message rendering 
+	 */
+	function showPopupMessage(type, message){
+		var messageElement = document.getElementById("pop-up-message");
+		messageElement.classList.add(type);
+		messageElement.innerHTML = message;
+		messageElement.classList.add("visible");
+		
+		setTimeout(function(){
+			messageElement.classList.remove("visible");
+			messageElement.classList.remove(type);
+		}, 4000);
+	}
+	
 	/*
 	 * Validates registration form
 	 */
@@ -20,27 +29,47 @@
 		var username = document.forms["regform"]["username"].value;
 		var password = document.forms["regform"]["password"].value;
 		var rpassword = document.forms["regform"]["retry-password"].value;
+		var name = document.forms["regform"]["name"].value;
+		var email = document.forms["regform"]["email"].value;
+		var phone = document.forms["regform"]["phone"].value;
+		
+		localStorage.clear();
 		
 		if (username == "") {
-	        alert("username must be filled out");
+			e.preventDefault();
+	        e.stopPropagation();
+	        showPopupMessage("error", "Username must be filled out");
 	        document.forms["regform"]["username"].focus();
-	        e.preventDefault();
-	        e.stopPropagation();
 	    }else if (password== "") {
-	        alert("password must be filled out");
-	        document.forms["regform"]["password"].focus();
 	        e.preventDefault();
 	        e.stopPropagation();
+	        showPopupMessage("error", "Password must be filled out");
+	        document.forms["regform"]["password"].focus();
 	    }else if (rpassword == "") {
-	        alert("retry-password must be filled out");
+	        e.preventDefault();
+	        e.stopPropagation();
+	        showPopupMessage("error", "Confirm Password must be filled out");
 	        document.forms["regform"]["retry-password"].focus();
+	    }else if (name == "") {
 	        e.preventDefault();
 	        e.stopPropagation();
+	        showPopupMessage("error", "Full Name must be filled out");
+	        document.forms["regform"]["name"].focus();
+	    }else if (email == "") {
+	        e.preventDefault();
+	        e.stopPropagation();
+	        showPopupMessage("error", "Email must be filled out");
+	        document.forms["regform"]["email"].focus();
+	    }else if (phone == "") {
+	        e.preventDefault();
+	        e.stopPropagation();
+	        showPopupMessage("error", "Phone must be filled out");
+	        document.forms["regform"]["phone"].focus();
 	    }else if(password != rpassword){
-	    	alert("password doesnt match");
-	        document.forms["regform"]["password"].focus();
-	        e.preventDefault();
+	    	e.preventDefault();
 	        e.stopPropagation();
+	    	showPopupMessage("error", "Passwords do not match");
+	        document.forms["regform"]["password"].focus();
 	    }
 	}
 	
@@ -51,16 +80,18 @@
 		var username = document.forms["loginform"]["username"].value;
 		var password = document.forms["loginform"]["password"].value;
 		
+		localStorage.clear();
+		
 		if (username == "") {
-	        alert("username must be filled out");
+			e.preventDefault();
+	        e.stopPropagation();
+			showPopupMessage("error", "Username must be filled out");
 	        document.forms["loginform"]["username"].focus();
-	        e.preventDefault();
-	        e.stopPropagation();
 	    }else if (password== "") {
-	        alert("password must be filled out");
-	        document.forms["loginform"]["password"].focus();
-	        e.preventDefault();
+	    	e.preventDefault();
 	        e.stopPropagation();
+	    	showPopupMessage("error", "Password must be filled out");
+	        document.forms["loginform"]["password"].focus();
 	    }
 	}
 	
@@ -68,6 +99,7 @@
 	 * Hides login form and shows register form
 	 */
 	function register(failed) {
+		
 		document.getElementById("login").style.display="none";
 		document.getElementById("register").style.display="inline";
 		if(failed == true){
@@ -146,8 +178,6 @@
 		});
 		
 		loadPredefinedSubscriptions();
-		initializeCart();
-		
 	};
 	
 	/*
@@ -192,8 +222,8 @@
 		response = JSON.parse(response);
 		
 		response.sort(function(a, b){return a['ageGroup'] - b['ageGroup']});
-		subscriptions=response;
-		//console.log(response.length);
+		subscriptions = response;
+		
 		var subscription_list_string = "";
 		var age_group_visited = [];
 		
@@ -205,6 +235,8 @@
 			for(var j = 0; j < sub_object['products'].length; j++){
 				sub_total += sub_object['products'][j].price * sub_object['products'][j].amount; 
 			}
+			
+			subscriptions[i]['price'] = sub_total;
 			
 			if(i%3 == 0){
 				var hide_val = sub_object['ageGroup'] == selected_age_group ? 'inner-subscription-container':'inner-subscription-container hide';
@@ -240,7 +272,6 @@
 		// Event handler for subscription select action
 		var subscription_buttons = document.getElementsByClassName("subscription_button");
 		
-		
 		for(var l = 0; l < subscription_buttons.length; l++){
 			subscription_buttons[l].addEventListener("click", function(e){
 				if(e.target && e.target.tagName == "BUTTON"){
@@ -253,114 +284,166 @@
 			});
 		}
 		
-		var cart_buttons =document.getElementsByClassName("addToCart_button");
-		var age=[];
-		var sub=[];
-		var count=0;var p=0;
+		// Event handler for add to cart action
+		var cart_buttons = document.getElementsByClassName("addToCart_button");
 		for(var l = 0; l < cart_buttons.length; l++){
 			cart_buttons[l].addEventListener("click", function(e){
 				if(e.target && e.target.tagName == "BUTTON"){
-					e.target.parentNode.parentNode.classList.add("sub-selected");
-					selected_subscription = e.target.parentNode.parentNode.getAttribute("data-id");						
-					count++;
-					//console.log(count);
-					for(var i=0;i<subscriptions.length;i++){
-						if(subscriptions[i].id==selected_subscription){
+					var sub_id = e.target.parentNode.parentNode.getAttribute("data-id");						
+					
+					if(typeof(Storage) !== "undefined"){
 						
-							for(var k=0;k<age_groups.length;k++){
-								if(age_groups[k].id==subscriptions[i].ageGroup){
-							     age.push(age_groups[k].name);
-							    
+						if(localStorage.getItem("cartItems") == null){
+							localStorage.setItem("cartItems", JSON.stringify([]));
+						}
+						
+						var cart = JSON.parse(localStorage.getItem("cartItems"));
+						
+						// Check if cart already has subscription
+						var found = 0;
+						for(var m = 0; m < cart.length; m++){
+							if(cart[m].sub_id == sub_id){
+								cart[m].quantity += 1;
+								
+								// Find subscription to get price
+								for(var i=0; i < subscriptions.length; i++){
+									if(subscriptions[i].id == sub_id){
+										cart[m].price = subscriptions[i].price * cart[m].quantity;
+										break;
+									}
+								}
+								found = 1;
+								break;
+							}
+						}
+						
+						// If subscription found in cart, update session variable and cart display
+						if(found == 1){
+							localStorage.setItem("cartItems", JSON.stringify(cart));
+							renderCartDisplay();
+						}
+						else{
+							var cart_object = {};
+							
+							// Get the subscription details and age group information and create a cart item
+							for(var i=0; i < subscriptions.length; i++){
+								if(subscriptions[i].id == sub_id){
+									
+									cart_object.age_group_id = subscriptions[i].ageGroup;
+									cart_object.sub_id = subscriptions[i].id;
+									cart_object.sub_name = subscriptions[i].name;
+									cart_object.quantity = 1;
+									cart_object.price = subscriptions[i].price * cart_object.quantity;
+									
+									for(var k = 0; k < age_groups.length; k++){
+										if(age_groups[k].id == subscriptions[i].ageGroup){
+											cart_object.age_group_name = age_groups[k].name;
+											break;
+										}
+									}
+									break;	
 								}
 							}
-							sub.push(subscriptions[i].name);	
+							
+							// Add cart item to session variable and update display
+				            addToCartSession(cart_object);
+				            renderCartDisplay();
 						}
 					}
-						if(p<count){
-						cartArray.push(p+1);
-						cartArray.push(age[p]);
-						cartArray.push(sub[p]);
-						//console.log(cartArray.length);
-						p++;
-						}
-		            sessionCart(cartArray);
-}
-	
-	/*
-	 * 	Add to cart session Storage
-	 */
-	function sessionCart(cartArray){
-		// Event handler for subscription add to cart action
-		
-					if(typeof(Storage) !== "undefined") 
-					{
-			        if (sessionStorage.clickcount)
-			        {
-			            sessionStorage.clickcount = Number(sessionStorage.clickcount)+1;
-			           
-			        } else
-			        {
-			            sessionStorage.clickcount = 1;
-			        }
-			        sessionStorage.setItem("cartItem", JSON.stringify(cartArray));
-				    split= JSON.parse(sessionStorage.getItem("cartItem"));
-				    displayTable(split);
-			        document.getElementById("count").innerHTML = sessionStorage.clickcount;
-					}
-			      }
-			});	
-	     }
+				}
+			});
+		}
 	}
 	
-	var x=0;
-	//display table in cart
-	function displayTable(split){
+	/*
+	 * 	Add subscription to cart in session storage
+	 */
+	function addToCartSession(cart_object){
+		
+		// Check if session storage is supported by browser
+		if(typeof(Storage) !== "undefined"){
+			
+			var cart = JSON.parse(localStorage.getItem("cartItems"));
+			cart.push(cart_object);
+			localStorage.setItem("cartItems", JSON.stringify(cart));
+		}
+	}
+	
+	/*
+	 *  Update cart model in UI
+	 */
+	function renderCartDisplay(){
 		
 		if(typeof(Storage) !== "undefined") {
-		console.log(split);
-		if(x < split.length)
-		{
-		data='<tr><td>'+split[x]+'</td>';
-		data+='<td>'+split[x+1]+'</td>';
-		data+='<td>'+split[x+2]+'</td>';
-		data+='<td>$75</td>';
-		data+='<td><button class="delete_cart">Delete</button>'; //<span>&times;</span>
-		
-		x=x+3;
-		document.getElementById("cart_table1").innerHTML += data;
-		}
-		}
-		else{
-			document.getElementById("cart_table1").innerHTML += "";
+			
+			var cart_session_items = localStorage.getItem("cartItems");
+			
+			if(cart_session_items == null){
+				return;
+			}
+			
+			var cart = JSON.parse(cart_session_items);
+			var cart_string = "";
+			
+			for(var p = 0; p < cart.length; p++){
+				cart_string += '<tr><td>' + (p+1) + '</td>'
+							+ '<td>' + cart[p].age_group_name + '</td>'
+							+ '<td>' + cart[p].sub_name + '</td>'
+							+ '<td>' + cart[p].quantity + '</td>'
+							+ '<td>' + Number(cart[p].price).toFixed(2) + '</td>'
+							+ '<td><button class="delete_cart" data-sub-id="' + cart[p].sub_id + '">Delete</button></td></tr>';
+			}
+			cart_string += '</tr>';
+			
+			document.getElementById("cart-table1").innerHTML = cart_string;
+			
+			// Update cart item count
+			document.getElementById("cart-count").innerHTML = cart.length;
+			
+			// Delete from cart event listeners
+			var cart_delete_buttons = document.getElementById("cart-table1").getElementsByClassName("delete_cart");
+			
+			for(var l = 0; l < cart_delete_buttons.length; l++){
+				cart_delete_buttons[l].addEventListener("click", function(e){
+					
+					var sub_id = e.target.getAttribute("data-sub-id");
+					var cart = JSON.parse(localStorage.getItem("cartItems"));
+					
+					for(var p = 0; p < cart.length; p++){
+						if(cart[p].sub_id == sub_id){
+							cart.splice(p,1);
+						}
+					}
+					
+					localStorage.setItem("cartItems", JSON.stringify(cart));
+					renderCartDisplay();
+				});
+			}
 		}
 	}
 	
 	/*
-	 * 	Add to cart event handler
+	 * 	Add event handlers to cart
 	 */
-	
-	function initializeCart(){
-		var modal = document.getElementById('cart_Modal');
+	function initializeCartEvents(){
+		var modal = document.getElementById('cart-modal');
 
 		// Get the button that opens the modal
 		var btn = document.getElementById("cart_btn");
 
 		// Get the <span> element that closes the modal
 		var span = document.getElementsByClassName("close")[0];
-		//var cartButton=document.getElementById("addToCart_button");
 		
 		// When the user clicks the button, open the modal 
 		btn.addEventListener("click", function(){			
-		    modal.style.display = "block";
-		    
-		    });
+			modal.style.display = "block";
+		});
 		   
 		// When the user clicks on <span> (x), close the modal
 		span.addEventListener("click", function(){	
-		    modal.style.display = "none";
-		    });
+			modal.style.display = "none";
+		});
 		
-
 		// When the user clicks anywhere outside of the modal, close it
 		window.addEventListener("click", function(event){
 		    if (event.target == modal) {
@@ -369,7 +452,6 @@
 		});
 		
 	}
-	
 	
 	/*
 	 *  Fetches predefined subscription data
@@ -406,25 +488,37 @@
 	}
 	
 	/*
-	 *  Proceed to checkout
+	 *  Proceed to Cart checkout
 	 */
-	function proceedToCheckout(){
-		var checkout_url =  window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + contextPath + "/checkout?age=" + selected_age_group + "&sub=" + selected_subscription + "&dur=" + selected_duration;
+	function proceedToCartCheckout(){
+		if(localStorage.getItem("cartItems") == null){
+			showPopupMessage("error", "Add items to cart before checkout!");
+			return;
+		}
+		
+		var cart = JSON.parse(localStorage.getItem("cartItems"));
+
+		if(cart.length == 0){
+			showPopupMessage("error", "Add items to cart before checkout!");
+			return;
+		}
+		
+		var checkout_url =  window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + contextPath + "/checkout?type=cart";
 		window.location.href = checkout_url;
 	}
 	
-	
 	/*
-	 *  Watches selected subscription and duration variables to enable or disable checkout button
+	 *  Proceed to checkout
 	 */
-	function addSubscriptionSelectionListener(){
-		var interval = setInterval(function(){ 
-			if(selected_subscription == -1 || selected_duration == -1 || loginStatus != true){ return; }
-			document.getElementsByClassName("checkout_btn")[0].classList.remove("disabled");
-			document.getElementsByClassName("cartCheckout_btn")[0].classList.remove("disabled");
-
-			clearInterval(interval);
-		}, 100);
+	function proceedToCheckout(){
+		
+		if(selected_subscription == -1 || selected_duration == -1 || selected_age_group == -1){
+			showPopupMessage("error", "Select an age group, subscription and duration before checkout!");
+			return;
+		}
+		
+		var checkout_url =  window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + contextPath + "/checkout?age=" + selected_age_group + "&sub=" + selected_subscription + "&dur=" + selected_duration;
+		window.location.href = checkout_url;
 	}
 	
 	/*
@@ -436,11 +530,10 @@
 		document.getElementById("login-button").addEventListener("click", login);
 		document.getElementById("sign-up-button").addEventListener("click", register);
 		document.getElementsByClassName("checkout_btn")[0].addEventListener("click", proceedToCheckout);
-		document.getElementsByClassName("cartCheckout_btn")[0].addEventListener("click", proceedToCheckout);
-
-		addSubscriptionSelectionListener();
-		addSubscriptionDurationEventListeners();
+		document.getElementsByClassName("cartCheckout_btn")[0].addEventListener("click", proceedToCartCheckout);
 		
+		initializeCartEvents();
+		addSubscriptionDurationEventListeners();
 	}
 	
 	/*
@@ -460,20 +553,16 @@
 		var logoutPath = contextPath + "/logout";
 		var indexPath = contextPath + "/index";
 		var transactionPath = contextPath + "/transactionHistory";
-		var userPath=contextPath + "/userProfile";
+		var userPath = contextPath + "/userProfile";
 	    
 	    document.getElementById("logout_button").setAttribute("href", logoutPath);
 	    document.getElementById("transaction").setAttribute("href", transactionPath);
 	    document.getElementById("logo-link").setAttribute("href", indexPath);
 	    document.getElementById("user_profile").setAttribute("href", userPath);
 	    
-	    if(sessionStorage.clickcount>0){
-	    document.getElementById("count").innerHTML = sessionStorage.clickcount;
-	    }
-	   
 	    loadAgeGroups();
+	    renderCartDisplay();
 	    initEventListeners();
-	    
 	}
 	
 	/*

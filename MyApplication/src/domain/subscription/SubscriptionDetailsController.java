@@ -1,6 +1,7 @@
 package domain.subscription;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,10 +24,11 @@ public class SubscriptionDetailsController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		SubscriptionProductDao subProdDao = new SubscriptionProductDaoImpl();
-		int subscriptionId = Integer.parseInt(req.getParameter("subscription"));
-		Subscription subscriptionDetails = subProdDao.getSubscriptionInfoById(subscriptionId);
+		String subscriptionIds = req.getParameter("subscription");
 		
-		String subscriptionDetailsString = gson.toJson(subscriptionDetails, new TypeToken<Subscription>(){}.getType());
+		List<Subscription> subscriptionDetails = subProdDao.getSubscriptionInfoById(subscriptionIds);
+		
+		String subscriptionDetailsString = gson.toJson(subscriptionDetails, new TypeToken<List<Subscription>>(){}.getType());
 		
 		resp.setContentType("application/json");
     	resp.setCharacterEncoding("UTF-8");

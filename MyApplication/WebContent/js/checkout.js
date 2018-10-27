@@ -13,7 +13,8 @@
 						   {"name": "amount", "display_name": "Number"},
 						   {"name": "price", "display_name": "Price ($)"}];
 	var subscribed_items = [];
-	var transaction_total;
+	var transaction_total = 0.0;
+	
 	/*
 	 *  Popup message rendering 
 	 */
@@ -40,6 +41,7 @@
 				openDropdown.classList.remove('show');
 			}
 		}
+		
 	    this.parentElement.getElementsByClassName("dropdown-content")[0].classList.toggle("show");
 	}
 
@@ -193,6 +195,7 @@
 				    	var result = "fail";
 				    	if(response['status'] > 0){
 				    		result = "pass";
+				    		localStorage.removeItem("cartItems");
 				    	}
 				    	
 				    	var confirmation_url =  window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + contextPath + "/confirmation?result=" +  result;
@@ -233,6 +236,7 @@
 				parent.parentElement.getElementsByClassName("dropbtn")[0].innerHTML = parent.getAttribute("data-name") + ": " + this.innerHTML;
 				
 				var sub_index = parent.parentElement.parentElement.parentElement.getAttribute("data-id");
+				
 				if(parent.getAttribute("data-name").toLowerCase() == "duration"){
 					subscribed_items[sub_index]["duration"] = parseInt(this.getAttribute("data-val"));
 				}
@@ -256,122 +260,141 @@
 		var content = "Sub total: $" + Number(new_total).toFixed(2);
 		sub_total_element.textContent = content;
 		
-		transaction_total = new_total;
+		var temp_total = 0.0;
+		for(i = 0; i < subscribed_items.length; i++){
+			temp_total += subscribed_items[i]['quantity'] * subscribed_items[i]['total'];
+		}
+		
+		transaction_total = temp_total;
+		
+		document.getElementById("main-total").textContent = 'Total Amount: $' + Number(transaction_total).toFixed(2);
 	}
 	
 	/*
 	 *  Fetch subscription details success handler
 	 */
-	function frameOrderDetailsSuccessHandler(response){
+	function frameOrderDetailsSuccessHandler(response, subscription_items){
 		response = JSON.parse(response);
 		
-		var order_details_string = '<div class="subscription-item" data-id="0">';
-		
-		order_details_string += '<div class="subscription-details">' +
-								'<div class="wi-25-di-in-bk fo-we-bo">1. ' + response['name'] + '</div>' +
-								'<div class="age-group wi-25-di-in-bk fo-si-13">Age Group: ' + response['ageGroupName'] + ' (' + response['ageGroupDescription'] + ')</div>' +
-								'<div class="sub-quantity wi-10-di-in-bk fo-si-13">' +
-								'<span class="di-in-bl">Quantity: </span>' +
-								'<input id="quantity" class="di-in-bl ou-no input-value" type="number" value="1" name="quantity" min="1" max="10">' +
-								'</div>' +
-								'<div id="duration-dropdown" class="dropdown wi-15-di-in-bk fo-we-bo">' +
-								'<button class="dropbtn">Duration: ' + durations[duration] + '</button>' +
-								'<div id="duration-dropdown-content" class="dropdown-content" data-name="Duration" data-selected="' + duration + '">';
-		
-		// Framing Duration dropdown
-		for(var j in durations){
-			order_details_string += '<a class="dropdown-item" href="#" data-val="' + j + '">' + durations[j] + '</a>';
-		}
-		
-		order_details_string += '</div>' +
-								'</div>' +
-								'<div id="frequency-dropdown" class="dropdown wi-15-di-in-bk fo-we-bo">' +
-								'<button class="dropbtn">Frequency: ' + frequencies['1'] + '</button>' +
-								'<div id="frequency-dropdown-content" class="dropdown-content" data-name="Frequency" data-selected="' + 1 + '">';
-		
-		// Framing Frequency drop down
-		for(var k in frequencies){
-			order_details_string += '<a class="dropdown-item" href="#" data-val="' + k + '">' + frequencies[k] + '</a>';
-		}
-		
-		order_details_string += '</div>' +
-								'</div>' +
-								'</div>';
-		
-		order_details_string += '<div class="main">' +
-								'<div>' + 
-								'<table width="200" border="1">' +
-								'<tbody>' +
-								'<tr>';
-		
-		// Framing products table
-		if(response.products && response.products.length){
+		for(var n = 0; n < response.length; n++){
 			
-			order_details_string += '<th scope="col">S.No</th>';
+			var order_details_string = '<div class="subscription-item" data-id="' + n + '">';
 			
-			for(var i = 0; i < product_headers.length; i++){
-				var header = product_headers[i];
-				order_details_string += '<th scope="col text-capitalize">' + header.display_name + '</th>';
+			order_details_string += '<div class="subscription-details">' +
+									'<div class="wi-25-di-in-bk fo-we-bo">' + (n+1) + '. ' + response[n]['name'] + '</div>' +
+									'<div class="age-group wi-25-di-in-bk fo-si-13">Age Group: ' + response[n]['ageGroupName'] + ' (' + response[n]['ageGroupDescription'] + ')</div>' +
+									'<div class="sub-quantity wi-10-di-in-bk fo-si-13">' +
+									'<span class="di-in-bl">Quantity: </span>' +
+									'<input class="di-in-bl ou-no input-value quantity" type="number" value="' + (subscription_items[n].quantity ? subscription_items[n].quantity : 1)  + '" name="quantity" min="1" max="10">' +
+									'</div>' +
+									'<div id="duration-dropdown-' + n + '" class="dropdown wi-15-di-in-bk fo-we-bo">' +
+									'<button class="dropbtn">Duration: ' + (subscription_items[n].duration ? durations[subscription_items[n].duration]: durations['12']) + '</button>' +
+									'<div id="duration-dropdown-content" class="dropdown-content" data-name="Duration" data-selected="' + (subscription_items[n].duration ? subscription_items[n].duration: 12) + '">';
+			
+			// Framing Duration dropdown
+			for(var j in durations){
+				order_details_string += '<a class="dropdown-item" href="#" data-val="' + j + '">' + durations[j] + '</a>';
 			}
 			
-			order_details_string += '<th scope="col">Total ($)</th>';
-			order_details_string += '</tr>';
+			order_details_string += '</div>' +
+									'</div>' +
+									'<div id="frequency-dropdown" class="dropdown wi-15-di-in-bk fo-we-bo">' +
+									'<button class="dropbtn">Frequency: ' + frequencies['1'] + '</button>' +
+									'<div id="frequency-dropdown-content" class="dropdown-content" data-name="Frequency" data-selected="' + 1 + '">';
 			
-			var total = 0.0;
-			var number = 0, price = 0;
+			// Framing Frequency drop down
+			for(var k in frequencies){
+				order_details_string += '<a class="dropdown-item" href="#" data-val="' + k + '">' + frequencies[k] + '</a>';
+			}
 			
-			for(var i = 0; i < response.products.length; i++){
-				var product_selected = response.products[i];
+			order_details_string += '</div>' +
+									'</div>' +
+									'</div>';
+			
+			order_details_string += '<div class="main">' +
+									'<div>' + 
+									'<table width="200" border="1">' +
+									'<tbody>' +
+									'<tr>';
+			
+			// Framing products table
+			if(response[n].products && response[n].products.length){
 				
-				order_details_string += '<tr>' + 
-										'<td>' + (i+1) + '</td>';
+				order_details_string += '<th scope="col">S.No</th>';
 				
-				for(var j = 0; j < product_headers.length; j++){
-					var header = product_headers[j];
-					if(header.name == "amount"){
-						number = product_selected[header.name];
-						order_details_string += '<td>' + product_selected[header.name] + '</td>';
-					}
-					else if(header.name == "price"){
-						price = product_selected[header.name];
-						order_details_string += '<td>' + Number(product_selected[header.name]).toFixed(2) + '</td>';
-					}
-					else{
-						order_details_string += '<td>' + product_selected[header.name] + '</td>';
-					}
+				for(var i = 0; i < product_headers.length; i++){
+					var header = product_headers[i];
+					order_details_string += '<th scope="col text-capitalize">' + header.display_name + '</th>';
 				}
 				
-				total += number * price;
-				
-				order_details_string += '<td>' + Number(number * price).toFixed(2) + '</td>';
+				order_details_string += '<th scope="col">Total ($)</th>';
 				order_details_string += '</tr>';
+				
+				var total = 0.0;
+				var number = 0, price = 0;
+				
+				for(var i = 0; i < response[n].products.length; i++){
+					var product_selected = response[n].products[i];
+					
+					order_details_string += '<tr>' + 
+											'<td>' + (i+1) + '</td>';
+					
+					for(var j = 0; j < product_headers.length; j++){
+						var header = product_headers[j];
+						if(header.name == "amount"){
+							number = product_selected[header.name];
+							order_details_string += '<td>' + product_selected[header.name] + '</td>';
+						}
+						else if(header.name == "price"){
+							price = product_selected[header.name];
+							order_details_string += '<td>' + Number(product_selected[header.name]).toFixed(2) + '</td>';
+						}
+						else{
+							order_details_string += '<td>' + product_selected[header.name] + '</td>';
+						}
+					}
+					
+					total += number * price;
+					
+					order_details_string += '<td>' + Number(number * price).toFixed(2) + '</td>';
+					order_details_string += '</tr>';
+				}
+				
+				order_details_string += '</tbody></table></div></div>';
+				order_details_string += '<div class="sub-total">Sub total: $' + Number(total).toFixed(2) + '</div>';
+				
+				transaction_total += total;
 			}
 			
-			order_details_string += '</tbody></table></div></div>';
-			order_details_string += '<div class="sub-total">Sub total: $' + Number(total).toFixed(2) + '</div>';
+			subscribed_items.push({
+				customer_id: user.id,
+				subscription_id: response[n]['id'],
+				frequency: frequencies['1'].toLowerCase(),
+				duration: duration ? parseInt(duration) : 12,
+				quantity: (subscription_items[n].quantity ? subscription_items[n].quantity : 1),
+				start_date: new Date().toLocaleDateString(),
+				total: total
+			});
 			
-			transaction_total = total;
+			order_details_string += '</div>';
+			
+			document.getElementById("cart-container").innerHTML += order_details_string;
 		}
 		
-		subscribed_items.push({
-			customer_id: user.id,
-			subscription_id: response['id'],
-			frequency: frequencies['1'].toLowerCase(),
-			duration: parseInt(duration),
-			quantity: 1,
-			start_date: new Date().toLocaleDateString(),
-			total: total
-		});
-		
-		order_details_string += '</div>';
-		
-		document.getElementById("cart-container").innerHTML += order_details_string;
+		document.getElementById("cart-container").innerHTML += '<div id="main-total">Total Amount: $' + Number(transaction_total).toFixed(2) + '</div>';
 		
 		// Adding event listeners for dropdowns
-		document.getElementById("duration-dropdown").getElementsByClassName("dropbtn")[0].addEventListener("click", onDropdownButtonClick);
-		document.getElementById("frequency-dropdown").getElementsByClassName("dropbtn")[0].addEventListener("click", onDropdownButtonClick);
+		var dropdown_buttons = document.getElementsByClassName("dropbtn");
+		for(var l = 0; l < dropdown_buttons.length; l++){
+			dropdown_buttons[l].addEventListener("click", onDropdownButtonClick);
+		}
 		addEventListenersForDropdownItems();
-		document.getElementById("quantity").addEventListener("change", onQuantityChange);
+		
+		// Adding event listeners for quantity
+		var quantity_buttons = document.getElementsByClassName("quantity");
+		for(var l = 0; l < quantity_buttons.length; l++){
+			quantity_buttons[l].addEventListener("click", onQuantityChange);
+		}
 		
 	}
 	
@@ -379,22 +402,124 @@
 	 * Fetches subscription details from database
 	 */
 	function frameOrderDetails(){
+		
+		var subscription_items = [];
+		var sub_ids = [];
+		if(checkoutType == "cart"){
+			subscription_items = JSON.parse(localStorage.getItem("cartItems"));
+			for(var j = 0; j < subscription_items.length; j++){
+				sub_ids.push(subscription_items[j].sub_id);
+			}
+		}
+		else{
+			subscription_items.push({
+				age_group_id: ageGroupId,
+				sub_id: subscriptionId,
+				duration: duration
+			});
+			sub_ids.push(subscriptionId);
+		}
+		
 		var xhttp = new XMLHttpRequest();
 	    xhttp.onreadystatechange = function() {
 	        if (this.readyState == 4 && this.status == 200) {
-	        	frameOrderDetailsSuccessHandler(this.responseText);
+	        	frameOrderDetailsSuccessHandler(this.responseText, subscription_items);
 	        }
 	    };
 	    
-	    xhttp.open("GET", "GetSubscriptionInfo?subscription=" + subscriptionId, true);
+	    xhttp.open("GET", "GetSubscriptionInfo?subscription=" + sub_ids.join(','), true);
 	    xhttp.send();
+	}
+	
+	/*
+	 *  Update cart model in UI
+	 */
+	function renderCartDisplay(){
+		
+		if(typeof(Storage) !== "undefined") {
+			
+			var cart_session_items = localStorage.getItem("cartItems");
+			
+			if(cart_session_items == null){
+				return;
+			}
+			
+			var cart = JSON.parse(cart_session_items);
+			var cart_string = "";
+			
+			for(var p = 0; p < cart.length; p++){
+				cart_string += '<tr><td>' + (p+1) + '</td>'
+							+ '<td>' + cart[p].age_group_name + '</td>'
+							+ '<td>' + cart[p].sub_name + '</td>'
+							+ '<td>' + cart[p].quantity + '</td>'
+							+ '<td>' + Number(cart[p].price).toFixed(2) + '</td>'
+							+ '<td><button class="delete_cart" data-sub-id="' + cart[p].sub_id + '">Delete</button></td></tr>';
+			}
+			cart_string += '</tr>';
+			
+			document.getElementById("cart-table1").innerHTML = cart_string;
+			
+			// Update cart item count
+			document.getElementById("cart-count").innerHTML = cart.length;
+			
+			// Delete from cart event listeners
+			var cart_delete_buttons = document.getElementById("cart-table1").getElementsByClassName("delete_cart");
+			
+			for(var l = 0; l < cart_delete_buttons.length; l++){
+				cart_delete_buttons[l].addEventListener("click", function(e){
+					
+					var sub_id = e.target.getAttribute("data-sub-id");
+					var cart = JSON.parse(localStorage.getItem("cartItems"));
+					
+					for(var p = 0; p < cart.length; p++){
+						if(cart[p].sub_id == sub_id){
+							cart.splice(p,1);
+						}
+					}
+					
+					localStorage.setItem("cartItems", JSON.stringify(cart));
+					renderCartDisplay();
+				});
+			}
+		}
+	}
+	
+	/*
+	 * 	Add event handlers to cart
+	 */
+	function initializeCartEvents(){
+		var modal = document.getElementById('cart-modal');
+
+		// Get the button that opens the modal
+		var btn = document.getElementById("cart_btn");
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close")[0];
+		
+		// When the user clicks the button, open the modal 
+		btn.addEventListener("click", function(){			
+			modal.style.display = "block";
+		});
+		   
+		// When the user clicks on <span> (x), close the modal
+		span.addEventListener("click", function(){	
+			modal.style.display = "none";
+		});
+		
+		// When the user clicks anywhere outside of the modal, close it
+		window.addEventListener("click", function(event){
+		    if (event.target == modal) {
+		        modal.style.display = "none";
+		    }
+		});
+		
 	}
 	
 	/*
 	 *  Initializes event listeners for checkout page
 	 */
 	function initEventListeners(){
-		
+		initializeCartEvents();
 	}
 	
 	/*
@@ -415,6 +540,8 @@
 	    frameOrderDetails();
 		initHorizontalTabs();
 		closeDropdownsOnOutsideClick();
+		
+		renderCartDisplay();
 		initEventListeners();
 	}
 	

@@ -62,10 +62,34 @@
 							<li><a href="/logout" id="logout_button">Logout</a></li>
 						</ul>
 						</div>
-                    
                     </button></li>
+                    <li><button id="cart_btn" class="cart_btn_class"><span class="count" id="cart-count">0</span><i class="fa fa-shopping-cart cart" style="font-size:30px;color:white"></i></button>
             </ul>
         </div>
+        
+        <!-- CART MODAL -->
+		<div id="cart-modal" class="modal">
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<table class="cart-table">
+					<thead>
+						<tr>
+							<th>Item No</th>
+							<th>Age Group</th>
+							<th>Subscription Name</th>
+							<th>Quantity</th>
+							<th>Price</th>
+							<th>Delete</th>
+						</tr>
+					</thead>
+					<tbody id="cart-table1">
+					</tbody>
+				</table>
+				<div class="cartCheckout">
+					<button class="cartCheckout_btn ">Checkout</button>
+				</div>
+			</div>
+		</div>
         
         <div class="success_msg">
 	        <p class="order_success_msg">Order Successful <span class="glyphicon glyphicon-ok green"></span></p>

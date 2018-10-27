@@ -38,10 +38,7 @@
 			    
 			    // Get customer details from session
 			    var user = <%=session.getAttribute("customerDetails")%>;
-		  
-			
-	
-			</script>
+		</script>
 		<!--HEADER SECTION -->
 		<div class="header">
 			<a id="logo-link" href="/index"> <img src="images/baby.png"
@@ -79,12 +76,11 @@
 			<input type="radio" name="tabset" id="tab2"
 				aria-controls="Transaction"> <label for="tab2">Transaction
 				History</label>
-			<!-- Tab 3 -->
 	
 			<div class="tab-panels">
 				<section id="Subscriptions" class="tab-panel">
 					<h2>Active Subscriptions</h2>
-					<div class="item-container">
+					<!-- <div class="item-container">
 						<div class="item-heading">
 							<ul class="item-heading-content">
 								<li class="di-in-bl padding-5-10">Subscription: Premium</li>
@@ -93,6 +89,7 @@
 								<li class="di-in-bl padding-5-10">Quantity: 2</li>
 								<li class="di-in-bl padding-5-10">Frequency: Bi Weekly</li>
 								<li class="di-in-bl padding-5-10">Duration: 12 Months</li>
+								<li class="di-in-bl padding-5-10">Total: $80.00</li>
 							</ul>
 						</div>
 						<div class="item-body">
@@ -100,12 +97,20 @@
 								<tr>
 									<th>S.No</th>
 									<th>Product Name</th>
+									<th>Brand</th>
+									<th>Category</th>
 									<th>Quantity</th>
+									<th>Amount</th>
+									<th>Price</th>
 								</tr>
 								<tr>
 									<td>1</td>
 									<td>Diapers</td>
-									<td>20</td>
+									<td>Huggies</td>
+									<td>Diapers</td>
+									<td>20lbs</td>
+									<td>2</td>
+									<td>13.5</td>
 								</tr>
 								<tr>
 									<td>2</td>
@@ -117,7 +122,6 @@
 									<td>Baby Soap</td>
 									<td>4</td>
 								</tr>
-	
 							</table>
 						</div>
 					</div>
@@ -190,7 +194,7 @@
 	
 							</table>
 						</div>
-					</div>
+					</div> -->
 				</section>
 				<section id="Transaction" class="tab-panel">
 					<h2>Transaction History</h2>
@@ -208,7 +212,7 @@
 							<table>
 								<tr>
 									<th>Subscription Name</th>
-									<th>Amount</th>
+									<th>Quantity</th>
 									<th>Status</th>
 									<th>&nbsp;</th>
 								</tr>
@@ -247,7 +251,7 @@
 							<table>
 								<tr>
 									<th>Subscription Name</th>
-									<th>Amount</th>
+									<th>Quantity</th>
 									<th>Status</th>
 									<th>&nbsp;</th>
 								</tr>
@@ -286,7 +290,7 @@
 							<table>
 								<tr>
 									<th>Subscription Name</th>
-									<th>Amount</th>
+									<th>Quantity</th>
 									<th>Status</th>
 									<th>&nbsp;</th>
 								</tr>

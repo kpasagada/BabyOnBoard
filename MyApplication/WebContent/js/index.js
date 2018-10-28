@@ -33,6 +33,9 @@
 		var email = document.forms["regform"]["email"].value;
 		var phone = document.forms["regform"]["phone"].value;
 		
+		var emailLegalReg =  /^([\w-\.]+@(?!gmail.com)(?!yahoo.com)(?!hotmail.com)(?!aol.com)([\w-]+\.)+[\w-]{2,4})?$/;
+		var phoneReg = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/;
+		
 		localStorage.clear();
 		
 		if (username == "") {
@@ -60,10 +63,20 @@
 	        e.stopPropagation();
 	        showPopupMessage("error", "Email must be filled out");
 	        document.forms["regform"]["email"].focus();
+	    }else if(emailLegalReg.test(email)){
+	    	 e.preventDefault();
+		        e.stopPropagation();
+		        showPopupMessage("error", "Please enter a valid email id");
+		        document.forms["regform"]["email"].focus();
 	    }else if (phone == "") {
 	        e.preventDefault();
 	        e.stopPropagation();
 	        showPopupMessage("error", "Phone must be filled out");
+	        document.forms["regform"]["phone"].focus();
+	    }else if(phoneReg.test(phone)) {
+	        e.preventDefault();
+	        e.stopPropagation();
+	        showPopupMessage("error", "Phone number is invalid");
 	        document.forms["regform"]["phone"].focus();
 	    }else if(password != rpassword){
 	    	e.preventDefault();

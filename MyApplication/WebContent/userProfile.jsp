@@ -86,12 +86,13 @@
 			</div>
 		</div>
     
+    	<!-- POP UP MESSAGE -->
+        <div id="pop-up-message">
+		</div>
     
     
-    
-    
-    <!--JAVA SCRIPTS -->
+    	<!--JAVA SCRIPTS -->
         <script type="text/javascript" src="js/userProfile.js"></script>
     </body>
-    </html>
+</html>
     

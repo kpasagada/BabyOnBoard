@@ -195,7 +195,9 @@
 				    	var result = "fail";
 				    	if(response['status'] > 0){
 				    		result = "pass";
-				    		localStorage.removeItem("cartItems");
+				    		if(checkoutType == "cart"){
+				    			localStorage.removeItem("cartItems");
+				    		}
 				    	}
 				    	
 				    	var confirmation_url =  window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + contextPath + "/confirmation?result=" +  result;
@@ -512,7 +514,6 @@
 		        modal.style.display = "none";
 		    }
 		});
-		
 	}
 	
 	/*
@@ -520,6 +521,27 @@
 	 */
 	function initEventListeners(){
 		initializeCartEvents();
+		document.getElementsByClassName("cartCheckout_btn")[0].addEventListener("click", proceedToCartCheckout);
+	}
+	
+	/*
+	 *  Proceed to Cart checkout
+	 */
+	function proceedToCartCheckout(){
+		if(localStorage.getItem("cartItems") == null){
+			showPopupMessage("error", "Add items to cart before checkout!");
+			return;
+		}
+		
+		var cart = JSON.parse(localStorage.getItem("cartItems"));
+
+		if(cart.length == 0){
+			showPopupMessage("error", "Add items to cart before checkout!");
+			return;
+		}
+		
+		var checkout_url =  window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + contextPath + "/checkout?type=cart";
+		window.location.href = checkout_url;
 	}
 	
 	/*

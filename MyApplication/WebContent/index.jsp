@@ -147,7 +147,8 @@
 			<button class="checkout_btn">Proceed to Checkout</button>
        	</div>
        
-       	<div id="pop-up-message">
+       	<!-- POP UP MESSAGE -->
+        <div id="pop-up-message">
 		</div>
        
        <!--JAVA SCRIPTS -->

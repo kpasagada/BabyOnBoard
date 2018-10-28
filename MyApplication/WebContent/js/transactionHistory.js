@@ -27,6 +27,21 @@
 		{'name':'status', 'display_name': 'Status'}];
 	
 	/*
+	 *  Popup message rendering 
+	 */
+	function showPopupMessage(type, message){
+		var messageElement = document.getElementById("pop-up-message");
+		messageElement.classList.add(type);
+		messageElement.innerHTML = message;
+		messageElement.classList.add("visible");
+		
+		setTimeout(function(){
+			messageElement.classList.remove("visible");
+			messageElement.classList.remove(type);
+		}, 4000);
+	}
+	
+	/*
 	 *  Get active subscriptions success handler 
 	 */
 	function loadActiveSubscriptionsSuccessHandler(response){
@@ -129,6 +144,7 @@
 	    
 	    loadActiveSubscriptions();
 	    addEventListeners();
+	    renderCartDisplay();
 	}
 	
 	/*
@@ -210,10 +226,115 @@
 	}
 	
 	/*
+	 *  Proceed to Cart checkout
+	 */
+	function proceedToCartCheckout(){
+		if(localStorage.getItem("cartItems") == null){
+			showPopupMessage("error", "Add items to cart before checkout!");
+			return;
+		}
+		
+		var cart = JSON.parse(localStorage.getItem("cartItems"));
+
+		if(cart.length == 0){
+			showPopupMessage("error", "Add items to cart before checkout!");
+			return;
+		}
+		
+		var checkout_url =  window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + contextPath + "/checkout?type=cart";
+		window.location.href = checkout_url;
+	}
+	
+	/*
+	 * 	Add event handlers to cart
+	 */
+	function initializeCartEvents(){
+		var modal = document.getElementById('cart-modal');
+
+		// Get the button that opens the modal
+		var btn = document.getElementById("cart_btn");
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close")[0];
+		
+		// When the user clicks the button, open the modal 
+		btn.addEventListener("click", function(){			
+			modal.style.display = "block";
+		});
+		   
+		// When the user clicks on <span> (x), close the modal
+		span.addEventListener("click", function(){	
+			modal.style.display = "none";
+		});
+		
+		// When the user clicks anywhere outside of the modal, close it
+		window.addEventListener("click", function(event){
+		    if (event.target == modal) {
+		        modal.style.display = "none";
+		    }
+		});
+	}
+	
+	/*
+	 *  Update cart model in UI
+	 */
+	function renderCartDisplay(){
+		
+		if(typeof(Storage) !== "undefined") {
+			
+			var cart_session_items = localStorage.getItem("cartItems");
+			
+			if(cart_session_items == null){
+				return;
+			}
+			
+			var cart = JSON.parse(cart_session_items);
+			var cart_string = "";
+			
+			for(var p = 0; p < cart.length; p++){
+				cart_string += '<tr><td>' + (p+1) + '</td>'
+							+ '<td>' + cart[p].age_group_name + '</td>'
+							+ '<td>' + cart[p].sub_name + '</td>'
+							+ '<td>' + cart[p].quantity + '</td>'
+							+ '<td>' + Number(cart[p].price).toFixed(2) + '</td>'
+							+ '<td><button class="delete_cart" data-sub-id="' + cart[p].sub_id + '">Delete</button></td></tr>';
+			}
+			cart_string += '</tr>';
+			
+			document.getElementById("cart-table1").innerHTML = cart_string;
+			
+			// Update cart item count
+			document.getElementById("cart-count").innerHTML = cart.length;
+			
+			// Delete from cart event listeners
+			var cart_delete_buttons = document.getElementById("cart-table1").getElementsByClassName("delete_cart");
+			
+			for(var l = 0; l < cart_delete_buttons.length; l++){
+				cart_delete_buttons[l].addEventListener("click", function(e){
+					
+					var sub_id = e.target.getAttribute("data-sub-id");
+					var cart = JSON.parse(localStorage.getItem("cartItems"));
+					
+					for(var p = 0; p < cart.length; p++){
+						if(cart[p].sub_id == sub_id){
+							cart.splice(p,1);
+						}
+					}
+					
+					localStorage.setItem("cartItems", JSON.stringify(cart));
+					renderCartDisplay();
+				});
+			}
+		}
+	}
+	
+	/*
 	 *  Adding event listeners for page
 	 */
 	function addEventListeners(){
+		initializeCartEvents();
 		document.getElementById('transaction-label').addEventListener('click', loadTransactions);
+		document.getElementsByClassName("cartCheckout_btn")[0].addEventListener("click", proceedToCartCheckout);
 	}
 	
 	/*

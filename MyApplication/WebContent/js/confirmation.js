@@ -5,6 +5,21 @@
 (function() {
 	
 	/*
+	 *  Popup message rendering 
+	 */
+	function showPopupMessage(type, message){
+		var messageElement = document.getElementById("pop-up-message");
+		messageElement.classList.add(type);
+		messageElement.innerHTML = message;
+		messageElement.classList.add("visible");
+		
+		setTimeout(function(){
+			messageElement.classList.remove("visible");
+			messageElement.classList.remove(type);
+		}, 4000);
+	}
+	
+	/*
 	 *  Update cart model in UI
 	 */
 	function renderCartDisplay(){
@@ -89,6 +104,26 @@
 	}
 	
 	/*
+	 *  Proceed to Cart checkout
+	 */
+	function proceedToCartCheckout(){
+		if(localStorage.getItem("cartItems") == null){
+			showPopupMessage("error", "Add items to cart before checkout!");
+			return;
+		}
+		
+		var cart = JSON.parse(localStorage.getItem("cartItems"));
+
+		if(cart.length == 0){
+			showPopupMessage("error", "Add items to cart before checkout!");
+			return;
+		}
+		
+		var checkout_url =  window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + contextPath + "/checkout?type=cart";
+		window.location.href = checkout_url;
+	}
+	
+	/*
 	 *  Initializes confirmation page
 	 */
 	function initConfirmation(){
@@ -114,6 +149,7 @@
 	    
 	    renderCartDisplay();
 	    initializeCartEvents();
+	    document.getElementsByClassName("cartCheckout_btn")[0].addEventListener("click", proceedToCartCheckout);
 	}
 	
 	/*

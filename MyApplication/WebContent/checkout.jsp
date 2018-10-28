@@ -220,7 +220,8 @@
 			</div>
 		</div>
 		
-		<div id="pop-up-message">
+		<!-- POP UP MESSAGE -->
+        <div id="pop-up-message">
 		</div>
 		
 		<script type="text/javascript" src="js/jquery.min.js"></script>

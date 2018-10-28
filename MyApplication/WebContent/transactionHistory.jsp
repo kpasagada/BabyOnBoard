@@ -39,6 +39,7 @@
 			    // Get customer details from session
 			    var user = <%=session.getAttribute("customerDetails")%>;
 		</script>
+		
 		<!--HEADER SECTION -->
 		<div class="header">
 			<a id="logo-link" href="/index"> <img src="images/baby.png"
@@ -62,8 +63,32 @@
 						</div>
 	
 					</button></li>
-				<li><button id="cart_btn" class="cart_btn_class"><i class="fa fa-shopping-cart cart" style="font-size: 30px; color: white"></i></button></li>
+				<li><button id="cart_btn" class="cart_btn_class"><span class="count" id="cart-count">0</span><i class="fa fa-shopping-cart cart" style="font-size:30px;color:white"></i></button>
 			</ul>
+		</div>
+		
+		<!-- CART MODAL -->
+		<div id="cart-modal" class="modal">
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<table class="cart-table">
+					<thead>
+						<tr>
+							<th>Item No</th>
+							<th>Age Group</th>
+							<th>Subscription Name</th>
+							<th>Quantity</th>
+							<th>Price</th>
+							<th>Delete</th>
+						</tr>
+					</thead>
+					<tbody id="cart-table1">
+					</tbody>
+				</table>
+				<div class="cartCheckout">
+					<button class="cartCheckout_btn ">Checkout</button>
+				</div>
+			</div>
 		</div>
 		
 		<!-- Active Subscriptions and controllers -->
@@ -83,127 +108,14 @@
 				</section>
 				<section id="Transaction" class="tab-panel">
 					<h2>Transaction History</h2>
-					<!-- <div class="item-container">
-						<div class="item-heading">
-							<ul class="item-heading-content">
-								<li class="di-in-bl padding-5-10">Order No: 1</li>
-								<li class="di-in-bl padding-5-10">Payment Mode: Cash</li>
-								<li class="di-in-bl padding-5-10">Amount: $80.00</li>
-								<li class="di-in-bl padding-5-10">Billed Address: Chennai, India, 75252</li>
-								<li class="di-in-bl padding-5-10">Order Date: 26 Nov, 2018</li>
-							</ul>
-						</div>
-						<div class="item-body">
-							<table>
-								<tr>
-									<th>Subscription Name</th>
-									<th>Quantity</th>
-									<th>Status</th>
-									<th>&nbsp;</th>
-								</tr>
-								<tr>
-									<td>Premium</td>
-									<td>$15</td>
-									<td>Active</td>
-									<td><a href="">View Details</a></td>
-								</tr>
-								<tr>
-									<td>Economy</td>
-									<td>$5</td>
-									<td>Cancelled</td>
-									<td><a href="">View Details</a></td>
-								</tr>
-								<tr>
-									<td>Standard</td>
-									<td>$10</td>
-									<td>Active</td>
-									<td><a href="">View Details</a></td>
-								</tr>
-	
-							</table>
-						</div>
-					</div>
-					<div class="item-container">
-						<div class="item-heading">
-							<ul class="item-heading-content">
-								<li class="di-in-bl padding-5-10">Order No:5678</li>
-								<li class="di-in-bl padding-5-10">Total:$80</li>
-								<li class="di-in-bl padding-5-10">Billed Address</li>
-								<li class="di-in-bl padding-5-10">Order Placed:Date</li>
-							</ul>
-						</div>
-						<div class="item-body">
-							<table>
-								<tr>
-									<th>Subscription Name</th>
-									<th>Quantity</th>
-									<th>Status</th>
-									<th>&nbsp;</th>
-								</tr>
-								<tr>
-									<td>Premium</td>
-									<td>$15</td>
-									<td>Active</td>
-									<td><a href="">View Details</a></td>
-								</tr>
-								<tr>
-									<td>Economy</td>
-									<td>$5</td>
-									<td>Cancelled</td>
-									<td><a href="">View Details</a></td>
-								</tr>
-								<tr>
-									<td>Standard</td>
-									<td>$10</td>
-									<td>Active</td>
-									<td><a href="">View Details</a></td>
-								</tr>
-	
-							</table>
-						</div>
-					</div>
-					<div class="item-container">
-						<div class="item-heading">
-							<ul class="item-heading-content">
-								<li class="di-in-bl padding-5-10">Order No:5678</li>
-								<li class="di-in-bl padding-5-10">Total:$80</li>
-								<li class="di-in-bl padding-5-10">Billed Address</li>
-								<li class="di-in-bl padding-5-10">Order Placed:Date</li>
-							</ul>
-						</div>
-						<div class="item-body">
-							<table>
-								<tr>
-									<th>Subscription Name</th>
-									<th>Quantity</th>
-									<th>Status</th>
-									<th>&nbsp;</th>
-								</tr>
-								<tr>
-									<td>Premium</td>
-									<td>$15</td>
-									<td>Active</td>
-									<td><a href="">View Details</a></td>
-								</tr>
-								<tr>
-									<td>Economy</td>
-									<td>$5</td>
-									<td>Cancelled</td>
-									<td><a href="">View Details</a></td>
-								</tr>
-								<tr>
-									<td>Standard</td>
-									<td>$10</td>
-									<td>Active</td>
-									<td><a href="">View Details</a></td>
-								</tr>
-							</table>
-						</div>
-					</div> -->
 				</section>
 			</div>
 		</div>
-	
+		
+		<!-- POP UP MESSAGE -->
+        <div id="pop-up-message">
+		</div>
+		
 		<!--JAVA SCRIPTS -->
 		<script type="text/javascript" src="js/transactionHistory.js"></script>
 	</body>

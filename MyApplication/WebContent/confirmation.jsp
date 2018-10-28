@@ -91,6 +91,7 @@
 			</div>
 		</div>
         
+        <!-- SUCCESS MESSAGE -->
         <div class="success_msg">
 	        <p class="order_success_msg">Order Successful <span class="glyphicon glyphicon-ok green"></span></p>
 	        <p class="thankyou_msg"> Thank you for shopping with us</p>
@@ -99,12 +100,17 @@
 	        <a href="/index" class="continue_link" >Continue Shopping</a>
         </div>
         
+        <!-- FAILURE MESSAGE -->
         <div class="failure_msg hide">
 	        <p class="order_failure_msg">Order Failed <span class="glyphicon glyphicon-remove red"></span></p>
 	        <p class="sorry_msg">We apologize for the inconvenience.</p>
 	        
 	        <a href="/index" class="go_back red" >Go Back</a>
         </div>
+        
+        <!-- POP UP MESSAGE -->
+        <div id="pop-up-message">
+		</div>
         
         <script type="text/javascript" src="js/confirmation.js"></script>
     </body>

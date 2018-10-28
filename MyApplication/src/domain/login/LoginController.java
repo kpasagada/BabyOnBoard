@@ -36,8 +36,15 @@ public class LoginController extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		if(submitType.equals("login") && c != null && c.getFullName() != null && c.getUsername() != null){
-			session.setAttribute("loginStatus", "true");
-			session.setAttribute("customerDetails", gson.toJson(c, new TypeToken<Customer>(){}.getType()));
+			if(c.getPassword().equals(login.getPassword())) {
+				session.setAttribute("loginStatus", "true");
+				session.removeAttribute("errorMessage");
+				session.setAttribute("customerDetails", gson.toJson(c, new TypeToken<Customer>(){}.getType()));
+			}
+			else {
+				session.setAttribute("loginStatus", "false");
+				session.setAttribute("errorMessage", "invalid-login");
+			}
 			response.sendRedirect(request.getContextPath()+"/index");
 		}else if(submitType.equals("register")){
 			c.setFullName(request.getParameter("name"));
@@ -47,14 +54,17 @@ public class LoginController extends HttpServlet {
 			c.setPhone(request.getParameter("phone"));
 			if(customerDao.register(c) == 0) {
 				session.setAttribute("loginStatus", "false");
+				session.setAttribute("errorMessage", "invalid-registration");
 			}
 			else {
 				session.setAttribute("loginStatus", "true");
+				session.removeAttribute("errorMessage");
 				session.setAttribute("customerDetails", gson.toJson(c, new TypeToken<Customer>(){}.getType()));
 			}
 			response.sendRedirect(request.getContextPath()+"/index");
 		}else{
 			session.setAttribute("loginStatus", "false");
+			session.setAttribute("errorMessage", "invalid-registration");
 			response.sendRedirect(request.getContextPath()+"/index");
 		}
 

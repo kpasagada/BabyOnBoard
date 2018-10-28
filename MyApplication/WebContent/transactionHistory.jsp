@@ -74,131 +74,16 @@
 				Subscription</label>
 			<!-- Tab 2 -->
 			<input type="radio" name="tabset" id="tab2"
-				aria-controls="Transaction"> <label for="tab2">Transaction
+				aria-controls="Transaction"> <label for="tab2" id="transaction-label">Transaction
 				History</label>
 	
 			<div class="tab-panels">
 				<section id="Subscriptions" class="tab-panel">
 					<h2>Active Subscriptions</h2>
-					<!-- <div class="item-container">
-						<div class="item-heading">
-							<ul class="item-heading-content">
-								<li class="di-in-bl padding-5-10">Subscription: Premium</li>
-								<li class="di-in-bl padding-5-10">Age Group: Infant</li>
-								<li class="di-in-bl padding-5-10">Start Date: Nov 26, 2018</li>
-								<li class="di-in-bl padding-5-10">Quantity: 2</li>
-								<li class="di-in-bl padding-5-10">Frequency: Bi Weekly</li>
-								<li class="di-in-bl padding-5-10">Duration: 12 Months</li>
-								<li class="di-in-bl padding-5-10">Total: $80.00</li>
-							</ul>
-						</div>
-						<div class="item-body">
-							<table>
-								<tr>
-									<th>S.No</th>
-									<th>Product Name</th>
-									<th>Brand</th>
-									<th>Category</th>
-									<th>Quantity</th>
-									<th>Amount</th>
-									<th>Price</th>
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>Diapers</td>
-									<td>Huggies</td>
-									<td>Diapers</td>
-									<td>20lbs</td>
-									<td>2</td>
-									<td>13.5</td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>Cerlac</td>
-									<td>10</td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>Baby Soap</td>
-									<td>4</td>
-								</tr>
-							</table>
-						</div>
-					</div>
-					<div class="item-container">
-						<div class="item-heading">
-							<ul class="item-heading-content">
-								<li class="di-in-bl padding-5-10">Subscription: Premium</li>
-								<li class="di-in-bl padding-5-10">Quantity: 2</li>
-								<li class="di-in-bl padding-5-10">Frequency: Bi Weekly</li>
-								<li class="di-in-bl padding-5-10">Duration: 12 Months</li>
-							</ul>
-						</div>
-						<div class="item-body">
-							<table>
-								<tr>
-									<th>S.No</th>
-									<th>Product Name</th>
-									<th>Quantity</th>
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>Diapers</td>
-									<td>20</td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>Cerlac</td>
-									<td>10</td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>Baby Soap</td>
-									<td>4</td>
-								</tr>
-	
-							</table>
-						</div>
-					</div>
-					<div class="item-container">
-						<div class="item-heading">
-							<ul class="item-heading-content">
-								<li class="di-in-bl padding-5-10">Subscription: Premium</li>
-								<li class="di-in-bl padding-5-10">Quantity: 2</li>
-								<li class="di-in-bl padding-5-10">Frequency: Bi Weekly</li>
-								<li class="di-in-bl padding-5-10">Duration: 12 Months</li>
-							</ul>
-						</div>
-						<div class="item-body">
-							<table>
-								<tr>
-									<th>S.No</th>
-									<th>Product Name</th>
-									<th>Quantity</th>
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>Diapers</td>
-									<td>20</td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>Cerlac</td>
-									<td>10</td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>Baby Soap</td>
-									<td>4</td>
-								</tr>
-	
-							</table>
-						</div>
-					</div> -->
 				</section>
 				<section id="Transaction" class="tab-panel">
 					<h2>Transaction History</h2>
-					<div class="item-container">
+					<!-- <div class="item-container">
 						<div class="item-heading">
 							<ul class="item-heading-content">
 								<li class="di-in-bl padding-5-10">Order No: 1</li>
@@ -314,7 +199,7 @@
 								</tr>
 							</table>
 						</div>
-					</div>
+					</div> -->
 				</section>
 			</div>
 		</div>

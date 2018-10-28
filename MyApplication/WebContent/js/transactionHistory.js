@@ -1,10 +1,10 @@
 
 (function() {
 	
+	var transactions_loaded = 0;
 	var frequencies = {'weekly': 'Weekly', 'bi-weekly': 'Bi-Weekly', 'monthly': 'Monthly'};
 	var durations = {3: '3 Months', 6: '6 Months', 9: '9 Months', 12: '12 Months'};
-	var active_sub_headers = [
-			{'name':'name', 'display_name':'Subscription'},
+	var active_sub_headers = [{'name':'name', 'display_name':'Subscription'},
 			{'name':'ageGroupName', 'display_name': 'Age Group'},
 			{'name':'startDate', 'display_name': 'Start Date'},
 			{'name':'quantity', 'display_name': 'Quantity'},
@@ -16,6 +16,15 @@
 		   {"name": "quantity", "display_name": "Quantity"},
 		   {"name": "amount", "display_name": "Number"},
 		   {"name": "price", "display_name": "Price ($)"}];
+	var transaction_headers = [{'name':'id', 'display_name':'Order No'},
+		{'name':'paymentMode', 'display_name': 'Payment Mode'},
+		{'name':'address', 'display_name': 'Billed Address'},
+		{'name':'amount', 'display_name': 'Amount'},
+		{'name':'transactionDate', 'display_name': 'Order Date'}];
+	var trans_sub_headers = [{'name':'name', 'display_name':'Subscription Name'},
+		{'name':'ageGroupName', 'display_name': 'Age Group'},
+		{'name':'quantity', 'display_name': 'Quantity'},
+		{'name':'status', 'display_name': 'Status'}];
 	
 	/*
 	 *  Get active subscriptions success handler 
@@ -119,6 +128,92 @@
 	    document.getElementById("logo-link").setAttribute("href", indexPath);
 	    
 	    loadActiveSubscriptions();
+	    addEventListeners();
+	}
+	
+	/*
+	 *  Load transactions success handler
+	 */
+	function loadTransactionsSuccessHandler(response){
+		response = JSON.parse(response);
+		
+		for(var n = 0; n < response.length; n++){
+			var trans_string = '<div class="item-container"><div class="item-heading"><ul class="item-heading-content">';
+			
+			for(var k = 0; k < transaction_headers.length; k++){
+				if(transaction_headers[k].name == "amount"){
+					trans_string += '<li class="di-in-bl padding-5-10">' + transaction_headers[k].display_name + ': $' + Number(response[n][transaction_headers[k].name]).toFixed(2) + '</li>';
+				}
+				else{
+					trans_string += '<li class="di-in-bl padding-5-10">' + transaction_headers[k].display_name + ': ' + response[n][transaction_headers[k].name] + '</li>';
+				}
+			}
+			
+			trans_string += '</ul></div>';
+			
+			trans_string += '<div class="item-body"><table><tr>';
+			
+			trans_string += '<th>S.No</th>';
+			
+			for(var i = 0; i < trans_sub_headers.length; i++){
+				var header = trans_sub_headers[i];
+				trans_string += '<th>' + header.display_name + '</th>';
+			}
+			
+			trans_string += '<th>&nbsp;</th>';
+			trans_string += '</tr>';
+			
+			for(var i = 0; i < response[n].subscriptions.length; i++){
+				var sub_selected = response[n].subscriptions[i];
+				
+				trans_string += '<tr>' + '<td>' + (i+1) + '</td>';
+				
+				for(var j = 0; j < trans_sub_headers.length; j++){
+					var header = trans_sub_headers[j];
+					
+					if(header.name == "status"){
+						trans_string += '<td>' + (sub_selected[header.name] ? "Active": "Cancelled") + '</td>';
+					}
+					else{ 
+						trans_string += '<td>' + sub_selected[header.name] + '</td>';
+					}
+				}
+				
+				trans_string += '<td><a href="">View Details</a></td>';
+				trans_string += '</tr>';
+			}
+			
+			trans_string += '</table></div></div>';
+			
+			document.getElementById('Transaction').innerHTML += trans_string; 
+		}
+	}
+	
+	/*
+	 *  Load user transactions 
+	 */
+	function loadTransactions(){
+		if(transactions_loaded == 1){
+			return;
+		}
+		
+		var xhttp = new XMLHttpRequest();
+	    xhttp.onreadystatechange = function() {
+	        if (this.readyState == 4 && this.status == 200) {
+	        	transactions_loaded = 1;
+	        	loadTransactionsSuccessHandler(this.responseText);
+	        }
+	    };
+	    
+	    xhttp.open("GET", "GetTransactionInfo?id=" + user.id, true);
+	    xhttp.send();
+	}
+	
+	/*
+	 *  Adding event listeners for page
+	 */
+	function addEventListeners(){
+		document.getElementById('transaction-label').addEventListener('click', loadTransactions);
 	}
 	
 	/*

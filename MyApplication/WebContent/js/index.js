@@ -115,9 +115,16 @@
 		
 		document.getElementById("login").style.display="none";
 		document.getElementById("register").style.display="inline";
-		if(failed == true){
+		if(failed){
 			var incorrect_register_element = document.getElementById("incorrect-register");
-			incorrect_register_element.classList.remove("hide");
+			if(failed == "invalid-registration"){
+				incorrect_register_element.innerHTML = "Login details invalid, register to continue!";
+				incorrect_register_element.classList.remove("hide");
+			}
+			else if(failed == "duplicate-username"){
+				incorrect_register_element.innerHTML = "Username already exists!";
+				incorrect_register_element.classList.remove("hide");
+			}
 		}
 	}
 	
@@ -562,6 +569,7 @@
 	 *  Initializing the Index page
 	 */
 	function initIndex(){
+		console.log(loginStatus, errorMessage)
 		if(loginStatus == true){
 			document.getElementsByClassName("home")[0].style.display="none";
 			document.getElementById("user-button").classList.remove("hide");
@@ -569,7 +577,10 @@
 		}
 		else if(loginStatus == false){
 			if(errorMessage == "invalid-registration"){
-				register(true);
+				register("invalid-registration");
+			}
+			else if(errorMessage == "duplicate-username"){
+				register("duplicate-username");
 			}
 			else if(errorMessage == "invalid-login"){
 				login(true);

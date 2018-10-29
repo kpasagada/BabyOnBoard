@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 /**
  * Servlet implementation class Login
@@ -52,14 +53,21 @@ public class LoginController extends HttpServlet {
 			c.setPassword(request.getParameter("password"));
 			c.setEmail(request.getParameter("email"));
 			c.setPhone(request.getParameter("phone"));
-			if(customerDao.register(c) == 0) {
-				session.setAttribute("loginStatus", "false");
-				session.setAttribute("errorMessage", "invalid-registration");
+			try {
+				int value = customerDao.register(c);
+				if(value == 0) {
+					session.setAttribute("loginStatus", "false");
+					session.setAttribute("errorMessage", "invalid-registration");
+				}
+				else {
+					session.setAttribute("loginStatus", "true");
+					session.removeAttribute("errorMessage");
+					session.setAttribute("customerDetails", gson.toJson(c, new TypeToken<Customer>(){}.getType()));
+				}
 			}
-			else {
-				session.setAttribute("loginStatus", "true");
-				session.removeAttribute("errorMessage");
-				session.setAttribute("customerDetails", gson.toJson(c, new TypeToken<Customer>(){}.getType()));
+			catch(MySQLIntegrityConstraintViolationException e) {
+				session.setAttribute("loginStatus", "false");
+				session.setAttribute("errorMessage", "duplicate-username");
 			}
 			response.sendRedirect(request.getContextPath()+"/index");
 		}else{

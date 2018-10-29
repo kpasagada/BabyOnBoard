@@ -1,4 +1,7 @@
 package domain.login;
+
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 /**
  * 
  * @author karthik
@@ -9,7 +12,7 @@ public interface CustomerDao {
 	/*
 	 * Register customer to the system 
 	 */
-	public int register(Customer c);
+	public int register(Customer c) throws MySQLIntegrityConstraintViolationException;
 	
 	/*
 	 * Retrieve the Customer object from the database

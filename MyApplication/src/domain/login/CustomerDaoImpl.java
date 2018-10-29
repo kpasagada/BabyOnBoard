@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 import db.DbManager;
 
 
@@ -15,7 +17,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	DbManager db = new DbManager();
 	
 	@Override
-	public int register(Customer c) {
+	public int register(Customer c) throws MySQLIntegrityConstraintViolationException {
 		int status = 0;
 		try{
 			conn = db.getConnection();
@@ -27,7 +29,11 @@ public class CustomerDaoImpl implements CustomerDao {
 			ps.setString(5, c.getPhone());
 			status = ps.executeUpdate();
 			conn.close();
-		}catch(Exception e){
+		}
+		catch(MySQLIntegrityConstraintViolationException e){
+			throw e;
+		}
+		catch(Exception e){
 			System.out.println(e);
 		}
 		return status;

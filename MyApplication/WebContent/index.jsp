@@ -93,11 +93,11 @@
                  <button id="sign-up-button" type="button" class="button outline-none" style="padding: 10px 56px;" > Not a registered user yet? Sign Up!</button>
            </form>
            <!-- Register -->
-           <form id="register" name="regform" action="LoginController" method="post">
+           <form id="register" name="regform" action="LoginController" method="post" >
            	 <p id="incorrect-register" class="te-al-ce hide">Login details invalid, register to continue!</p>
              <h1 class="te-al-ce"><img class="human reg" src="images/human.png"/> <br>REGISTER</h1>
              <input type="text" name="name" class="register outline-none" placeholder="Full Name">
-             <input type="text" name="email" class="register outline-none" placeholder="Email Address">
+             <input type="text" name="email" class="register outline-none"  placeholder="Email Address">
              <input type="text" name="phone" class="register outline-none" placeholder="Phone Number">
              <input type="text" name="username" class="register outline-none" placeholder="Username">
              <input type="password" name="password" class="register outline-none" placeholder="Password">

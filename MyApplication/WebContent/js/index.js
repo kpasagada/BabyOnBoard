@@ -64,10 +64,10 @@
 	        showPopupMessage("error", "Email must be filled out");
 	        document.forms["regform"]["email"].focus();
 	    }else if(!emailLegalReg.test(email)){
-	    	 e.preventDefault();
-		        e.stopPropagation();
-		        showPopupMessage("error", "Please enter a valid email id");
-		        document.forms["regform"]["email"].focus();
+	    	e.preventDefault();
+	        e.stopPropagation();
+	        showPopupMessage("error", "Please enter a valid email id");
+	        document.forms["regform"]["email"].focus();
 	    }else if(phone == "") {
 	        e.preventDefault();
 	        e.stopPropagation();

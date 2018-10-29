@@ -21,7 +21,7 @@ public class CustomerDaoImpl implements CustomerDao {
 		int status = 0;
 		try{
 			conn = db.getConnection();
-			ps =conn.prepareStatement("INSERT INTO customer(user_name,password,full_name,email,phone) VALUES(?,?,?,?,?)");
+			ps = conn.prepareStatement("INSERT INTO customer(user_name,password,full_name,email,phone) VALUES(?,?,?,?,?)");
 			ps.setString(1, c.getUsername());
 			ps.setString(2, c.getPassword());
 			ps.setString(3, c.getFullName());
@@ -44,7 +44,7 @@ public class CustomerDaoImpl implements CustomerDao {
 		Customer c = new Customer();
 		try{
 			conn = db.getConnection();
-			ps =conn.prepareStatement("SELECT id, user_name, password, full_name, email, phone FROM customer WHERE user_name=?");
+			ps = conn.prepareStatement("SELECT id, user_name, password, full_name, email, phone FROM customer WHERE user_name=?");
 			ps.setString(1, login.getUsername());
 
 			ResultSet rs = ps.executeQuery();
@@ -61,6 +61,22 @@ public class CustomerDaoImpl implements CustomerDao {
 			System.out.println(e);
 		}
 		return c;
+	}
+
+	@Override
+	public int deleteCustomer(String userName) {
+		int status = 0;
+		try{
+			conn = db.getConnection();
+			ps = conn.prepareStatement("DELETE FROM customer WHERE user_name = ?");
+			ps.setString(1, userName);
+			status = ps.executeUpdate();
+			conn.close();
+		}
+		catch(Exception e){
+			System.out.println(e);
+		}
+		return status;
 	}
 
 }

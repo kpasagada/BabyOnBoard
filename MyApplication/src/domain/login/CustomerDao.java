@@ -19,5 +19,9 @@ public interface CustomerDao {
 	 */
 	public Customer validateCustomer(Login login);
 	
+	/*
+	 * Delete customer if exists
+	 */
+	public int deleteCustomer(String userName);
 }
 

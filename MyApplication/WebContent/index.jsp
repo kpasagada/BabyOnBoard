@@ -26,6 +26,7 @@
 	    <script type="text/javascript">
 	    	var loginStatus;
 		    var loginStatus = <%=session.getAttribute("loginStatus")%>;
+		    var errorMessage = "<%=session.getAttribute("errorMessage")%>";
 		    var contextPath = "<%=request.getContextPath()%>";
 	    </script>
 	    
@@ -85,6 +86,7 @@
         <div class="home">
         <!-- Login -->
            <form id="login" name="loginform" action="LoginController" method="post">
+           		 <p id="incorrect-login" class="te-al-ce hide">Password invalid!</p>
                  <h1 style="text-align:center;"><img class="human" src="images/human.png"/> <br><span style="font-size:35px;">LOGIN </span><br></h1>
                  <input type="text" name="username" class="login outline-none" placeholder="Username">
                  <input type="password" name="password" class="login outline-none" placeholder="Password">
@@ -108,7 +110,7 @@
         </div>
         
         <!--AGE CATEGORY-->
-        <div >
+        <div>
             <ul id="age-group-list" class="age">
                 <h2>Choose a category</h2>
             </ul>

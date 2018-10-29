@@ -184,7 +184,8 @@ public class SubscriptionProductDaoImpl implements SubscriptionProductDao{
 		
 		try{
 			conn = db.getConnection();
-			ps = conn.prepareStatement("SELECT csm.id, csm.frequency, csm.quantity, csm.duration, csm.start_date, s.age_group, ag.name, s.id, s.name, p.id, p.name, p.brand, p.category, p.quantity, p.price, spm.quantity FROM customer_subscription_mapping csm JOIN subscription s ON csm.subscription_id = s.id JOIN subscription_product_mapping spm ON spm.subscription_id = s.id JOIN product p ON p.id = spm.product_id JOIN age_group ag ON ag.id = s.age_group WHERE csm.customer_id = 1 AND csm.status = 1 ORDER BY csm.start_date DESC, csm.id DESC");
+			ps = conn.prepareStatement("SELECT csm.id, csm.frequency, csm.quantity, csm.duration, csm.start_date, s.age_group, ag.name, s.id, s.name, p.id, p.name, p.brand, p.category, p.quantity, p.price, spm.quantity FROM customer_subscription_mapping csm JOIN subscription s ON csm.subscription_id = s.id JOIN subscription_product_mapping spm ON spm.subscription_id = s.id JOIN product p ON p.id = spm.product_id JOIN age_group ag ON ag.id = s.age_group WHERE csm.customer_id = ? AND csm.status = 1 ORDER BY csm.start_date DESC, csm.id DESC");
+			ps.setInt(1, userId);
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {

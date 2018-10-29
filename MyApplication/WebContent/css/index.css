@@ -408,7 +408,7 @@ SECTION-LANDING PAGE
 	box-shadow: 0px 2px 15px rgba(123, 125, 128, 0.78);
 }
 
-#incorrect-register {
+#incorrect-login, #incorrect-register {
 	color: red;
 	margin-top: 2%;
 	font-size: 14px;

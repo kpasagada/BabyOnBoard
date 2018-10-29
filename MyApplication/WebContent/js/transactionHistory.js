@@ -47,6 +47,11 @@
 	function loadActiveSubscriptionsSuccessHandler(response){
 		response = JSON.parse(response);
 		
+		if(response == null || response.length == 0){
+			document.getElementById("Subscriptions").innerHTML += '<div class="te-al-ce">No Active Subscriptions to display.</div>';
+			return;
+		}
+		
 		for(var n = 0; n < response.length; n++){
 			var subs_string = '<div class="item-container"><div class="item-heading"><ul class="item-heading-content">';
 			
@@ -152,6 +157,11 @@
 	 */
 	function loadTransactionsSuccessHandler(response){
 		response = JSON.parse(response);
+		
+		if(response == null || response.length == 0){
+			document.getElementById("Transaction").innerHTML += '<div class="te-al-ce">No Transactions to display.</div>';
+			return;
+		}
 		
 		for(var n = 0; n < response.length; n++){
 			var trans_string = '<div class="item-container"><div class="item-heading"><ul class="item-heading-content">';

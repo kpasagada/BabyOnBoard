@@ -124,9 +124,13 @@
 	/*
 	 *  Hides register form and shows login form
 	 */
-	function login() {
+	function login(show) {
 		document.getElementById("login").style.display="inline";
 		document.getElementById("register").style.display="none";
+		if(show == true){
+			var incorrect_login_element = document.getElementById("incorrect-login");
+			incorrect_login_element.classList.remove("hide");
+		}
 	}
 	
 	/*
@@ -564,7 +568,12 @@
 			document.getElementById("cart_btn").classList.remove("hide");
 		}
 		else if(loginStatus == false){
-			register(true);
+			if(errorMessage == "invalid-registration"){
+				register(true);
+			}
+			else if(errorMessage == "invalid-login"){
+				login(true);
+			}
 		}
 		
 		//Setting logout path

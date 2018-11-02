@@ -146,5 +146,16 @@ CREATE TABLE `transaction_customer_subscription_mapping` (
 	CONSTRAINT fk_transaction_customer_subscription_mapping_transaction_id FOREIGN KEY (`transaction_id`) REFERENCES `transaction`(`id`)
 );
 
-
+-- Cart table
+CREATE TABLE `cart` (
+	`id` int NOT NULL AUTO_INCREMENT,
+	`subscription_id` int NOT NULL,
+	`customer_id` int NOT NULL,
+	`price` float(5,2) NOT NULL,
+	`quantity` int NOT NULL,
+	UNIQUE KEY `uniq_cart_sub_id_cust_id` (`subscription_id`,`customer_id`),
+	PRIMARY KEY(id),
+	CONSTRAINT fk_cart_subscription_id FOREIGN KEY (`subscription_id`) REFERENCES `subscription`(`id`),
+	CONSTRAINT fk_cart_customer_id FOREIGN KEY (`customer_id`) REFERENCES `customer`(`id`)
+);
 

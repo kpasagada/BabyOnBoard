@@ -569,7 +569,7 @@
 	 *  Initializing the Index page
 	 */
 	function initIndex(){
-		console.log(loginStatus, errorMessage)
+		
 		if(loginStatus == true){
 			document.getElementsByClassName("home")[0].style.display="none";
 			document.getElementById("user-button").classList.remove("hide");

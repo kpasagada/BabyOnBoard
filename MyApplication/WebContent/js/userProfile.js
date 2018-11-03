@@ -1,5 +1,10 @@
+/**
+ *  Functions for user profile page
+ */
 
 (function() {
+	
+	var cartItems = null;
 	
 	/*
 	 *  Popup message rendering 
@@ -17,56 +22,95 @@
 	}
 	
 	/*
+	 *  Add cart item to database
+	 */
+	function modifyCartItem(request_object, type){
+		document.getElementById("overlay").classList.remove("hide");
+		
+		var url = "";
+		
+		if(type == "add"){
+			url = "AddCartItem";
+		}
+		else if(type == "update"){
+			url = "UpdateCartItem";
+		}
+		else if(type == "delete"){
+			url = "DeleteCartItem";
+		}
+		
+		var xhr = new XMLHttpRequest();
+		
+		xhr.onreadystatechange = function() {
+		    if(xhr.readyState == 4 && xhr.status == 200) {
+		    	renderCartDisplaySuccessHandler(xhr.responseText);
+		    	document.getElementById("overlay").classList.add("hide");
+		    }
+		}
+		
+		xhr.open("POST", url, true);
+		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.send(JSON.stringify(request_object));
+	}
+	
+	/*
+	 *  Get cart items success handler
+	 */
+	function renderCartDisplaySuccessHandler(response){
+		if(response == null){
+			return;
+		}
+		
+		cartItems = JSON.parse(response);
+		
+		if(response.length == 0){
+			return;
+		}
+		
+		var cart_string = "";
+		
+		for(var p = 0; p < cartItems.length; p++){
+			cart_string += '<tr><td>' + (p+1) + '</td>'
+						+ '<td>' + cartItems[p].ageGroupName + '</td>'
+						+ '<td>' + cartItems[p].subscriptionName + '</td>'
+						+ '<td>' + cartItems[p].quantity + '</td>'
+						+ '<td>' + Number(cartItems[p].price).toFixed(2) + '</td>'
+						+ '<td><button class="delete_cart" data-sub-id="' + cartItems[p].subscriptionId + '">Delete</button></td></tr>';
+		}
+		cart_string += '</tr>';
+		
+		document.getElementById("cart-table1").innerHTML = cart_string;
+		
+		// Update cart item count
+		document.getElementById("cart-count").innerHTML = cartItems.length;
+		
+		// Delete from cart event listeners
+		var cart_delete_buttons = document.getElementById("cart-table1").getElementsByClassName("delete_cart");
+		
+		for(var l = 0; l < cart_delete_buttons.length; l++){
+			cart_delete_buttons[l].addEventListener("click", function(e){
+				
+				var sub_id = e.target.getAttribute("data-sub-id");
+				var request_object = {'cust_id': user.id, 'sub_id': sub_id};
+				modifyCartItem(request_object, "delete");
+			});
+		}
+	}
+	
+	/*
 	 *  Update cart model in UI
 	 */
 	function renderCartDisplay(){
 		
-		if(typeof(Storage) !== "undefined") {
-			
-			var cart_session_items = localStorage.getItem("cartItems");
-			
-			if(cart_session_items == null){
-				return;
-			}
-			
-			var cart = JSON.parse(cart_session_items);
-			var cart_string = "";
-			
-			for(var p = 0; p < cart.length; p++){
-				cart_string += '<tr><td>' + (p+1) + '</td>'
-							+ '<td>' + cart[p].age_group_name + '</td>'
-							+ '<td>' + cart[p].sub_name + '</td>'
-							+ '<td>' + cart[p].quantity + '</td>'
-							+ '<td>' + Number(cart[p].price).toFixed(2) + '</td>'
-							+ '<td><button class="delete_cart" data-sub-id="' + cart[p].sub_id + '">Delete</button></td></tr>';
-			}
-			cart_string += '</tr>';
-			
-			document.getElementById("cart-table1").innerHTML = cart_string;
-			
-			// Update cart item count
-			document.getElementById("cart-count").innerHTML = cart.length;
-			
-			// Delete from cart event listeners
-			var cart_delete_buttons = document.getElementById("cart-table1").getElementsByClassName("delete_cart");
-			
-			for(var l = 0; l < cart_delete_buttons.length; l++){
-				cart_delete_buttons[l].addEventListener("click", function(e){
-					
-					var sub_id = e.target.getAttribute("data-sub-id");
-					var cart = JSON.parse(localStorage.getItem("cartItems"));
-					
-					for(var p = 0; p < cart.length; p++){
-						if(cart[p].sub_id == sub_id){
-							cart.splice(p,1);
-						}
-					}
-					
-					localStorage.setItem("cartItems", JSON.stringify(cart));
-					renderCartDisplay();
-				});
-			}
-		}
+		var xhttp = new XMLHttpRequest();
+	    xhttp.onreadystatechange = function() {
+	        if (this.readyState == 4 && this.status == 200) {
+	        	renderCartDisplaySuccessHandler(this.responseText);
+	        }
+	    };
+	    
+	    xhttp.open("GET", "FetchCartItems?id=" + user.id, true);
+	    xhttp.send();
 	}
 	
 	/*
@@ -104,14 +148,7 @@
 	 *  Proceed to Cart checkout
 	 */
 	function proceedToCartCheckout(){
-		if(localStorage.getItem("cartItems") == null){
-			showPopupMessage("error", "Add items to cart before checkout!");
-			return;
-		}
-		
-		var cart = JSON.parse(localStorage.getItem("cartItems"));
-
-		if(cart.length == 0){
+		if(cartItems.length == 0){
 			showPopupMessage("error", "Add items to cart before checkout!");
 			return;
 		}

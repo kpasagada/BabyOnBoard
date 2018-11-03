@@ -94,11 +94,18 @@ public class CartDaoImpl implements CartDao{
 	@Override
 	public List<Cart> deleteCartItem(JsonObject subscriptionDetails) {
 		int status = 0;
+		
 		try {
 			conn = db.getConnection();
-			ps = conn.prepareStatement("DELETE FROM cart WHERE customer_id = ? AND subscription_id = ?");
-			ps.setInt(1, subscriptionDetails.get("cust_id").getAsInt());
-			ps.setInt(2, subscriptionDetails.get("sub_id").getAsInt());
+			if(subscriptionDetails.has("sub_id") && subscriptionDetails.has("cust_id")){
+				ps = conn.prepareStatement("DELETE FROM cart WHERE customer_id = ? AND subscription_id = ?");
+				ps.setInt(1, subscriptionDetails.get("cust_id").getAsInt());
+				ps.setInt(2, subscriptionDetails.get("sub_id").getAsInt());
+			}
+			else if(subscriptionDetails.has("cust_id")) {
+				ps = conn.prepareStatement("DELETE FROM cart WHERE customer_id = ?");
+				ps.setInt(1, subscriptionDetails.get("cust_id").getAsInt());
+			}
 			status = ps.executeUpdate();
 			
 			conn.close();
@@ -106,7 +113,7 @@ public class CartDaoImpl implements CartDao{
 			System.out.println(e);
 		}
 		
-		return status == 1 ? this.fetchCartItems(subscriptionDetails.get("cust_id").getAsInt()) : null;
+		return status > 0 ? this.fetchCartItems(subscriptionDetails.get("cust_id").getAsInt()) : null;
 	}
 	
 }

@@ -46,7 +46,12 @@
 				window.location.href = logout_url;
 			}
 		</script>
-    
+    	
+    	<!-- Overlay -->
+		<div id="overlay" class="hide">
+			<div class="overlay-content"><i class="fa fa-spinner fa-spin"></i> Updating cart...</div>
+		</div>
+    	
     	<!--HEADER SECTION -->
         <div class="header">
             <a id="logo-link" href="/index"> <img src="images/baby.png" alt="logo" class="logo"> </a>

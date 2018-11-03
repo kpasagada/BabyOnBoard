@@ -4,7 +4,7 @@
 	
 (function() {
 	
-	var age_groups, subscriptions, selected_age_group = 1, selected_subscription = -1, selected_duration = -1;
+	var age_groups, subscriptions, selected_age_group = 1, selected_subscription = -1, selected_duration = -1, cartItems = [];
 	
 	/*
 	 *  Popup message rendering 
@@ -35,8 +35,6 @@
 		
 		var emailLegalReg =  /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 		var phoneReg = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/;
-		
-		localStorage.clear();
 		
 		if (username == "") {
 			e.preventDefault();
@@ -92,8 +90,6 @@
 	function loginValidate(e){
 		var username = document.forms["loginform"]["username"].value;
 		var password = document.forms["loginform"]["password"].value;
-		
-		localStorage.clear();
 		
 		if (username == "") {
 			e.preventDefault();
@@ -315,64 +311,42 @@
 				if(e.target && e.target.tagName == "BUTTON"){
 					var sub_id = e.target.parentNode.parentNode.getAttribute("data-id");						
 					
-					if(typeof(Storage) !== "undefined"){
-						
-						if(localStorage.getItem("cartItems") == null){
-							localStorage.setItem("cartItems", JSON.stringify([]));
-						}
-						
-						var cart = JSON.parse(localStorage.getItem("cartItems"));
-						
-						// Check if cart already has subscription
-						var found = 0;
-						for(var m = 0; m < cart.length; m++){
-							if(cart[m].sub_id == sub_id){
-								cart[m].quantity += 1;
-								
-								// Find subscription to get price
-								for(var i=0; i < subscriptions.length; i++){
-									if(subscriptions[i].id == sub_id){
-										cart[m].price = subscriptions[i].price * cart[m].quantity;
-										break;
-									}
-								}
-								found = 1;
-								break;
-							}
-						}
-						
-						// If subscription found in cart, update session variable and cart display
-						if(found == 1){
-							localStorage.setItem("cartItems", JSON.stringify(cart));
-							renderCartDisplay();
-						}
-						else{
-							var cart_object = {};
+					// Check if cart already has subscription
+					var found = 0;
+					var request_object = {'cust_id': user.id, 'sub_id': sub_id};
+					for(var m = 0; m < cartItems.length; m++){
+						if(cartItems[m].subscriptionId == sub_id){
+							request_object['quantity'] = cartItems[m].quantity + 1;
 							
-							// Get the subscription details and age group information and create a cart item
+							// Find subscription to get price
 							for(var i=0; i < subscriptions.length; i++){
 								if(subscriptions[i].id == sub_id){
-									
-									cart_object.age_group_id = subscriptions[i].ageGroup;
-									cart_object.sub_id = subscriptions[i].id;
-									cart_object.sub_name = subscriptions[i].name;
-									cart_object.quantity = 1;
-									cart_object.price = subscriptions[i].price * cart_object.quantity;
-									
-									for(var k = 0; k < age_groups.length; k++){
-										if(age_groups[k].id == subscriptions[i].ageGroup){
-											cart_object.age_group_name = age_groups[k].name;
-											break;
-										}
-									}
-									break;	
+									request_object['price'] = subscriptions[i].price * request_object['quantity'];
+									break;
 								}
 							}
-							
-							// Add cart item to session variable and update display
-				            addToCartSession(cart_object);
-				            renderCartDisplay();
+							found = 1;
+							break;
 						}
+					}
+
+					// If subscription found in cart, update cart in database display
+					if(found == 1){
+						modifyCartItem(request_object, "update");
+					}
+					else{
+						
+						// Get the subscription details and age group information and create a cart item
+						for(var i=0; i < subscriptions.length; i++){
+							if(subscriptions[i].id == sub_id){
+								request_object['quantity'] = 1;
+								request_object['price'] = subscriptions[i].price * request_object['quantity'];
+								break;	
+							}
+						}
+						
+						// Add cart item to database and update display
+						modifyCartItem(request_object, "add");
 					}
 				}
 			});
@@ -380,16 +354,78 @@
 	}
 	
 	/*
-	 * 	Add subscription to cart in session storage
+	 *  Add cart item to database
 	 */
-	function addToCartSession(cart_object){
+	function modifyCartItem(request_object, type){
+		document.getElementById("overlay").classList.remove("hide");
 		
-		// Check if session storage is supported by browser
-		if(typeof(Storage) !== "undefined"){
-			
-			var cart = JSON.parse(localStorage.getItem("cartItems"));
-			cart.push(cart_object);
-			localStorage.setItem("cartItems", JSON.stringify(cart));
+		var url = "";
+		
+		if(type == "add"){
+			url = "AddCartItem";
+		}
+		else if(type == "update"){
+			url = "UpdateCartItem";
+		}
+		else if(type == "delete"){
+			url = "DeleteCartItem";
+		}
+		
+		var xhr = new XMLHttpRequest();
+		
+		xhr.onreadystatechange = function() {
+		    if(xhr.readyState == 4 && xhr.status == 200) {
+		    	renderCartDisplaySuccessHandler(xhr.responseText);
+		    	document.getElementById("overlay").classList.add("hide");
+		    }
+		}
+		
+		xhr.open("POST", url, true);
+		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.send(JSON.stringify(request_object));
+	}
+	
+	/*
+	 *  Get cart items success handler
+	 */
+	function renderCartDisplaySuccessHandler(response){
+		if(response == null){
+			return;
+		}
+		
+		cartItems = JSON.parse(response);
+		
+		if(response.length == 0){
+			return;
+		}
+		
+		var cart_string = "";
+		
+		for(var p = 0; p < cartItems.length; p++){
+			cart_string += '<tr><td>' + (p+1) + '</td>'
+						+ '<td>' + cartItems[p].ageGroupName + '</td>'
+						+ '<td>' + cartItems[p].subscriptionName + '</td>'
+						+ '<td>' + cartItems[p].quantity + '</td>'
+						+ '<td>' + Number(cartItems[p].price).toFixed(2) + '</td>'
+						+ '<td><button class="delete_cart" data-sub-id="' + cartItems[p].subscriptionId + '">Delete</button></td></tr>';
+		}
+		cart_string += '</tr>';
+		
+		document.getElementById("cart-table1").innerHTML = cart_string;
+		
+		// Update cart item count
+		document.getElementById("cart-count").innerHTML = cartItems.length;
+		
+		// Delete from cart event listeners
+		var cart_delete_buttons = document.getElementById("cart-table1").getElementsByClassName("delete_cart");
+		
+		for(var l = 0; l < cart_delete_buttons.length; l++){
+			cart_delete_buttons[l].addEventListener("click", function(e){
+				
+				var sub_id = e.target.getAttribute("data-sub-id");
+				var request_object = {'cust_id': user.id, 'sub_id': sub_id};
+				modifyCartItem(request_object, "delete");
+			});
 		}
 	}
 	
@@ -398,52 +434,15 @@
 	 */
 	function renderCartDisplay(){
 		
-		if(typeof(Storage) !== "undefined") {
-			
-			var cart_session_items = localStorage.getItem("cartItems");
-			
-			if(cart_session_items == null){
-				return;
-			}
-			
-			var cart = JSON.parse(cart_session_items);
-			var cart_string = "";
-			
-			for(var p = 0; p < cart.length; p++){
-				cart_string += '<tr><td>' + (p+1) + '</td>'
-							+ '<td>' + cart[p].age_group_name + '</td>'
-							+ '<td>' + cart[p].sub_name + '</td>'
-							+ '<td>' + cart[p].quantity + '</td>'
-							+ '<td>' + Number(cart[p].price).toFixed(2) + '</td>'
-							+ '<td><button class="delete_cart" data-sub-id="' + cart[p].sub_id + '">Delete</button></td></tr>';
-			}
-			cart_string += '</tr>';
-			
-			document.getElementById("cart-table1").innerHTML = cart_string;
-			
-			// Update cart item count
-			document.getElementById("cart-count").innerHTML = cart.length;
-			
-			// Delete from cart event listeners
-			var cart_delete_buttons = document.getElementById("cart-table1").getElementsByClassName("delete_cart");
-			
-			for(var l = 0; l < cart_delete_buttons.length; l++){
-				cart_delete_buttons[l].addEventListener("click", function(e){
-					
-					var sub_id = e.target.getAttribute("data-sub-id");
-					var cart = JSON.parse(localStorage.getItem("cartItems"));
-					
-					for(var p = 0; p < cart.length; p++){
-						if(cart[p].sub_id == sub_id){
-							cart.splice(p,1);
-						}
-					}
-					
-					localStorage.setItem("cartItems", JSON.stringify(cart));
-					renderCartDisplay();
-				});
-			}
-		}
+		var xhttp = new XMLHttpRequest();
+	    xhttp.onreadystatechange = function() {
+	        if (this.readyState == 4 && this.status == 200) {
+	        	renderCartDisplaySuccessHandler(this.responseText);
+	        }
+	    };
+	    
+	    xhttp.open("GET", "FetchCartItems?id=" + user.id, true);
+	    xhttp.send();
 	}
 	
 	/*
@@ -515,14 +514,8 @@
 	 *  Proceed to Cart checkout
 	 */
 	function proceedToCartCheckout(){
-		if(localStorage.getItem("cartItems") == null){
-			showPopupMessage("error", "Add items to cart before checkout!");
-			return;
-		}
 		
-		var cart = JSON.parse(localStorage.getItem("cartItems"));
-
-		if(cart.length == 0){
+		if(cartItems.length == 0){
 			showPopupMessage("error", "Add items to cart before checkout!");
 			return;
 		}
@@ -574,6 +567,7 @@
 			document.getElementsByClassName("home")[0].style.display="none";
 			document.getElementById("user-button").classList.remove("hide");
 			document.getElementById("cart_btn").classList.remove("hide");
+			renderCartDisplay();
 		}
 		else if(loginStatus == false){
 			if(errorMessage == "invalid-registration"){
@@ -599,7 +593,6 @@
 	    document.getElementById("user_profile").setAttribute("href", userPath);
 	    
 	    loadAgeGroups();
-	    renderCartDisplay();
 	    initEventListeners();
 	}
 	

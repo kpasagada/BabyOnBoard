@@ -13,7 +13,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 @WebServlet("/FetchCartItems")
-
 public class FetchCartItemsController extends HttpServlet {
 		
 		private static final long serialVersionUID = 1L;

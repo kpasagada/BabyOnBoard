@@ -40,6 +40,11 @@
 			    var user = <%=session.getAttribute("customerDetails")%>;
 		</script>
 		
+		<!-- Overlay -->
+		<div id="overlay" class="hide">
+			<div class="overlay-content"><i class="fa fa-spinner fa-spin"></i> Updating cart...</div>
+		</div>
+		
 		<!--HEADER SECTION -->
 		<div class="header">
 			<a id="logo-link" href="/index"> <img src="images/baby.png"

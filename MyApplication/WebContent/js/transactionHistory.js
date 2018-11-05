@@ -8,8 +8,8 @@
 	var transactions_loaded = 0;
 	var frequencies = {'weekly': 'Weekly', 'bi-weekly': 'Bi-Weekly', 'monthly': 'Monthly'};
 	var durations = {3: '3 Months', 6: '6 Months', 9: '9 Months', 12: '12 Months'};
-	var active_sub_headers = [{'name':'name', 'display_name':'Subscription'},
-			{'name':'ageGroupName', 'display_name': 'Age Group'},
+	var active_sub_headers = [{'name':'subscription.name', 'display_name':'Subscription'},
+			{'name':'subscription.ageGroup.name', 'display_name': 'Age Group'},
 			{'name':'startDate', 'display_name': 'Start Date'},
 			{'name':'quantity', 'display_name': 'Quantity'},
 			{'name':'frequency', 'display_name': 'Frequency'},
@@ -25,8 +25,8 @@
 		{'name':'address', 'display_name': 'Billed Address'},
 		{'name':'amount', 'display_name': 'Amount'},
 		{'name':'transactionDate', 'display_name': 'Order Date'}];
-	var trans_sub_headers = [{'name':'name', 'display_name':'Subscription Name'},
-		{'name':'ageGroupName', 'display_name': 'Age Group'},
+	var trans_sub_headers = [{'name':'subscription.name', 'display_name':'Subscription Name'},
+		{'name':'subscription.ageGroup.name', 'display_name': 'Age Group'},
 		{'name':'quantity', 'display_name': 'Quantity'},
 		{'name':'status', 'display_name': 'Status'}];
 	
@@ -67,7 +67,16 @@
 					subs_string += '<li class="di-in-bl padding-5-10">' + active_sub_headers[k].display_name + ': ' + durations[response[n][active_sub_headers[k].name]] + '</li>';
 				}
 				else{
-					subs_string += '<li class="di-in-bl padding-5-10">' + active_sub_headers[k].display_name + ': ' + response[n][active_sub_headers[k].name] + '</li>';
+					var header_split = active_sub_headers[k].name.split(".");
+					if(header_split.length == 3){
+						subs_string += '<li class="di-in-bl padding-5-10">' + active_sub_headers[k].display_name + ': ' + response[n][header_split[0]][header_split[1]][header_split[2]] + '</li>';
+					}
+					else if(header_split.length == 2){
+						subs_string += '<li class="di-in-bl padding-5-10">' + active_sub_headers[k].display_name + ': ' + response[n][header_split[0]][header_split[1]] + '</li>';
+					}
+					else{
+						subs_string += '<li class="di-in-bl padding-5-10">' + active_sub_headers[k].display_name + ': ' + response[n][active_sub_headers[k].name] + '</li>';
+					}
 				}
 			}
 			
@@ -86,8 +95,8 @@
 			var total = 0.0;
 			var number = 0, price = 0;
 			
-			for(var i = 0; i < response[n].products.length; i++){
-				var product_selected = response[n].products[i];
+			for(var i = 0; i < response[n].subscription.products.length; i++){
+				var product_selected = response[n].subscription.products[i];
 				
 				product_string += '<tr>' + '<td>' + (i+1) + '</td>';
 				
@@ -204,8 +213,17 @@
 					if(header.name == "status"){
 						trans_string += '<td>' + (sub_selected[header.name] ? "Active": "Cancelled") + '</td>';
 					}
-					else{ 
-						trans_string += '<td>' + sub_selected[header.name] + '</td>';
+					else{
+						var header_split = header.name.split(".");
+						if(header_split.length == 3){
+							trans_string += '<td>' + sub_selected[header_split[0]][header_split[1]][header_split[2]] + '</td>';
+						}
+						else if(header_split.length == 2){
+							trans_string += '<td>' + sub_selected[header_split[0]][header_split[1]] + '</td>';
+						}
+						else{
+							trans_string += '<td>' + sub_selected[header.name] + '</td>';
+						}
 					}
 				}
 				

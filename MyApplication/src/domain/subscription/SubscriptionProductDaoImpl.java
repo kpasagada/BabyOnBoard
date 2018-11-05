@@ -1,6 +1,5 @@
 package domain.subscription;
 
-import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +13,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import db.DbManager;
+import domain.agegroup.AgeGroup;
 
 public class SubscriptionProductDaoImpl implements SubscriptionProductDao{
 
@@ -34,10 +34,13 @@ public class SubscriptionProductDaoImpl implements SubscriptionProductDao{
 			while(rs.next()) {
 				int currentSubscriptionId = rs.getInt(1);
 				
+				AgeGroup ageGroup = new AgeGroup();
+				ageGroup.setId(rs.getInt(3));
+				
 				Subscription subscription = new Subscription();
 				subscription.setId(currentSubscriptionId);
 				subscription.setName(rs.getString(2));
-				subscription.setAgeGroup(rs.getInt(3));
+				subscription.setAgeGroup(ageGroup);
 				
 				List<Product> productLists = new ArrayList<Product>();
 				
@@ -93,12 +96,15 @@ public class SubscriptionProductDaoImpl implements SubscriptionProductDao{
 			while(rs.next()) {
 				int currentSubscriptionMappingId = rs.getInt(1);
 				
+				AgeGroup ageGroup = new AgeGroup();
+				ageGroup.setId(rs.getInt(3));
+				ageGroup.setName(rs.getString(11));
+				ageGroup.setDescription(rs.getString(12));
+				
 				Subscription subscription = new Subscription();
 				subscription.setId(rs.getInt(1));
 				subscription.setName(rs.getString(2));
-				subscription.setAgeGroup(rs.getInt(3));
-				subscription.setAgeGroupName(rs.getString(11));
-				subscription.setAgeGroupDescription(rs.getString(12));
+				subscription.setAgeGroup(ageGroup);
 				
 				List<Product> productLists = new ArrayList<Product>();
 				
@@ -178,9 +184,9 @@ public class SubscriptionProductDaoImpl implements SubscriptionProductDao{
 	}
 
 	@Override
-	public List<Subscription> fetchActiveSubscriptions(int userId) {
+	public List<CustomerSubscriptionMap> fetchActiveSubscriptions(int userId) {
 		
-		List<Subscription> subList = new ArrayList<Subscription>();
+		List<CustomerSubscriptionMap> subList = new ArrayList<CustomerSubscriptionMap>();
 		
 		try{
 			conn = db.getConnection();
@@ -191,15 +197,21 @@ public class SubscriptionProductDaoImpl implements SubscriptionProductDao{
 			while(rs.next()) {
 				int currentSubscriptionMappingId = rs.getInt(1);
 				
+				AgeGroup ageGroup = new AgeGroup();
+				ageGroup.setId(rs.getInt(6));
+				ageGroup.setName(rs.getString(7));
+				
 				Subscription subscription = new Subscription();
 				subscription.setId(rs.getInt(8));
 				subscription.setName(rs.getString(9));
-				subscription.setAgeGroup(rs.getInt(6));
-				subscription.setAgeGroupName(rs.getString(7));
-				subscription.setQuantity(rs.getInt(3));
-				subscription.setFrequency(rs.getString(2));
-				subscription.setDuration(rs.getInt(4));
-				subscription.setStartDate(rs.getDate(5));
+				subscription.setAgeGroup(ageGroup);
+				
+				CustomerSubscriptionMap custSubMap = new CustomerSubscriptionMap();
+				custSubMap.setQuantity(rs.getInt(3));
+				custSubMap.setFrequency(rs.getString(2));
+				custSubMap.setDuration(rs.getInt(4));
+				custSubMap.setStartDate(rs.getDate(5));
+				custSubMap.setSubscription(subscription);
 				
 				List<Product> productLists = new ArrayList<Product>();
 				
@@ -231,7 +243,7 @@ public class SubscriptionProductDaoImpl implements SubscriptionProductDao{
 				}
 				
 				subscription.setProducts(productLists);
-				subList.add(subscription);
+				subList.add(custSubMap);
 				rs.previous();
 			}
 			

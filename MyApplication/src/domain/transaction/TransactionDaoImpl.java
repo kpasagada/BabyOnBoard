@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Date;
 import domain.subscription.*;
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import db.DbManager;
@@ -49,7 +48,7 @@ public class TransactionDaoImpl implements TransactionDao {
 				String address = rs.getString(8);
 				int quantity = rs.getInt(9);
 				
-				//setting all the values into their fields
+				// Setting all the values into their fields
 				Transaction transaction = new Transaction();
 				
 				transaction.setId(transactionId);
@@ -58,32 +57,44 @@ public class TransactionDaoImpl implements TransactionDao {
 				transaction.setPaymentMode(paymentMode);
 				transaction.setAddress(address);
 				
-				List<Subscription> subscriptionsList = new ArrayList<Subscription>();
+				List<CustomerSubscriptionMap> subscriptionsList = new ArrayList<CustomerSubscriptionMap>();
+				
+				AgeGroup ag = new AgeGroup();
+				ag.setName(ageGroup);
 				
 				Subscription subscription = new Subscription();
 				subscription.setName(subscriptionName);
-				subscription.setStatus(status);
-				subscription.setAgeGroupName(ageGroup);
-				subscription.setQuantity(quantity);
+				subscription.setAgeGroup(ag);
 				
-				subscriptionsList.add(subscription);
+				CustomerSubscriptionMap custSubMap = new CustomerSubscriptionMap();
+				custSubMap.setStatus(status);
+				custSubMap.setQuantity(quantity);
+				custSubMap.setSubscription(subscription);
+				
+				subscriptionsList.add(custSubMap);
 				
 				while(rs.next()) {
 					if(transactionId == rs.getInt(1)) {
-						//getting all the values
+						// Getting all the values
 						subscriptionName = rs.getString(3);
 						status = rs.getBoolean(6);
 						ageGroup = rs.getString(7);
 						quantity = rs.getInt(9);
 						
-						//setting all the values into their respective fields
+						// Setting all the values into their respective fields
+						AgeGroup ag1 = new AgeGroup();
+						ag1.setName(ageGroup);
+						
 						Subscription subscription1 = new Subscription();
 						subscription1.setName(subscriptionName);
-						subscription1.setStatus(status);
-						subscription1.setAgeGroupName(ageGroup);
-						subscription1.setQuantity(quantity);
+						subscription1.setAgeGroup(ag1);
 						
-						subscriptionsList.add(subscription1);
+						CustomerSubscriptionMap custSubMap1 = new CustomerSubscriptionMap();
+						custSubMap1.setStatus(status);
+						custSubMap1.setQuantity(quantity);
+						custSubMap1.setSubscription(subscription1);
+						
+						subscriptionsList.add(custSubMap1);
 					}
 					else {
 						break;

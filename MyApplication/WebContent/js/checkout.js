@@ -297,7 +297,7 @@
 			
 			order_details_string += '<div class="subscription-details">' +
 									'<div class="wi-25-di-in-bk fo-we-bo">' + (n+1) + '. ' + response[n]['name'] + '</div>' +
-									'<div class="age-group wi-25-di-in-bk fo-si-13">Age Group: ' + response[n]['ageGroupName'] + ' (' + response[n]['ageGroupDescription'] + ')</div>' +
+									'<div class="age-group wi-25-di-in-bk fo-si-13">Age Group: ' + response[n]['ageGroup']['name'] + ' (' + response[n]['ageGroup']['description'] + ')</div>' +
 									'<div class="sub-quantity wi-10-di-in-bk fo-si-13">' +
 									'<span class="di-in-bl">Quantity: </span>' +
 									'<input class="di-in-bl ou-no input-value quantity" type="number" value="' + (subscription_items[n].quantity ? subscription_items[n].quantity : 1)  + '" name="quantity" min="1" max="10">' +

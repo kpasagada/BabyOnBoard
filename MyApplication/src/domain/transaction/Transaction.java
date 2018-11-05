@@ -27,7 +27,7 @@ public class Transaction {
 	private String cardExpiration;
 	private String cardCVV;
 	
-	List<Subscription> subscriptions;
+	List<CustomerSubscriptionMap> subscriptions;
 	
 	public int getId() {
 		return id;
@@ -83,11 +83,10 @@ public class Transaction {
 	public void setCardCVV(String cardCVV) {
 		this.cardCVV = cardCVV;
 	}
-	
-	public List<Subscription> getSubscriptions() {
+	public List<CustomerSubscriptionMap> getSubscriptions() {
 		return subscriptions;
 	}
-	public void setSubscriptions(List<Subscription> subscriptions) {
+	public void setSubscriptions(List<CustomerSubscriptionMap> subscriptions) {
 		this.subscriptions = subscriptions;
 	}
 }

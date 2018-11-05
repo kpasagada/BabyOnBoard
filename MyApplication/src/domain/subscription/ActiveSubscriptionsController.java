@@ -27,9 +27,9 @@ public class ActiveSubscriptionsController extends HttpServlet {
 		SubscriptionProductDao subscriptionDao = new SubscriptionProductDaoImpl();
 		int userId = Integer.parseInt(req.getParameter("id"));
 	
-		List<Subscription> subscriptionList =  subscriptionDao.fetchActiveSubscriptions(userId);
+		List<CustomerSubscriptionMap> subscriptionList =  subscriptionDao.fetchActiveSubscriptions(userId);
 		
-		String subscriptionListString = gson.toJson(subscriptionList, new TypeToken<List<Subscription>>(){}.getType());
+		String subscriptionListString = gson.toJson(subscriptionList, new TypeToken<List<CustomerSubscriptionMap>>(){}.getType());
 	
 		resp.setContentType("application/json");
     	resp.setCharacterEncoding("UTF-8");

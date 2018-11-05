@@ -241,7 +241,7 @@
 		
 		response = JSON.parse(response);
 		
-		response.sort(function(a, b){return a['ageGroup'] - b['ageGroup']});
+		response.sort(function(a, b){return a['ageGroup'].id - b['ageGroup'].id});
 		subscriptions = response;
 		
 		var subscription_list_string = "";
@@ -250,7 +250,7 @@
 		for (var i = 0; i < response.length; i++){
 			var sub_object = response[i];
 			var sub_total = 0;
-			var sub_age_group_name = getAgeGroupById(sub_object['ageGroup']);
+			var sub_age_group_name = getAgeGroupById(sub_object['ageGroup'].id);
 			
 			for(var j = 0; j < sub_object['products'].length; j++){
 				sub_total += sub_object['products'][j].price * sub_object['products'][j].amount; 
@@ -259,8 +259,8 @@
 			subscriptions[i]['price'] = sub_total;
 			
 			if(i%3 == 0){
-				var hide_val = sub_object['ageGroup'] == selected_age_group ? 'inner-subscription-container':'inner-subscription-container hide';
-				subscription_list_string += '<div class="' + hide_val + '" data-age="' + sub_object['ageGroup'] + '">' +
+				var hide_val = sub_object['ageGroup'].id == selected_age_group ? 'inner-subscription-container':'inner-subscription-container hide';
+				subscription_list_string += '<div class="' + hide_val + '" data-age="' + sub_object['ageGroup'].id + '">' +
 											'<ul class="subscription">' +
 											'<h2>Choose a subscription for ' + sub_age_group_name.replace(" ","") + '</h2>' +
 											'<div class="border"></div>';
@@ -281,7 +281,7 @@
 										'</div>';
 			
 			if(i%3 == 2){
-				age_group_visited.push(sub_object['ageGroup']);
+				age_group_visited.push(sub_object['ageGroup'].id);
 				subscription_list_string += '</ul></div>';
 			}
 		}
@@ -296,7 +296,7 @@
 			subscription_buttons[l].addEventListener("click", function(e){
 				if(e.target && e.target.tagName == "BUTTON"){
 					if(document.getElementsByClassName("sub-selected").length){
-						document.getElementsByClassName("sub-selected")[0].classList.removes("sub-selected");
+						document.getElementsByClassName("sub-selected")[0].classList.remove("sub-selected");
 					}
 					e.target.parentNode.parentNode.classList.add("sub-selected");
 					selected_subscription = e.target.parentNode.parentNode.getAttribute("data-id");
@@ -310,6 +310,11 @@
 			cart_buttons[l].addEventListener("click", function(e){
 				if(e.target && e.target.tagName == "BUTTON"){
 					var sub_id = e.target.parentNode.parentNode.getAttribute("data-id");						
+					
+					if(loginStatus == false){
+						showPopupMessage("error", "Login to add items to cart!");
+						return;	
+					}
 					
 					// Check if cart already has subscription
 					var found = 0;

@@ -1,5 +1,6 @@
 package domain.login;
 
+import com.google.gson.JsonObject;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 /**
@@ -23,5 +24,10 @@ public interface CustomerDao {
 	 * Delete customer if exists
 	 */
 	public int deleteCustomer(String userName);
+	
+	/*
+	 * Update customer details
+	 */
+	public int updateCustomer(JsonObject user);
 }
 

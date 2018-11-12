@@ -145,6 +145,80 @@
 	}
 	
 	/*
+	 *  Validate customer details
+	 */
+	function customerValidate(e){
+		var name = document.forms["editcustomer"]["name"].value;
+		var email = document.forms["editcustomer"]["email"].value;
+		var phone = document.forms["editcustomer"]["phone"].value;
+		var password = document.forms["editcustomer"]["password"].value;
+		var rpassword = document.forms["editcustomer"]["retry-password"].value;
+		
+		var emailLegalReg =  /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+		var phoneReg = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/;
+		
+		if (password == "") {
+	        e.preventDefault();
+	        e.stopPropagation();
+	        showPopupMessage("error", "Password must be filled out");
+	        document.forms["editcustomer"]["password"].focus();
+	    }else if (rpassword == "") {
+	        e.preventDefault();
+	        e.stopPropagation();
+	        showPopupMessage("error", "Retype Password must be filled out");
+	        document.forms["editcustomer"]["retry-password"].focus();
+	    }else if (name == "") {
+	        e.preventDefault();
+	        e.stopPropagation();
+	        showPopupMessage("error", "Full Name must be filled out");
+	        document.forms["editcustomer"]["name"].focus();
+	    }else if (email == "") {
+	        e.preventDefault();
+	        e.stopPropagation();
+	        showPopupMessage("error", "Email must be filled out");
+	        document.forms["editcustomer"]["email"].focus();
+	    }else if(!emailLegalReg.test(email)){
+	    	e.preventDefault();
+	        e.stopPropagation();
+	        showPopupMessage("error", "Please enter a valid email id");
+	        document.forms["editcustomer"]["email"].focus();
+	    }else if(phone == "") {
+	        e.preventDefault();
+	        e.stopPropagation();
+	        showPopupMessage("error", "Phone must be filled out");
+	        document.forms["editcustomer"]["phone"].focus();
+	    }else if(!phoneReg.test(phone)) {
+	        e.preventDefault();
+	        e.stopPropagation();
+	        showPopupMessage("error", "Phone number is invalid");
+	        document.forms["editcustomer"]["phone"].focus();
+	    }else if(password != rpassword){
+	    	e.preventDefault();
+	        e.stopPropagation();
+	    	showPopupMessage("error", "Passwords do not match");
+	        document.forms["editcustomer"]["password"].focus();
+	    }
+	}
+	
+	/*
+	 *  Fills the form with customer details
+	 */
+	function loadCustomerDetails(){
+		
+		document.getElementById("user-heading-name").textContent = "Welcome, " + user.fullname;
+		
+		document.forms["editcustomer"]["id"].value = user.id;
+		document.forms["editcustomer"]["username"].value = user.username;
+		document.forms["editcustomer"]["name"].value = user.fullname;
+		document.forms["editcustomer"]["email"].value = user.email;
+		document.forms["editcustomer"]["phone"].value = user.phone;
+		document.forms["editcustomer"]["password"].value = user.password;
+		document.forms["editcustomer"]["retry-password"].value = user.password;
+		
+		document.getElementById("edit-customer").addEventListener("submit", function(e){ customerValidate(e);});
+	}
+	
+	/*
 	 *  Proceed to Cart checkout
 	 */
 	function proceedToCartCheckout(){
@@ -171,6 +245,8 @@
 	    document.getElementById("user_profile").setAttribute("href", userPath);
 	    document.getElementById("transaction").setAttribute("href", trasactionPath);
 	    document.getElementById("logo-link").setAttribute("href", indexPath);
+	    
+	    loadCustomerDetails();
 	    
 	    renderCartDisplay();
 	    initializeCartEvents();

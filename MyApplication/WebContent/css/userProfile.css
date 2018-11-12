@@ -55,7 +55,7 @@ COMMON CLASSES
 }
 
 .bo-sh-rgba:hover {
-	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+	box-shadow: 0 8px 16px 0 rgba(241, 151, 86, 0.5);
 }
 
 /*------------------------------------------------------------------------------
@@ -345,7 +345,7 @@ SECTION-LANDING PAGE
 }
 
 /*------------------------------------------------------------------------------
-Overlay CSS
+							Overlay CSS
 --------------------------------------------------------------------------------*/
 #overlay {
     position: fixed; 
@@ -366,4 +366,64 @@ Overlay CSS
 #overlay .overlay-content{
 	position: relative;
     top: 45%;
+}
+
+/*------------------------------------------------------------------------------
+								User Form CSS
+--------------------------------------------------------------------------------*/
+#user-heading{
+	padding: 5px;
+}
+
+#user-heading .user-image{
+	height: 60px;
+	width: 60px;
+}
+
+#user-heading-name{
+	margin-top: -10px;
+	font-size: 30px;
+}
+
+#edit-customer{
+	font-size: 20px;
+}
+
+.form-element{
+	padding: 10px 20px;
+}
+
+.form-label{
+	font-weight: 500;
+    padding-right: 20px;
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    width: 20%;
+}
+
+.form-value{
+	padding: 5px;
+    border: 1px solid #d2c6c6;
+    border-radius: 4px;
+    width: 40%;
+    height: 35px;
+    color: #777
+}
+
+.form-value::placeholder{
+	font-style: italic;
+}
+
+.form-value:hover, .form-value:focus, .form-value:active{
+	border: 1px solid #888;
+}
+
+.form-submit{
+    font-size: 20px;
+    padding: 5px 15px;
+    border: 1px solid #f1af7f;
+    color: #f1af7f;
+    background: white;
+    border-radius: 5px;
 }

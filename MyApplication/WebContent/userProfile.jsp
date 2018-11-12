@@ -64,7 +64,22 @@
                              
             </ul>
         </div>
-    
+    	
+    	<!-- Customer Form -->
+    	<h1 id="user-heading" class="te-al-ce">
+    		<img class="user-image" src="images/human.png"/><div id="user-heading-name"></div>
+    	</h1>
+    	<form id="edit-customer" name="editcustomer" action="UpdateCustomer" method="post">
+    		<div class="form-element hide"><label class="form-label">Id:</label><input type="text" name="id" class="form-value outline-none" placeholder="Id"></div>
+    		<div class="form-element hide"><label class="form-label">Username:</label><input type="text" name="username" class="form-value outline-none" placeholder="Username"></div>
+	        <div class="form-element"><label class="form-label">Full Name:</label><input type="text" name="name" class="form-value outline-none" placeholder="Full Name"></div>
+	        <div class="form-element"><label class="form-label">Email Address:</label><input type="text" name="email" class="form-value outline-none"  placeholder="Email Address"></div>
+	        <div class="form-element"><label class="form-label">Phone Number:</label><input type="text" name="phone" class="form-value outline-none" placeholder="Phone Number"></div>
+	        <div class="form-element"><label class="form-label">Password:</label><input type="password" name="password" class="form-value outline-none" placeholder="Password"></div>
+	        <div class="form-element"><label class="form-label">Retype Password:</label><input type="password" name="retry-password" class="form-value outline-none" placeholder="Confirm Password"></div>
+	        <div class="form-element te-al-ce"><button type="submit" name="submit" class="form-submit bo-sh-rgba pointer outline-none" value="register">Save</button></div>
+        </form>
+    	
     	<!-- CART MODAL -->
 		<div id="cart-modal" class="modal">
 			<div class="modal-content">

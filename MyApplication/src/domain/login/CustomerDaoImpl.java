@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import com.google.gson.JsonObject;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import db.DbManager;
@@ -70,6 +71,26 @@ public class CustomerDaoImpl implements CustomerDao {
 			conn = db.getConnection();
 			ps = conn.prepareStatement("DELETE FROM customer WHERE user_name = ?");
 			ps.setString(1, userName);
+			status = ps.executeUpdate();
+			conn.close();
+		}
+		catch(Exception e){
+			System.out.println(e);
+		}
+		return status;
+	}
+
+	@Override
+	public int updateCustomer(JsonObject user) {
+		int status = 0;
+		try{
+			conn = db.getConnection();
+			ps = conn.prepareStatement("UPDATE customer SET password = ?, full_name = ?, email = ?, phone = ? WHERE id = ?");
+			ps.setString(1, user.get("password").getAsString());
+			ps.setString(2, user.get("fullname").getAsString());
+			ps.setString(3, user.get("email").getAsString());
+			ps.setString(4, user.get("phone").getAsString());
+			ps.setInt(5, user.get("id").getAsInt());
 			status = ps.executeUpdate();
 			conn.close();
 		}

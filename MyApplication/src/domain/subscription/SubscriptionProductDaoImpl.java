@@ -207,6 +207,7 @@ public class SubscriptionProductDaoImpl implements SubscriptionProductDao{
 				subscription.setAgeGroup(ageGroup);
 				
 				CustomerSubscriptionMap custSubMap = new CustomerSubscriptionMap();
+				custSubMap.setId(rs.getInt(1));
 				custSubMap.setQuantity(rs.getInt(3));
 				custSubMap.setFrequency(rs.getString(2));
 				custSubMap.setDuration(rs.getInt(4));
@@ -253,6 +254,25 @@ public class SubscriptionProductDaoImpl implements SubscriptionProductDao{
 		}
 		
 		return subList;
+	}
+
+	@Override
+	public int cancelSubscription(int custSubId) {
+		
+		int status = 0;
+		
+		try {
+			conn = db.getConnection();
+			ps = conn.prepareStatement("UPDATE customer_subscription_mapping SET status = 0 WHERE id = ?");
+			ps.setInt(1, custSubId);
+			status = ps.executeUpdate();
+			
+			conn.close();
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		
+		return status;
 	}
 	
 }

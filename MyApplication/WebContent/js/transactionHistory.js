@@ -57,7 +57,8 @@
 		}
 		
 		for(var n = 0; n < response.length; n++){
-			var subs_string = '<div class="item-container"><div class="item-heading"><ul class="item-heading-content">';
+			
+			var subs_string = '<div class="item-container" data-id="' + response[n].id + '"><span title="Cancel Subscription" class="cancel-sub"><i class="fa fa-times"></i></span><div class="item-heading"><ul class="item-heading-content">';
 			
 			for(var k = 0; k < active_sub_headers.length; k++){
 				if(active_sub_headers[k].name == "frequency"){
@@ -130,6 +131,32 @@
 			var main_string = subs_string + product_string + '</div>';
 			
 			document.getElementById("Subscriptions").innerHTML += main_string;
+		}
+		
+		var cancel_elements = document.getElementsByClassName("cancel-sub");
+		for(var i = 0; i < cancel_elements.length; i++){
+			cancel_elements[i].addEventListener("click", function(e){
+				var cust_sub_id = this.parentElement.getAttribute("data-id");
+				
+				var xhttp = new XMLHttpRequest();
+			    xhttp.onreadystatechange = function() {
+			        if (this.readyState == 4 && this.status == 200) {
+			        	var resp = JSON.parse(this.responseText);
+			        	if(resp['status'] == 1){
+			        		showPopupMessage("success", "Successfully cancelled subscription.");
+			        		setTimeout(function(){
+			        			location.reload();
+			        		}, 1000);
+			        	}
+			        	else{
+			        		showPopupMessage("error", "Error in canceling subscription!");
+			        	}
+			        }
+			    };
+			    
+			    xhttp.open("GET", "CancelSubscription?id=" + cust_sub_id, true);
+			    xhttp.send();
+			});
 		}
 	}
 	

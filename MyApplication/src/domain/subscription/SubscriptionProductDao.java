@@ -26,4 +26,9 @@ public interface SubscriptionProductDao {
 	 *  Fetches all subscriptions information for a customer
 	 */
 	public List<CustomerSubscriptionMap> fetchActiveSubscriptions(int userId);
+	
+	/*
+	 *  Fetches all subscriptions information for a customer
+	 */
+	public int cancelSubscription(int custSubId);
 }

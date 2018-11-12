@@ -5,6 +5,7 @@ import java.util.Date;
 import domain.login.Customer;
 
 public class CustomerSubscriptionMap {
+	private int id;
 	private boolean status;
 	private int quantity;
 	private Date startDate;
@@ -13,6 +14,12 @@ public class CustomerSubscriptionMap {
 	private Customer customer;
 	private Subscription subscription;
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public void setStatus(boolean status) {
 		this.status = status;
 	}

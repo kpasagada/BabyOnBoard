@@ -1,4 +1,4 @@
-package domain.login.test;
+package domain.register.test;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

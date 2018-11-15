@@ -11,6 +11,7 @@ import java.util.List;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import db.DbManager;
 import domain.agegroup.AgeGroup;
@@ -150,7 +151,7 @@ public class SubscriptionProductDaoImpl implements SubscriptionProductDao{
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public ArrayList<Integer> saveCustomerSubscriptions(JsonArray subscriptionDetails) {
+	public ArrayList<Integer> saveCustomerSubscriptions(JsonArray subscriptionDetails) throws MySQLIntegrityConstraintViolationException {
 		
 		ArrayList<Integer> generatedIds = new ArrayList<Integer>();
 		
@@ -175,7 +176,11 @@ public class SubscriptionProductDaoImpl implements SubscriptionProductDao{
 				}
 				
 				conn.close();
-			}catch(Exception e){
+			}
+			catch(MySQLIntegrityConstraintViolationException e){
+				throw e;
+			}
+			catch(Exception e){
 				System.out.println(e);
 			}
 		}

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import domain.transaction.TransactionDao;
 import domain.transaction.TransactionDaoImpl;
@@ -41,7 +42,12 @@ public class CustomerSubscriptionController extends HttpServlet{
 		JsonArray customerSubDetails = transactionDetails.getAsJsonArray("subscribed_items");
 		
 		SubscriptionProductDao subProdDao = new SubscriptionProductDaoImpl();
-		ArrayList<Integer> custSubscriptionIds = subProdDao.saveCustomerSubscriptions(customerSubDetails);
+		ArrayList<Integer> custSubscriptionIds = new ArrayList<Integer>();
+		try {
+			custSubscriptionIds = subProdDao.saveCustomerSubscriptions(customerSubDetails);
+		} catch (MySQLIntegrityConstraintViolationException e) {
+			e.printStackTrace();
+		}
 		
 		int custSubstatus = -1;
 		if(customerSubDetails.size() == custSubscriptionIds.size()) {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.JsonArray;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 public interface SubscriptionProductDao {
 	
@@ -20,7 +21,7 @@ public interface SubscriptionProductDao {
 	/*
 	 *  Inserts subscriptions for customers
 	 */
-	public ArrayList<Integer> saveCustomerSubscriptions(JsonArray subscriptionDetails);
+	public ArrayList<Integer> saveCustomerSubscriptions(JsonArray subscriptionDetails) throws MySQLIntegrityConstraintViolationException;
 	
 	/*
 	 *  Fetches all subscriptions information for a customer

@@ -116,9 +116,7 @@ CREATE TABLE `customer_subscription_mapping` (
 	`status` boolean NOT NULL DEFAULT 1, 
 	PRIMARY KEY (id),
 	CONSTRAINT fk_customer_subscription_mapping_customer_id FOREIGN KEY (`customer_id`) REFERENCES `customer`(`id`),
-	CONSTRAINT fk_customer_subscription_mapping_subscription_id FOREIGN KEY (`subscription_id`) REFERENCES `subscription`(`id`),
-	CONSTRAINT ck_customer_subscription_mapping_frequency CHECK (`frequency` IN ("weekly","bi-weekly","monthly")),
-	CONSTRAINT ck_customer_subscription_mapping_duration CHECK (`duration` IN (3,6,9,12))
+	CONSTRAINT fk_customer_subscription_mapping_subscription_id FOREIGN KEY (`subscription_id`) REFERENCES `subscription`(`id`)
 );
 
 -- Transaction table
@@ -132,8 +130,7 @@ CREATE TABLE `transaction` (
 	`card_no` char(20),
 	`card_expiration` char(7),
 	`card_cvv` char(3),
-	PRIMARY KEY(id),
-	CONSTRAINT ck_transaction_payment_mode CHECK (`payment_mode` IN ("cash","card","paypal"))
+	PRIMARY KEY(id)
 );
 
 -- Transaction Customer Subscription mapping table

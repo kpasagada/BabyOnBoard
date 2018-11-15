@@ -1,4 +1,4 @@
-package domain.login.test;
+package domain.register.test;
 
 import static org.junit.Assert.assertTrue;
 

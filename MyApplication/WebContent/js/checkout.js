@@ -508,7 +508,7 @@
 	 *  Get cart items success handler
 	 */
 	function renderCartDisplaySuccessHandler(response, result){
-		console.log(response)
+		
 		if(response == null){
 			return;
 		}

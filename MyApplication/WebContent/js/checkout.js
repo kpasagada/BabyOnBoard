@@ -186,7 +186,7 @@
 				}
 				
 				transaction['subscribed_items'] = subscribed_items;
-				
+
 				var xhr = new XMLHttpRequest();
 				
 				xhr.onreadystatechange = function() {
@@ -302,7 +302,7 @@
 									'<span class="di-in-bl">Quantity: </span>' +
 									'<input class="di-in-bl ou-no input-value quantity" type="number" value="' + (subscription_items[n].quantity ? subscription_items[n].quantity : 1)  + '" name="quantity" min="1" max="10">' +
 									'</div>' +
-									'<div id="duration-dropdown-' + n + '" class="dropdown wi-15-di-in-bk fo-we-bo">' +
+									'<div id="duration-dropdown" class="dropdown wi-15-di-in-bk fo-we-bo">' +
 									'<button class="dropbtn">Duration: ' + (subscription_items[n].duration ? durations[subscription_items[n].duration]: durations['12']) + '</button>' +
 									'<div id="duration-dropdown-content" class="dropdown-content" data-name="Duration" data-selected="' + (subscription_items[n].duration ? subscription_items[n].duration: 12) + '">';
 			

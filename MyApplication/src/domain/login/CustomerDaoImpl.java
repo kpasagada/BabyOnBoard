@@ -95,9 +95,34 @@ public class CustomerDaoImpl implements CustomerDao {
 			conn.close();
 		}
 		catch(Exception e){
+			System.out.println("here");
 			System.out.println(e);
 		}
 		return status;
+	}
+	
+	@Override
+	public int getUserIdByUsername(String username) {
+		int status = 0;
+		int id = 0;
+		try{
+			conn = db.getConnection();
+			ps = conn.prepareStatement("SELECT id FROM customer WHERE user_name = ?");
+			ps.setString(1, username);
+			ResultSet rs = ps.executeQuery();
+			//status = ps.executeUpdate();
+			while(rs.next()) {
+				id = rs.getInt(1);
+			}
+			conn.close();
+			
+		}
+		catch(Exception e){
+			
+			System.out.println(e);
+		}
+		return id;
+	
 	}
 
 }

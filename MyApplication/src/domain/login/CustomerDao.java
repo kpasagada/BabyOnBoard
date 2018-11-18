@@ -29,5 +29,7 @@ public interface CustomerDao {
 	 * Update customer details
 	 */
 	public int updateCustomer(JsonObject user);
+	
+	public int getUserIdByUsername(String username);
 }
 

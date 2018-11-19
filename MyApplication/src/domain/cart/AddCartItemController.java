@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 @WebServlet("/AddCartItem")
 public class AddCartItemController extends HttpServlet{
@@ -35,17 +36,22 @@ public class AddCartItemController extends HttpServlet{
 		
 		JsonObject cartDetails = gson.fromJson(data, JsonObject.class);
 		CartDao cartDao = new CartDaoImpl();
-		List<Cart> cartItems = cartDao.addItemToCart(cartDetails);
-		
-		String cartItemsString = "";
-		
-		if(cartItems != null) {
-			cartItemsString = gson.toJson(cartItems, new TypeToken<List<Cart>>(){}.getType());
+		List<Cart> cartItems;
+		try {
+			cartItems = cartDao.addItemToCart(cartDetails);
+			String cartItemsString = "";
+			
+			if(cartItems != null) {
+				cartItemsString = gson.toJson(cartItems, new TypeToken<List<Cart>>(){}.getType());
+			}
+			resp.setContentType("application/json");
+	    	resp.setCharacterEncoding("UTF-8");
+	        resp.getWriter().write(cartItemsString);
+	        resp.flushBuffer();
+		} catch (MySQLIntegrityConstraintViolationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
-		resp.setContentType("application/json");
-    	resp.setCharacterEncoding("UTF-8");
-        resp.getWriter().write(cartItemsString);
-        resp.flushBuffer();
 	}
 }

@@ -3,6 +3,7 @@ package domain.cart;
 import java.util.List;
 
 import com.google.gson.JsonObject;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 public interface CartDao {
 	
@@ -14,7 +15,7 @@ public interface CartDao {
 	/*
 	 *  Add item to cart
 	 */
-	public List<Cart> addItemToCart(JsonObject subscriptionDetails);
+	public List<Cart> addItemToCart(JsonObject subscriptionDetails) throws MySQLIntegrityConstraintViolationException;
 	
 	/*
 	 *  Update item in cart

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.JsonObject;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import db.DbManager;
 
@@ -49,7 +50,7 @@ public class CartDaoImpl implements CartDao{
 	}
 
 	@Override
-	public List<Cart> addItemToCart(JsonObject subscriptionDetails) {
+	public List<Cart> addItemToCart(JsonObject subscriptionDetails) throws MySQLIntegrityConstraintViolationException {
 		
 		int status = 0;
 		
@@ -63,7 +64,13 @@ public class CartDaoImpl implements CartDao{
 			status = ps.executeUpdate();
 			
 			conn.close();
-		}catch(Exception e){
+		}
+		
+		catch(MySQLIntegrityConstraintViolationException e){
+			throw e;
+		}
+		
+		catch(Exception e){
 			System.out.println(e);
 		}
 		

@@ -319,6 +319,7 @@
 					// Check if cart already has subscription
 					var found = 0;
 					var request_object = {'cust_id': user.id, 'sub_id': sub_id};
+					console.log(request_object);
 					for(var m = 0; m < cartItems.length; m++){
 						if(cartItems[m].subscriptionId == sub_id){
 							request_object['quantity'] = cartItems[m].quantity + 1;
@@ -368,6 +369,8 @@
 		
 		if(type == "add"){
 			url = "AddCartItem";
+			console.log(url);
+			
 		}
 		else if(type == "update"){
 			url = "UpdateCartItem";

@@ -51,7 +51,7 @@ public class SubscribPackageUITest {
 	@Test
 	public void subscribePackageByCardSuccessTest() throws InterruptedException {
 		assertEquals("Baby On Board | Landing", driver.getTitle());
-		
+		Thread.sleep(5000);
 		// Checking if all age groups are present
 		WebElement ageGroupList = driver.findElement(By.id("age-group-list"));
 		assertNotNull(ageGroupList);

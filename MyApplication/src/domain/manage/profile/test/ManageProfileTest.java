@@ -2,13 +2,7 @@ package domain.manage.profile.test;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.*;
-import java.io.BufferedReader;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
@@ -20,13 +14,11 @@ import domain.login.CustomerDaoImpl;
 
 public class ManageProfileTest {
 	private static CustomerDao customerDao;
-	private static Gson gson;
 	private static Customer c;
 	
 	@BeforeClass
 	public static void setup() throws MySQLIntegrityConstraintViolationException {
 		customerDao = new CustomerDaoImpl();
-		gson = new Gson();
 		c = new Customer();
 		
 		c.setFullName("Test Dummy");
@@ -34,7 +26,7 @@ public class ManageProfileTest {
 		c.setPassword("test-dummy");
 		c.setEmail("test@dummy.com");
 		c.setPhone("+1-352-949-9999");
-		int status = customerDao.register(c);
+		customerDao.register(c);
 	}
 	
 	@Test
@@ -98,8 +90,6 @@ public class ManageProfileTest {
 	public static void tearDown() {
 		customerDao.deleteCustomer("test-dummy");
 		customerDao = null;
-		gson = null;
-		
 	}
 	
 }

@@ -271,6 +271,8 @@ public class ManageProfileUITest {
 		
 	}
 	
+	
+	
 	@AfterClass
 	public static void tearDown() {
 		CustomerDao customerDao = new CustomerDaoImpl();

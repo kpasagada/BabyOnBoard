@@ -100,7 +100,7 @@
 		<div class="tabset">
 			<!-- Tab 1 -->
 			<input type="radio" name="tabset" id="tab1"
-				aria-controls="Subscriptions" checked> <label for="tab1">Active
+				aria-controls="Subscriptions" checked> <label for="tab1" id="subscription-label">Active
 				Subscription</label>
 			<!-- Tab 2 -->
 			<input type="radio" name="tabset" id="tab2"

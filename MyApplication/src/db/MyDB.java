@@ -10,7 +10,7 @@ package db;
 public interface MyDB {
 
 	String USER="root";
-	String PASS="diksha";
+	String PASS="admin";
 	String CONN_URL="jdbc:mysql://localhost:3306/baby_db?useSSL=false";
 	
 	

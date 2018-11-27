@@ -1,3 +1,3 @@
 # MyApplication
 
-# A project in order to apply the principles of OOAD.
+# A project to apply the principles of OOAD.

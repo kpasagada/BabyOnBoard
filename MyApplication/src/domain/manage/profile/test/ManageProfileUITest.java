@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -38,7 +37,7 @@ public class ManageProfileUITest {
 		c.setPassword("test-dummy");
 		c.setEmail("test@dummy.com");
 		c.setPhone("+1-352-949-9999");
-		int status = customerDao.register(c);	
+		customerDao.register(c);	
 		
 	}
 	

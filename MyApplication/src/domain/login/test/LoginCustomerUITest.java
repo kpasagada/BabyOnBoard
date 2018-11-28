@@ -17,9 +17,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import domain.login.CustomerDao;
-import domain.login.CustomerDaoImpl;
-
 /**
  * @author Roopa
  *

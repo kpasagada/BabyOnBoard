@@ -103,7 +103,6 @@ public class CustomerDaoImpl implements CustomerDao {
 	
 	@Override
 	public int getUserIdByUsername(String username) {
-		int status = 0;
 		int id = 0;
 		try{
 			conn = db.getConnection();

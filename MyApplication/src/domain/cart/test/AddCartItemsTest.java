@@ -5,9 +5,7 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.gson.Gson;
@@ -21,9 +19,7 @@ import domain.cart.CartDaoImpl;
 public class AddCartItemsTest {
 
 	private static CartDao cartDao;
-	private static JsonObject cartDetails;
 	private static Gson gson;
-	private static Cart cart;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -80,7 +76,6 @@ public class AddCartItemsTest {
 		gson = null;
 		//cartDao.deleteCartItem(gson.fromJson("{\"sub_id\":\"9\",\"cust_id\":\"1\",\"price\":\"19\",\"quantity\":\"1\"}", JsonObject.class));
 		cartDao=null;
-		cartDetails=null;
 	}
 
 	

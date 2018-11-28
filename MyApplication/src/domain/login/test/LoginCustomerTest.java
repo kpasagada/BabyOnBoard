@@ -2,15 +2,10 @@ package domain.login.test;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
-
-import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.google.gson.Gson;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import domain.login.Customer;

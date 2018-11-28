@@ -29,7 +29,7 @@ public class RegisterCustomerTest {
 		c.setEmail("test@dummy.com");
 		c.setPhone("+1-352-949-9999");
 		int status = customerDao.register(c);
-		assertTrue(status == 1);
+		assertTrue(status > 0);
 	}
 	
 	@Test(expected = MySQLIntegrityConstraintViolationException.class)

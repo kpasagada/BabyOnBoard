@@ -33,7 +33,7 @@ public class LoginController extends HttpServlet {
 		String submitType = request.getParameter("submit");
 		Login login = new Login(username, pass);
 		Customer c = customerDao.validateCustomer(login);
-		System.out.println(c.getId());
+		
 		HttpSession session = request.getSession();
 		
 		if(submitType.equals("login") && c != null && c.getFullName() != null && c.getUsername() != null){

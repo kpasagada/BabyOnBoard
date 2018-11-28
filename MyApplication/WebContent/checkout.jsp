@@ -65,7 +65,7 @@
 	            <li><a href="#features">Features</a></li>
 	            <li><a href="#work">How it works</a></li>
 	            <li><a href="#contact">Contact</a></li>
-	            <li><button id="user-button" class="user hide"><i class="fa fa-user-circle-o" style="font-size:30px;color:#fff;"></i>
+	            <li><button id="user-button" class="user"><i class="fa fa-user-circle-o" style="font-size:30px;color:#fff;"></i>
 	             <div class = "user_dropdown ">
 						<ul class="dropdown_nav" >
 							<li><a href="/userProfile" id="user_profile">User profile</a></li>

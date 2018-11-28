@@ -102,7 +102,6 @@ public class CustomerDaoImpl implements CustomerDao {
 			conn.close();
 		}
 		catch(Exception e){
-			System.out.println("here");
 			System.out.println(e);
 		}
 		return status;

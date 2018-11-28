@@ -32,8 +32,6 @@ public class ManageProfileTest {
 	@Test
 	public void updateProfileSuccessTest() throws MySQLIntegrityConstraintViolationException{
 		int userId = customerDao.getUserIdByUsername("test-dummy");
-		//int userId = c1.getId();
-		//assertTrue(userId == 0);
 		
 		JsonObject userDetails = new JsonObject();
 		userDetails.addProperty("password", "testedPassword");
@@ -49,8 +47,6 @@ public class ManageProfileTest {
 	@Test
 	public void updateProfileNoPasswordTest() throws MySQLIntegrityConstraintViolationException{
 		int userId = customerDao.getUserIdByUsername("test-dummy");
-		//int userId = c1.getId();
-		//assertTrue(userId == 0);
 		String pass = new String();
 		pass = null;
 		JsonObject userDetails = new JsonObject();
@@ -63,28 +59,6 @@ public class ManageProfileTest {
 		int status = customerDao.updateCustomer(userDetails);
 		assertTrue(status == 0);
 	}
-	
-// TEST THIS IN UI
-/*
-	@Test
-	public void updateProfileWrongEmailTest() {
-		int userId = customerDao.getUserIdByUsername("test-dummy");
-		//int userId = c1.getId();
-		//assertTrue(userId == 0);
-		String pass = new String();
-		pass = null;
-		JsonObject userDetails = new JsonObject();
-		userDetails.addProperty("password", pass);
-		userDetails.addProperty("fullname", "Tested Dummy");
-		userDetails.addProperty("email", "tested@gmail.com");
-		userDetails.addProperty("phone", "469-899-0000");
-		userDetails.addProperty("id", userId);
-		
-		int status = customerDao.updateCustomer(userDetails);
-		assertTrue(status == 0);
-	}
-	
-*/	
 	
 	@AfterClass
 	public static void tearDown() {

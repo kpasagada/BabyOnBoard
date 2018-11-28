@@ -192,6 +192,7 @@ public class SubscribPackageUITest {
 		
 		// Check valid card
 		creditPayCont.findElement(By.id("card_no")).sendKeys("alpha-121-delta");
+		Thread.sleep(200);
 		creditPayCont.findElements(By.className("submit-payment")).get(0).click();
 		Thread.sleep(200);
 		popUpMessage = driver.findElement(By.id("pop-up-message"));
@@ -224,6 +225,7 @@ public class SubscribPackageUITest {
 		// Check exp year
 		creditPayCont.findElement(By.id("card_exp_month")).clear();
 		creditPayCont.findElement(By.id("card_exp_month")).sendKeys("12");
+		Thread.sleep(200);
 		creditPayCont.findElements(By.className("submit-payment")).get(0).click();
 		Thread.sleep(200);
 		popUpMessage = driver.findElement(By.id("pop-up-message"));
